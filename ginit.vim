@@ -45,9 +45,9 @@ lua << EOF
 
 local fn = require('utils.fn')
 local c = vim.g.colors
-fn.highlight('SpellBad',                    nil,                nil,                ucl,                c.red_error)
-fn.highlight('SpellCap',                    nil,                nil,                ucl,                c.orange)
-fn.highlight('SpellLocal',                  nil,                nil,                ucl,                c.blue)
-fn.highlight('SpellRare',                   nil,                nil,                ucl,                c.magenta)
+fn.highlight('SpellBad',   nil, nil, 'undercurl', c.red_error)
+fn.highlight('SpellCap',   nil, nil, 'undercurl', c.orange)
+fn.highlight('SpellLocal', nil, nil, 'undercurl', c.blue)
+fn.highlight('SpellRare',  nil, nil, 'undercurl', c.magenta)
 
 EOF
