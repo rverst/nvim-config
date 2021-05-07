@@ -26,6 +26,8 @@ p.paq 'hrsh7th/nvim-compe'
 p.paq 'onsails/lspkind-nvim'
 p.paq 'nvim-lua/lsp_extensions.nvim'
 p.paq 'glepnir/lspsaga.nvim'
+p.paq 'simrat39/symbols-outline.nvim'
+
 p.paq 'sbdchd/neoformat'
 
 p.paq 'lewis6991/gitsigns.nvim'

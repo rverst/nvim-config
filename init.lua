@@ -31,6 +31,7 @@ require('plugins.lsp')
 require('plugins.lspsaga')
 require('plugins.compe')
 require('plugins.lspkind')
+require('plugins.symbols-outline')
 
 --require('plugins.indentline')
 require('plugins.treesitter')

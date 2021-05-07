@@ -105,6 +105,8 @@ local shortListShow = function()
     return false
   elseif t == 'terminal' then
     return false
+  elseif t == 'outline' then
+    return false
   end
   return true
 end

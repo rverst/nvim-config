@@ -30,12 +30,15 @@ utils.map('v', '<C-l>', '<C-w>l')
 
 -- Need to find something easy and useful to resize the windows,
 -- should be a single keystroke command for easy repeat
+-- update: done this at my keyboards
 --utils.map('n', '<C-a>', '<cmd>vertical resize -5<CR>')
 --utils.map('n', '<C-s>', '<cmd>vertical resize +5<CR>')
 --utils.map('n', '<C-d>', '<cmd>resize -5<CR>')
 --utils.map('n', '<C-f>', '<cmd>resize +5<CR>')
 utils.map('n', '<F2>', '<C-w>=')
 
+-- toggle symbols outline
+utils.map('n', '<C-s>', '<cmd>SymbolsOutline<CR>')
 
 -- new terminal
 local term = ''
