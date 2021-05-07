@@ -18,6 +18,46 @@ M.getOs = function()
   end
 end
 
+M.highlight = function(group, fg, bg, attr, sp)
+  local x = {group}
+  if fg then
+    if type(fg) == 'string' then
+      table.insert(x, 'ctermfg='..fg)
+      table.insert(x, 'guifg='..fg)
+    else
+      table.insert(x, 'ctermfg='..fg.term)
+      table.insert(x, 'guifg='..fg.hex)
+    end
+  end
+  if bg then
+    if type(bg) == 'string' then
+      table.insert(x, 'ctermbg='..bg)
+      table.insert(x, 'guibg='..bg)
+    else
+      table.insert(x, 'ctermbg='..bg.term)
+      table.insert(x, 'guibg='..bg.hex)
+    end
+  end
+  if attr then
+    table.insert(x, 'cterm='..attr)
+    table.insert(x, 'gui='..attr)
+  end
+  if sp then
+    if type(sp) == 'string' then
+      table.insert(x, 'guisp='..sp)
+    else
+      table.insert(x, 'guisp='..sp.hex)
+    end
+  end
+
+  local cmd = 'highlight '..table.concat(x, ' ')
+  vim.cmd(cmd)
+end
+
+M.isGui = function()
+  return vim.fn.exists(':GuiFont') > 0
+end
+
 M.joinPath = function(...)
   local args = {...}
   local sep = package.config:sub(1, 1)
@@ -76,40 +116,5 @@ M.rgbToX256 = function(r, g, b)
   return val
 end
 
-M.highlight = function(group, fg, bg, attr, sp)
-  local x = {group}
-  if fg then
-    if type(fg) == 'string' then
-      table.insert(x, 'ctermfg='..fg)
-      table.insert(x, 'guifg='..fg)
-    else
-      table.insert(x, 'ctermfg='..fg.term)
-      table.insert(x, 'guifg='..fg.hex)
-    end
-  end
-  if bg then
-    if type(bg) == 'string' then
-      table.insert(x, 'ctermbg='..bg)
-      table.insert(x, 'guibg='..bg)
-    else
-      table.insert(x, 'ctermbg='..bg.term)
-      table.insert(x, 'guibg='..bg.hex)
-    end
-  end
-  if attr then
-    table.insert(x, 'cterm='..attr)
-    table.insert(x, 'gui='..attr)
-  end
-  if sp then
-    if type(sp) == 'string' then
-      table.insert(x, 'guisp='..sp)
-    else
-      table.insert(x, 'guisp='..sp.hex)
-    end
-  end
-
-  local cmd = 'highlight '..table.concat(x, ' ')
-  vim.cmd(cmd)
-end
 
 return M
