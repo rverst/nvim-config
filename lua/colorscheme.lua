@@ -21,7 +21,7 @@ local uli = 'underline'
 
 
 --           'Group'                        Foreground          Background          Decorations         SP Color
-fn.highlight('Normal',                      nil,                c.none,             nil,                nil)
+fn.highlight('Normal',                      nil,                c.bg,               nil,                nil)
 fn.highlight('LineNr',                      nil,                c.none,             nil,                nil)
 fn.highlight('SignColumn',                  nil,                c.none,             nil,                nil)
 
@@ -38,7 +38,7 @@ fn.highlight('PmenuSel',                    c.orange_light,     c.dark3,        
 
 fn.highlight('IndentBlanklineChar',         c.dark2,            nil,                nil,                nil)
 
-if cim.g.is_gui == 1 then
+if vim.g.is_gui == 1 then
 fn.highlight('SpellBad',                    nil,                nil,                ucl,                c.red_error)
 fn.highlight('SpellCap',                    nil,                nil,                ucl,                c.orange)
 fn.highlight('SpellLocal',                  nil,                nil,                ucl,                c.blue)
