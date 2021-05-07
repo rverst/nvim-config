@@ -103,15 +103,22 @@ local shortListShow = function()
   local t = vim.bo.filetype:lower()
   if t == 'nvimtree' then
     return false
+  elseif t == 'terminal' then
+    return false
   end
   return true
+end
+
+local isTerminal = function()
+  local t = vim.bo.buftype:lower()
+  return t == 'terminal'
 end
 
 local bufferType = function()
   return vim.bo.filetype:lower()
 end
 
-local negated = function(f)
+local neg = function(f)
     return function() return not f() end
 end
 
@@ -163,34 +170,37 @@ gls.left =
 
 	{FileIcon = {
 		provider  = {space, 'FileIcon'},
+    condition = neg(isTerminal),
 		highlight = {getFileIconColor, c.dark3.hex},
 	}},
 
 	{FileName = {
 		provider  = {space, 'FileName'},
-		condition = bufferNotEmpty,
+		condition = all(bufferNotEmpty, neg(isTerminal)),
 		highlight = {c.acc2.hex, c.dark3.hex, 'bold'}
 	}},
 
 	{FileSize = {
 		provider  = {space, 'FileSize'},
-		condition = bufferNotEmpty,
+		condition = all(bufferNotEmpty, neg(isTerminal)),
 		highlight = {c.acc1.hex, c.dark3.hex, 'italic'}
 	}},
 
 	{LspClient = {
 		provider  = {space, printer(' '), lspClient()},
-		condition = lspActive,
+		condition = all(lspActive, neg(isTerminal)),
 		highlight = {getFileIconColor, c.dark3.hex}
 	}},
 
 	{LeftEnd = {
 		provider = space,
+    condition = neg(isTerminal),
 		highlight = {c.dark3.hex, c.dark3.hex},
 	}},
 
 	{DiagnosticError = {
 		provider = 'DiagnosticError',
+    condition = neg(isTerminal),
 		icon = ' ',
 		highlight = {c.red.hex, c.dark2.hex},
 		separator = ' ',
@@ -199,6 +209,7 @@ gls.left =
 
 	{DiagnosticWarn = {
 		provider = 'DiagnosticWarn',
+    condition = neg(isTerminal),
 		icon = ' ',
 		highlight = {c.yellow_light.hex, c.dark2.hex},
 		separator = ' ',
@@ -207,6 +218,7 @@ gls.left =
 
 	{DiagnosticHint = {
 		provider = 'DiagnosticHint',
+    condition = neg(isTerminal),
 		icon = 'ﯧ ',
 		highlight = {c.yellow.hex, c.dark2.hex},
 		separator = ' ',
@@ -215,6 +227,7 @@ gls.left =
 
 	{DiagnosticInfo = {
 		provider = 'DiagnosticInfo',
+    condition = neg(isTerminal),
 		icon = ' ',
 		highlight = {c.yellow.hex, c.dark2.hex},
 		separator = ' ',
@@ -226,7 +239,7 @@ gls.right =
 {
 	{RightStart = {
 		provider = space,
-		condition = checkwidth,
+		condition = all(bufferNotEmpty, neg(isTerminal)),
 		highlight = {c.dark3.hex, c.dark3.hex},
 	}},
 
@@ -265,6 +278,7 @@ gls.right =
 
 	{FileFormat = {
 		provider = {space, fileFormat, space},
+    condition = neg(isTerminal),
 		highlight = {c.acc1.hex, c.dark3.hex},
 		separator = separators.left,
 		separator_highlight = {c.dark1.hex, c.dark3.hex}
@@ -272,7 +286,7 @@ gls.right =
 
   {LineColumn = {
     provider = { lineColumn() },
-    condition = bufferNotEmpty,
+    condition = all(bufferNotEmpty, neg(isTerminal)),
     highlight = {c.white.hex, c.dark3.hex},
     separator = ' ',
     separator_highlight = {c.dark3.hex, c.dark3.hex},
@@ -280,13 +294,14 @@ gls.right =
 
   {LinePercent = {
     provider = { printer('['), linePercent(), printer(']') },
-    condition = bufferNotEmpty,
+    condition = all(bufferNotEmpty, neg(isTerminal)),
     highlight = {c.acc1.hex, c.dark3.hex},
     separator = ' ',
     separator_highlight = {c.dark3.hex, c.dark3.hex},
   }},
 
   {RightEnd = {
+    condition = neg(isTerminal),
     provider = space,
 		highlight = {c.dark3.hex, c.dark3.hex},
   }},
@@ -301,9 +316,15 @@ gls.short_line_left = {
 
 	{ShortFileName = {
 		provider  = {space, 'FileIcon', 'FileName'},
-    condition = all(bufferNotEmpty, shortListShow),
+    condition = all(bufferNotEmpty, shortListShow, neg(isTerminal)),
 		highlight = {c.acc1.hex, c.dark2.hex, 'bold'}
 	}},
+
+  {ShortPrintTerm ={
+    provider = {space, printer('TERMINAL')},
+    condition = isTerminal,
+    highlight = {c.acc1.hex, c.dark2.hex, 'bold'}
+  }},
 }
 
 gls.short_line_right = {
@@ -315,7 +336,7 @@ gls.short_line_right = {
 
   {ShortLineColumn = {
     provider = { lineColumn() },
-    condition = all(bufferNotEmpty, shortListShow),
+    condition = all(bufferNotEmpty, shortListShow, neg(isTerminal)),
     highlight = {c.acc1.hex, c.dark2.hex},
     separator = ' ',
     separator_highlight = {c.dark2.hex, c.dark2.hex},
