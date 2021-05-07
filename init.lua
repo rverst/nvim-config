@@ -10,10 +10,7 @@
  - TJ DeVries (https://github.com/tjdevries)
 --]]
 
-local g = vim.g
-
--- leaderkey is space, set this early so it's get respected
-g.mapleader = ' '
+vim.g.mapleader = ' '
 
 -- load the plugin manager
 require('plugins.paq')
@@ -40,7 +37,6 @@ require('plugins.treesitter')
 
 require('plugins.telescope')
 require('plugins.nvimtree')
-
 
 require('bindings')
 require('plugins.kommentary')

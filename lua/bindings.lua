@@ -11,6 +11,7 @@ utils.map('', '<leader>p', '"+p')
 -- spellcheck, 'o' for ortography
 utils.map('n', '<leader>oo', '<cmd>setlocal spell! spelllang=en_us,de_de<CR>')
 utils.map('n', '<leader>oe', '<cmd>setlocal spell! spelllang=en_us<CR>')
+utils.map('n', '<leader>og', '<cmd>setlocal spell! spelllang=de_de<CR>')
 utils.map('n', '<leader>od', '<cmd>setlocal spell! spelllang=de_de<CR>')
 
 -- switch windows with <ctrl> hjkl
