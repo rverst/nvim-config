@@ -41,3 +41,13 @@ nnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>
 inoremap <silent><RightMouse> <Esc>:call GuiShowContextMenu()<CR>
 vnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>gv
 
+lua << EOF
+
+local fn = require('utils.fn')
+local c = vim.g.colors
+fn.highlight('SpellBad',                    nil,                nil,                ucl,                c.red_error)
+fn.highlight('SpellCap',                    nil,                nil,                ucl,                c.orange)
+fn.highlight('SpellLocal',                  nil,                nil,                ucl,                c.blue)
+fn.highlight('SpellRare',                   nil,                nil,                ucl,                c.magenta)
+
+EOF

@@ -38,17 +38,10 @@ fn.highlight('PmenuSel',                    c.orange_light,     c.dark3,        
 
 fn.highlight('IndentBlanklineChar',         c.dark2,            nil,                nil,                nil)
 
-if vim.g.is_gui == 1 then
-fn.highlight('SpellBad',                    nil,                nil,                ucl,                c.red_error)
-fn.highlight('SpellCap',                    nil,                nil,                ucl,                c.orange)
-fn.highlight('SpellLocal',                  nil,                nil,                ucl,                c.blue)
-fn.highlight('SpellRare',                   nil,                nil,                ucl,                c.magenta)
-else
 fn.highlight('SpellBad',                    c.red_error,        nil,                ucl,                c.red_error)
 fn.highlight('SpellCap',                    c.orange,           nil,                ucl,                c.orange)
 fn.highlight('SpellLocal',                  c.blue,             nil,                ucl,                c.blue)
 fn.highlight('SpellRare',                   c.magenta,          nil,                ucl,                c.magenta)
-end
 
 fn.highlight('GitSignsAdd',                 c.green,            c.none,             none,               nil)
 fn.highlight('GitSignsChange',              c.yellow,           c.none,             none,               nil)
