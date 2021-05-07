@@ -219,6 +219,6 @@ local opt = {silent = true, noremap = true}
 local map = require('utils').map
 
 -- cycle trough tabs
-map('n', '<S-l>', [[<Cmd>BufferLineCycleNext<CR>]], opt)
-map('n', '<S-k>', [[<Cmd>BufferLineCyclePrev<CR>]], opt)
+map('n', 'L', [[<Cmd>BufferLineCycleNext<CR>]], opt)
+--map('n', '<S-k>', [[<Cmd>BufferLineCyclePrev<CR>]], opt)
 

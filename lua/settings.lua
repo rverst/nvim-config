@@ -51,6 +51,7 @@ vim.b.shiftwidth = indent
 vim.bo.shiftwidth = indent
 
 vim.o.numberwidth = 3
+vim.wo.cursorline = true
 vim.wo.number = true
 vim.wo.relativenumber = true
 vim.wo.signcolumn = 'yes:2'

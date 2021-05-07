@@ -60,5 +60,20 @@ utils.map('n', '<leader>fg', '<cmd>lua require("telescope.builtin").live_grep()<
 utils.map('n', '<leader>fb', '<cmd>lua require("telescope.builtin").buffers()<CR>')
 utils.map('n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<CR>')
 
+-- lsp saga
+utils.map('n', 'gh', '<cmd>lua require("lspsaga.provider").lsp_finder()<CR>')
+utils.map('n', 'ca', '<cmd>lua require("lspsaga.codeaction").code_action()<CR>')
+utils.map('v', 'ca', '<cmd><C-U>lua require("lspsaga.codeaction").range_code_action()<CR>')
+
+utils.map('n', 'K', '<cmd>lua require("lspsaga.hover").render_hover_doc()<CR>')
+utils.map('n', '<C-a>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>')
+utils.map('n', '<C-z>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>')
+
+utils.map('n', 'gs', '<cmd>lua require("lspsaga.signaturehelp").signature_help()<CR>')
+
+-- FixMe: not working...
+utils.map('n', '<A-d>', '<cmd>lua require("lspsaga.floaterm").open_float_terminal("lazygit")<CR>')
+utils.map('t', '<A-d>', '<C-\\><C-n><cmd>lua require("lspsaga.floaterm").close_float_terminal()<CR>')
+
 -- Goyo
 utils.map('n', '<F4>', '<cmd>Goyo<CR>' )
