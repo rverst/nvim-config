@@ -1,4 +1,6 @@
 local utils = require('utils')
+local va = require('utils.vars')
+local fn = require('utils.fn')
 
 -- highlight yank
 utils.augrp('ag_hl_yank', [[TextYankPost * silent! lua vim.highlight.on_yank {on_visual = false, timeout=150}]])
@@ -25,3 +27,5 @@ utils.augrp('ag_hl_todo', {
 -- delete trailing spaces on save
 utils.augrp('ag_del_wp', [[BufWritePre * %s/\s\+$//e]])
 
+-- PackerSync
+utils.augrp('packer_sync', [[BufWritePost ]]..fn.joinPath('*', 'plugins', 'init.lua')..[[ :PackerSync]])

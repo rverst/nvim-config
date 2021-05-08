@@ -1,5 +1,29 @@
 local M = {}
 
+
+M.clearUpdate = function()
+  M.isUpdate(true)
+end
+
+M.execute = function(cmd)
+  local handle = io.popen(cmd)
+  local result = handle:read('*a')
+  handle:close()
+  return result
+end
+
+M.exists = function(file)
+  local ok, err, code = os.rename(file, file)
+   if not ok then
+      if code == 13 then
+         -- Permission denied, but it exists
+         return true
+      end
+   end
+   if ok == nil then ok = false end
+   return ok, err
+end
+
 M.getOs = function()
   local sys = vim.loop.os_uname().sysname
   local rel = vim.loop.os_uname().release
@@ -54,8 +78,23 @@ M.highlight = function(group, fg, bg, attr, sp)
   vim.cmd(cmd)
 end
 
+M.isDir = function(path)
+  return M.exists(M.joinPath(path, package.config:sub(1,1)))
+end
+
 M.isGui = function()
   return vim.fn.exists(':GuiFont') > 0
+end
+
+M.isUpdate = function(deleteFile)
+  local updateFile = M.joinPath(require('utils.vars').vimPath, 'update')
+  if M.exists(updateFile) then
+    if deleteFile then
+      os.remove(updateFile)
+    end
+    return true
+  end
+  return false
 end
 
 M.joinPath = function(...)

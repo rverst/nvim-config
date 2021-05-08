@@ -12,39 +12,39 @@
 
 vim.g.mapleader = ' '
 
--- load the plugin manager
-require('plugins.paq')
-
 -- set some color variables, the actual colorscheme is loaded later
 require('colors')
-
-require('plugins.devicons')
-require('plugins.file-icons')
-
 require('settings')
+--
+-- load the plugin manager
+require('plugins')
 
-require('plugins.gitsigns')
-require('plugins.colorizer')
-require('plugins.neoscroll')
 
-require('plugins.lsp')
-require('plugins.lspsaga')
-require('plugins.compe')
-require('plugins.lspkind')
-require('plugins.symbols-outline')
+
+--require('plugins.gitsigns')
+--require('plugins.colorizer')
+--require('plugins.neoscroll')
+
+--require('plugins.lsp')
+--require('plugins.lspsaga')
+--require('plugins.compe')
+--require('plugins.lspkind')
+--require('plugins.symbols-outline')
 
 --require('plugins.indentline')
-require('plugins.treesitter')
+--require('plugins.treesitter')
 
-require('plugins.telescope')
-require('plugins.nvimtree')
+--require('plugins.telescope')
+--require('plugins.nvimtree')
 
-require('bindings')
-require('plugins.kommentary')
-require('plugins.snippets')
+--require('plugins.kommentary')
+--require('plugins.snippets')
 
-require('plugins.bufferline')
-require('plugins.statusline')
+--require('plugins.bufferline')
+--require('plugins.statusline')
+
 require('colorscheme')
+--require('bindings')
 require('autocmds')
 
+require('utils.fn').clearUpdate()

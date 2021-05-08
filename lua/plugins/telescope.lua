@@ -46,32 +46,5 @@ require('telescope').setup {
         -- Developer configurations: Not meant for general override
         buffer_previewer_maker = require 'telescope.previewers'.buffer_previewer_maker
     },
-    extensions = {
-        media_files = {
-            filetypes = {'png', 'webp', 'jpg', 'jpeg'},
-            find_cmd = 'rg' -- find command (defaults to `fd`)
-        }
-    }
 }
-
-require('telescope').load_extension('media_files')
-
-local opt = {noremap = true, silent = true}
-
--- mappings
-vim.api.nvim_set_keymap('n', '<Leader>ff', [[<Cmd>lua require('telescope.builtin').find_files()<CR>]], opt)
-vim.api.nvim_set_keymap(
-    'n',
-    '<Leader>fp',
-    [[<Cmd>lua require('telescope').extensions.media_files.media_files()<CR>]],
-    opt
-)
-
-vim.api.nvim_set_keymap('n', '<Leader>fb', [[<Cmd>lua require('telescope.builtin').buffers()<CR>]], opt)
-vim.api.nvim_set_keymap('n', '<Leader>fh', [[<Cmd>lua require('telescope.builtin').help_tags()<CR>]], opt)
-vim.api.nvim_set_keymap('n', '<Leader>fi', [[<Cmd>lua require('telescope.builtin').highlights()<CR>]], opt)
-vim.api.nvim_set_keymap('n', '<Leader>fo', [[<Cmd>lua require('telescope.builtin').tags()<CR>]], opt)
-vim.api.nvim_set_keymap('n', '<Leader>fn', [[<Cmd>lua require('telescope.builtin').file_browser()<CR>]], opt)
-vim.api.nvim_set_keymap('n', '<Leader>fc', [[<Cmd>lua require('telescope.builtin').commands()<CR>]], opt)
-vim.api.nvim_set_keymap('n', '<Leader>fm', [[<Cmd> Neoformat<CR>]], opt)
 
