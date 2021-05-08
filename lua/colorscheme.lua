@@ -68,6 +68,35 @@ fn.highlight('LspDiagnosticsDefaultWarning',          c.orange,           nil,  
 fn.highlight('LspDiagnosticsDefaultHint',             c.dark2,            nil,                'italic',           nil)
 fn.highlight('LspDiagnosticsDefaultInformation',      c.yellow,           nil,                'italic',           nil)
 
+-- Which-Key
+fn.highlight('WhichKey',                              c.yellow_light,     c.none,             none,               nil)
+fn.highlight('WhichKeyGroup',                         c.yellow,           c.none,             'italic',           nil)
+fn.highlight('WhichKeySeparator',                     c.border,           c.none,             none,               nil)
+fn.highlight('WhichKeyDesc',                          c.acc2,             c.none,             none,               nil)
+fn.highlight('WhichKeyFloat',                         c.acc1,             c.bg,               none,               nil)
+fn.highlight('WhichKeyValue',                         c.comment,          c.nonenil,          none,               nil)
+
+-- Bufferline
+fn.highlight('BufferCurrent',                         c.yellow,           c.dark2,            nil,                nil)
+fn.highlight('BufferCurrentIndex',                    c.border,           c.dark2,            nil,                nil)
+fn.highlight('BufferCurrentMod',                      c.yellow,           c.dark2,            'bold,italic',      nil)
+fn.highlight('BufferCurrentSign',                     c.border,           c.dark2,            nil,                nil)
+fn.highlight('BufferCurrentTarget',                   nil,                c.dark2,            nil,                nil)
+fn.highlight('BufferVisible',                         c.acc2,             nil,                'italic',           nil)
+fn.highlight('BufferVisibleIndex',                    c.border,           nil,                nil,                nil)
+fn.highlight('BufferVisibleMod',                      c.acc2,             nil,                'bold,italic',      nil)
+fn.highlight('BufferVisibleSign',                     c.border,           nil,                nil,                nil)
+fn.highlight('BufferVisibleTarget',                   nil,                nil,                nil,                nil)
+fn.highlight('BufferInactive',                        c.comment,          nil,                nil,                nil)
+fn.highlight('BufferInactiveIndex',                   c.border,           nil,                nil,                nil)
+fn.highlight('BufferInactiveMod',                     c.comment,          nil,                'bold,italic',      nil)
+fn.highlight('BufferInactiveSign',                    c.border,           nil,                nil,                nil)
+fn.highlight('BufferInactiveTarget',                  nil,                nil,                nil,                nil)
+fn.highlight('BufferTabpages',                        nil,                nil,                nil,                nil)
+fn.highlight('BufferTabpageFill',                     nil,                nil,                nil,                nil)
+fn.highlight('BufferCurrentIcon',                     nil,                c.dark2,            nil,                nil)
+fn.highlight('BufferVisibleIcon',                     nil,                nil,                nil,                nil)
+fn.highlight('BufferInactiveIcon',                    nil,                nil,                nil,                nil)
 
 -- standard syntax highlighting
 fn.highlight('Boolean',                               c.orange,           nil,                nil,                nil)

@@ -71,6 +71,12 @@ utils.map('n', '<C-s>', '<cmd>SymbolsOutline<CR>')
 -- <esc> to leave insert mode in terminal
 utils.map('t', '<ESC>', [[<C-\><C-n>]])
 
+-- bufferline
+utils.map('n', 'L', ':BufferNext<CR>')
+utils.map('n', 'K', ':BufferPrevious<CR>')
+
+vim.cmd[[nnoremap <silent> <A-1> :BufferGoto 1<CR>]]
+vim.cmd[[nnoremap <silent> <A-1> :BufferGoto 2<CR>]]
 
 local term = ''
 if var.isWindows then
@@ -80,7 +86,8 @@ else
 end
 
 wk.register({
-
+	p = 'paste from clipboard',
+	y = 'yank to clipboard',
 	f = {
 		name = 'find',
 		f = {[[<cmd>lua require('telescope.builtin').find_files()<CR>]], 'find file'},
@@ -106,6 +113,25 @@ wk.register({
 		name = 'terminal',
 		n = {[[<cmd> vnew term://]]..term..[[ <CR>]], 'new terminal vsplit'},
 		x = {[[<cmd> new term://]]..term..[[ | resize 10<CR>]], 'new terminal split'},
+	},
+
+	b = {
+		name = 'buffer',
+		['1'] = {[[<cmd>BufferGoto 1<CR>]], 'buffer 1'},
+		['2'] = {[[<cmd>BufferGoto 2<CR>]], 'buffer 2'},
+		['3'] = {[[<cmd>BufferGoto 3<CR>]], 'buffer 3'},
+		['4'] = {[[<cmd>BufferGoto 4<CR>]], 'buffer 4'},
+		['5'] = {[[<cmd>BufferGoto 5<CR>]], 'buffer 5'},
+		['6'] = {[[<cmd>BufferGoto 6<CR>]], 'buffer 6'},
+		['7'] = {[[<cmd>BufferGoto 7<CR>]], 'buffer 7'},
+		['8'] = {[[<cmd>BufferGoto 8<CR>]], 'buffer 8'},
+		['9'] = {[[<cmd>BufferGoto 9<CR>]], 'buffer 9'},
+		['0'] = {[[<cmd>BufferLast<CR>]], 'last buffer'},
+		[','] = {[[<cmd>BufferMovePrevious<CR>]], 'move buffer left'},
+		['.'] = {[[<cmd>BufferMoveNext<CR>]], 'move buffer right'},
+		['c'] = {[[<cmd>BufferClose<CR>]], 'close buffer'},
+		['d'] = {[[<cmd>BufferOrderByDirectory<CR>]], 'order buffers by dir'},
+		['l'] = {[[<cmd>BufferOrderByLanguage<CR>]], 'order buffers by lang'},
 	},
 
 }, { prefix = '<leader>'})

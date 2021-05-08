@@ -73,6 +73,9 @@ M.highlight = function(group, fg, bg, attr, sp)
       table.insert(x, 'guisp='..sp.hex)
     end
   end
+  if #x == 1 then
+	  return
+  end
 
   local cmd = 'highlight '..table.concat(x, ' ')
   vim.cmd(cmd)
