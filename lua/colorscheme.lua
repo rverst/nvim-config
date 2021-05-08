@@ -29,6 +29,10 @@ fn.highlight('SignColumn',                            nil,                c.none
 fn.highlight('Todo',                                  c.yellow,           c.none,             ubi,                nil)
 fn.highlight('Fixme',                                 c.red,              c.none,             ubi,                nil)
 
+fn.highlight('Cursor',                                nil,                c.acc1,            nil,                nil)
+fn.highlight('MatchParen',                            nil,                c.dark2,            nil,                nil)
+fn.highlight('MatchParent',                           nil,                c.dark2,            nil,                nil)
+
 fn.highlight('CursorLine',                            nil,                c.cursorline,       nil,                c.dark2)
 fn.highlight('CursorLineNR',                          c.yellow,           c.none,             none,               nil)
 
@@ -69,16 +73,14 @@ fn.highlight('LspDiagnosticsDefaultHint',             c.dark2,            nil,  
 fn.highlight('LspDiagnosticsDefaultInformation',      c.yellow,           nil,                'italic',           nil)
 
 -- Which-Key
-fn.highlight('WhichKey',                              c.yellow_light,     c.none,             none,               nil)
-fn.highlight('WhichKeyGroup',                         c.yellow,           c.none,             'italic',           nil)
-fn.highlight('WhichKeySeparator',                     c.border,           c.none,             none,               nil)
+fn.highlight('WhichKey',                              c.yellow_light,     c.none,             none,               nil) fn.highlight('WhichKeyGroup',                         c.yellow,           c.none,             'italic',           nil) fn.highlight('WhichKeySeparator',                     c.border,           c.none,             none,               nil)
 fn.highlight('WhichKeyDesc',                          c.acc2,             c.none,             none,               nil)
 fn.highlight('WhichKeyFloat',                         c.acc1,             c.bg,               none,               nil)
 fn.highlight('WhichKeyValue',                         c.comment,          c.nonenil,          none,               nil)
 
 -- Bufferline
-fn.highlight('BufferCurrent',                         c.yellow,           c.dark2,            nil,                nil)
-fn.highlight('BufferCurrentIndex',                    c.border,           c.dark2,            nil,                nil)
+fn.highlight('BufferCurrent',                         c.yellow,           c.dark2,           nil,                nil)
+fn.highlight('BufferCurrentIndex',                    c.border,           c.dark2,           nil,                nil)
 fn.highlight('BufferCurrentMod',                      c.yellow,           c.dark2,            'bold,italic',      nil)
 fn.highlight('BufferCurrentSign',                     c.border,           c.dark2,            nil,                nil)
 fn.highlight('BufferCurrentTarget',                   nil,                c.dark2,            nil,                nil)

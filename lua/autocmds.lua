@@ -28,4 +28,6 @@ utils.augrp('ag_hl_todo', {
 utils.augrp('ag_del_wp', [[BufWritePre * %s/\s\+$//e]])
 
 -- PackerSync
-utils.augrp('packer_sync', [[BufWritePost ]]..fn.joinPath('*', 'plugins', 'init.lua')..[[ :PackerSync]])
+utils.augrp('packer_sync', {
+	[[BufWritePost ]]..fn.joinPath('*', 'plugins', 'init.lua')..[[ :luafile ]]..fn.joinPath('lua', 'plugins', 'init.lua'),
+	[[BufWritePost ]]..fn.joinPath('*', 'plugins', 'init.lua')..[[ :PackerSync]]})

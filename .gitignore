@@ -4,3 +4,5 @@ update
 [Ss]ession.*
 /spell/*
 !/spell/*.add
+
+plugin/packer_compiled.vim
