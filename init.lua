@@ -48,3 +48,4 @@ require('colorscheme')
 require('autocmds')
 
 require('utils.fn').clearUpdate()
+

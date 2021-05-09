@@ -55,6 +55,11 @@ require('packer').startup(function()
 	}
 
 	use {
+		'neovim/nvim-lspconfig',
+		config = function() require('lsp') end,
+	}
+
+	use {
 		'folke/which-key.nvim',
 		config = function() require('plugins.which-key') end
 	}

@@ -116,7 +116,7 @@ wk.register({
 	},
 
 	b = {
-		name = 'buffer',
+		name = 'bufferline',
 		['1'] = {[[<cmd>BufferGoto 1<CR>]], 'buffer 1'},
 		['2'] = {[[<cmd>BufferGoto 2<CR>]], 'buffer 2'},
 		['3'] = {[[<cmd>BufferGoto 3<CR>]], 'buffer 3'},
