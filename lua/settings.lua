@@ -95,4 +95,3 @@ if clipProvCopy then
   }
 end
 
-vim.o.clipboard = vim.o.clipboard .. 'unnamedplus'
