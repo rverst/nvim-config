@@ -1,18 +1,9 @@
-local npairs = require("nvim-autopairs")
-
-npairs.setup({
-    check_ts = true,
-    ts_config = {
-        lua = {'string'}, -- it will not add pair on that treesitter node
-        javascript = {'template_string'},
-    }
-})
-
 require('nvim-treesitter.configs').setup {
-	ensure_installed = 'all',
+	ensure_installed = 'maintained',
 	ignore_install = { 'haskell' },
 	highlight = {
 		enable = true,
+		disable_filetype = { 'TelescopePrompt'  },
 		additional_vim_regex_highlighting = true,
 	},
 	indent = {
@@ -53,13 +44,22 @@ require('nvim-treesitter.configs').setup {
 	},
 }
 
-local ts_conds = require('nvim-autopairs.ts-conds')
-local rule = require('nvim-autopairs.rule')
+require("nvim-autopairs").setup({
+	disable_filetype = { 'TelescopePrompt' },
+	check_ts = true,
+	ts_config = {
+		lua = {'string'}, -- it will not add pair on that treesitter node
+		javascript = {'template_string'},
+	}
+})
+
+--local ts_conds = require('nvim-autopairs.ts-conds')
+--local rule = require('nvim-autopairs.rule')
 
 -- press % => %% is only inside comment or string
-npairs.add_rules({
-  rule("%", "%", "lua")
-    :with_pair(ts_conds.is_ts_node({'string','comment'})),
-  rule("$", "$", "lua")
-    :with_pair(ts_conds.is_not_ts_node({'function'}))
-})
+--npairs.add_rules({
+--  rule("%", "%", "lua")
+--    :with_pair(ts_conds.is_ts_node({'string','comment'})),
+--  rule("$", "$", "lua")
+--    :with_pair(ts_conds.is_not_ts_node({'function'}))
+--})

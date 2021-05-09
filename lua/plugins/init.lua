@@ -40,12 +40,17 @@ require('packer').startup(function()
 
 	use {
 		'nvim-telescope/telescope.nvim',
-		requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}, config = function() require('plugins.telescope') end }
+		requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
+		config = function() require('plugins.telescope') end
+	}
 
 	use {
 		'nvim-treesitter/nvim-treesitter',
 		run = ':TSUpdate',
-		requires = {{'nvim-treesitter/playground'}, {'windwp/nvim-autopairs'}, {'windwp/nvim-ts-autotag'}},
+		requires = {{'nvim-treesitter/playground'},
+			{'windwp/nvim-autopairs'},
+			{'windwp/nvim-ts-autotag'},
+		},
 		config = function() require('plugins.treesitter') end
 	}
 

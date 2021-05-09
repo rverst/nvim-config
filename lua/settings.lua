@@ -58,6 +58,11 @@ vim.wo.relativenumber = true
 vim.wo.signcolumn = 'yes:2'
 vim.wo.wrap = false
 
+vim.wo.foldmethod='expr'
+vim.wo.foldexpr='nvim_treesitter#foldexpr()'
+vim.wo.foldcolumn='0'
+vim.wo.foldenable=false
+
 local clipName
 local clipProvCopy
 local clipProvPaste
