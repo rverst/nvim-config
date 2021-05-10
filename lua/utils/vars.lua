@@ -8,7 +8,7 @@ function M:init()
   self.isMacOs = self.os == OS.MacOs
   self.isLinux = self.os == OS.Linux
   self.isWsl = self.os == OS.WSL
-  self.isWindows = self.os == OS.Windowsh
+  self.isWindows = self.os == OS.Windows
 
   self.vimPath = vim.fn.stdpath('config')
   self.dataPath = vim.fn.stdpath('data')

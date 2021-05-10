@@ -28,14 +28,15 @@ M.getOs = function()
   local sys = vim.loop.os_uname().sysname
   local rel = vim.loop.os_uname().release
 
-  if sys == 'Darwin' then
+  --print("GetOS", sys, rel)
+  if sys:find('^[Dd]arwin') ~= nil then
     return OS.MacOs
-  elseif sys == 'Linux' then
-    if string.find(rel, 'WSL') ~= nil then
+  elseif sys:find('^[Ll]inux') ~= nil then
+    if string.find(rel, '[Ww][Ss][Ll]') ~= nil then
       return OS.WSL
     end
     return OS.Linux
-  elseif sys == 'Windows' then
+  elseif sys:find('^[Ww]in') ~= nil then
     return OS.Windows
   else
     return OS.Unknown
