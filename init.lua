@@ -12,6 +12,9 @@
 
 vim.g.mapleader = ' '
 
+local fn = require('utils.fn')
+local v = require('utils.vars')
+
 -- set some color variables, the actual colorscheme is loaded later
 require('colors')
 require('settings')
@@ -47,5 +50,6 @@ require('colorscheme')
 --require('bindings')
 require('autocmds')
 
-require('utils.fn').clearUpdate()
+fn.clearUpdate()
+
 

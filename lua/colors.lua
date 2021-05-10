@@ -51,6 +51,7 @@ c.purple        = calcColors('#C8A0D1')
 c.purple_light  = calcColors('#FBB1F9')
 c.comment       = calcColors('#656565')
 c.cursorline    = calcColors('#282828')
+c.cursor        = calcColors('#EBDBB2')
 c.bg            = c.dark1
 c.fg            = c.white_dark
 

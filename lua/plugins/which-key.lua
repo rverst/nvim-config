@@ -72,11 +72,8 @@ utils.map('n', '<C-s>', '<cmd>SymbolsOutline<CR>')
 utils.map('t', '<ESC>', [[<C-\><C-n>]])
 
 -- bufferline
-utils.map('n', 'L', ':BufferNext<CR>')
-utils.map('n', 'K', ':BufferPrevious<CR>')
-
-vim.cmd[[nnoremap <silent> <A-1> :BufferGoto 1<CR>]]
-vim.cmd[[nnoremap <silent> <A-1> :BufferGoto 2<CR>]]
+utils.map('n', 'L', '<cmd>BufferNext<CR>')
+utils.map('n', 'K', '<cmd>BufferPrevious<CR>')
 
 local term = ''
 if var.isWindows then

@@ -1,7 +1,7 @@
 local M = {} local fn = require('utils.fn')
 local v = require('utils.vars')
 
-local root = fn.joinPath(v.lspPath, 'sumneko')
+local root = fn.joinPath(v.lspPath, 'lua-language-server')
 
 local oss
 local bin = 'lua-language-server'
@@ -22,68 +22,14 @@ M.isInstalled = function()
 end
 
 M.install = function(update)
-	if vim.fn.executable('ninja') ~= 1 then
-		error('ninja not installed, see: https://github.com/ninja-build/ninja/releases')
-		return
-	end
-
-	local script = ''
-	if not update then
-
-		if fn.exists(root) then
-			M.uninstall()
-		end
-
-		script = [[
-		git clone https://github.com/sumneko/lua-language-server sumneko;
-		cd sumneko;
-		git submodule update --init --recursive;
-		]]
-	else
-		script = [[
-		cd sumneko;
-		git submodule update --init --recursive;
-		git pull --ff-only --rebase=false --progress
-		git submodule foreach git pull --ff-only --rebase=false --progress
-		]]
-	end
-
-	script = script..string.format([[
-	cd 3rd/luamake;
-	compile/install.%s;
-	cd ../../;
-	./3rd/luamake/luamake rebuild;
-	]], v.isWindows and 'bat' or 'sh')
-
-	vim.cmd('new')
-	vim.fn.termopen(script, {
-		cwd = v.lspPath,
-		on_exit = function(_, exitCode)
-			if exitCode ~= 0 then
-				vim.api.nvim_err_writeln('installation of sumneko_lua failed')
-			else
-				print('sumneko_lua installation successful')
-			end
-		end
-	})
-	vim.cmd('startinsert')
+	print([[No installation script for "sumneko_lua" provided. Please install "sumneko_lua" to: ]]..root..[[ See: https://github.com/sumneko/lua-language-server for details]])
 end
 
 M.uninstall = function()
-	local cmd
-	if v.isWindows then
-		cmd = [[]]
-	else
-		cmd = [[rm -rf ]]..root
-	end
-
-	if os.execute(cmd) ~= 0 then
-		error('error uninstalling sumneko')
-	end
 end
 
 M.update = function()
-
+	M.install(true)
 end
 
 M.config =  {

@@ -8,7 +8,7 @@ let g:is_gui=1
 " Set Editor Font
 if exists(':GuiFont')
     if has('win32')
-      set guifont=Hack NF:h14
+      set guifont=Hack\ NF:h14
     endif
 
     if has('macunix')

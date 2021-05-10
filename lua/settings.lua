@@ -39,6 +39,10 @@ vim.bo.undofile = true
 
 vim.o.mouse = 'nv'
 
+--"n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
+--local cur =  'n-v-c-sm:block-Cursor,i:ver100-iCursor,n-v-c-sm:blinkon0'
+--vim.o.guicursor=cur
+
 vim.b.swapfile = false
 vim.bo.swapfile = false
 
@@ -67,6 +71,16 @@ local clipName
 local clipProvCopy
 local clipProvPaste
 local clipCache
+
+if v.isWindows then
+  vim.cmd([[
+  let &shell = has('win32') ? 'powershell' : 'pwsh'
+  set shellquote= shellpipe=\| shellxquote=
+  set shellcmdflag=-NoLogo\ -NoProfile\ -ExecutionPolicy\ RemoteSigned\ -Command
+  set shellredir=\|\ Out-File\ -Encoding\ UTF8
+  ]])
+end
+
 
 if v.isWsl or v.isWindows then
   clipName = 'windows-clipboard'

@@ -10,7 +10,7 @@ end
 
 local updateRepo = function()
 	local c = ' && '
-	if fn.isWindows then s = " ; " end
+	if fn.isWindows then c = " ; " end
 	local cmd = 'cd '..path..c..'git pull --ff-only --rebase=false --progress'
 	fn.execute(cmd)
 end
@@ -32,7 +32,7 @@ end
 checkInstall()
 
 
-require('packer').startup(function()
+require('packer').startup(function(use)
 
 	use {
 		'qbthomason/packer.nvim'
@@ -46,7 +46,6 @@ require('packer').startup(function()
 
 	use {
 		'nvim-treesitter/nvim-treesitter',
-		run = ':TSUpdate',
 		requires = {{'nvim-treesitter/playground'},
 			{'windwp/nvim-autopairs'},
 			{'windwp/nvim-ts-autotag'},
@@ -57,6 +56,11 @@ require('packer').startup(function()
 	use {
 		'neovim/nvim-lspconfig',
 		config = function() require('lsp') end,
+	}
+
+	use {
+		'ray-x/go.nvim',
+		config = function()  require('plugins.go-nvim') end,
 	}
 
 	use {
@@ -71,9 +75,14 @@ require('packer').startup(function()
 	}
 
 	use {
-		'romgrk/barbar.nvim',
+		'rverst/barbar.nvim',
 		requires = {'kyazdani42/nvim-web-devicons', opt = true},
 		config = function() require('plugins.bufferline') end
+	}
+
+	use {
+		'hrsh7th/nvim-compe',
+		config = function() require('plugins.compe') end
 	}
 
 	use {

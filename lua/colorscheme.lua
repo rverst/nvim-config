@@ -18,7 +18,11 @@ vim.cmd('hi clear CursorLine')
 local ubi = 'underline,bold,italic'
 local ucl = 'undercurl'
 local uli = 'underline'
-local bi =  'bold,italic'
+local ita = 'italic'
+local bit = 'bold,italic'
+local uit = 'underline,italic'
+local inv = 'inverse'
+local rev = 'inverse'
 
 
 --           'Group'                                  Foreground          Background          Decorations         SP Color
@@ -29,7 +33,10 @@ fn.highlight('SignColumn',                            nil,                c.none
 fn.highlight('Todo',                                  c.yellow,           c.none,             ubi,                nil)
 fn.highlight('Fixme',                                 c.red,              c.none,             ubi,                nil)
 
-fn.highlight('Cursor',                                nil,                c.acc1,            nil,                nil)
+fn.highlight('Cursor',                                nil,                c.cursor,           inv,                nil)
+fn.highlight('TermCursor',                            nil,                c.cursor,           inv,                nil)
+fn.highlight('iCursor',                               nil,                c.cursor,           inv,                nil)
+
 fn.highlight('MatchParen',                            nil,                c.dark2,            nil,                nil)
 fn.highlight('MatchParent',                           nil,                c.dark2,            nil,                nil)
 
@@ -65,33 +72,40 @@ fn.highlight('NvimTreeOpenedFolderName',              c.yellow_light,     nil,  
 fn.highlight('NvimTreeIndentMarker',                  c.dark2,            nil,                nil,                nil)
 
 -- SymbolsOutline
-fn.highlight('FocusedSymbol',                         c.orange,           c.dark2,            bi,                 nil)
+fn.highlight('FocusedSymbol',                         c.orange,           c.dark2,            bit,                 nil)
 
-fn.highlight('LspDiagnosticsDefaultError',            c.red,              nil,                'italic',           nil)
-fn.highlight('LspDiagnosticsDefaultWarning',          c.orange,           nil,                'italic',           nil)
-fn.highlight('LspDiagnosticsDefaultHint',             c.dark2,            nil,                'italic',           nil)
-fn.highlight('LspDiagnosticsDefaultInformation',      c.yellow,           nil,                'italic',           nil)
+-- LSP
+fn.highlight('LspDiagnosticsDefaultError',            c.red,              nil,                ita,                nil)
+fn.highlight('LspDiagnosticsDefaultWarning',          c.orange,           nil,                ita,                nil)
+fn.highlight('LspDiagnosticsDefaultHint',             c.dark2,            nil,                ita,                nil)
+fn.highlight('LspDiagnosticsDefaultInformation',      c.yellow,           nil,                ita,                nil)
+
+fn.highlight('LspReferenceRead',                      nil,                nil,                uli,                c.green)
+fn.highlight('LspReferenceWrite',                     c.red_light,        nil,                uit,                c.red)
+fn.highlight('LspReferenceText',                      c.acc1,             nil,                uli,                c.acc2)
 
 -- Which-Key
-fn.highlight('WhichKey',                              c.yellow_light,     c.none,             none,               nil) fn.highlight('WhichKeyGroup',                         c.yellow,           c.none,             'italic',           nil) fn.highlight('WhichKeySeparator',                     c.border,           c.none,             none,               nil)
+fn.highlight('WhichKey',                              c.yellow_light,     c.none,             none,               nil)
+fn.highlight('WhichKeyGroup',                         c.yellow,           c.none,             ita,                nil)
+fn.highlight('WhichKeySeparator',                     c.border,           c.none,             none,               nil)
 fn.highlight('WhichKeyDesc',                          c.acc2,             c.none,             none,               nil)
 fn.highlight('WhichKeyFloat',                         c.acc1,             c.bg,               none,               nil)
 fn.highlight('WhichKeyValue',                         c.comment,          c.nonenil,          none,               nil)
 
 -- Bufferline
-fn.highlight('BufferCurrent',                         c.yellow,           c.dark2,           nil,                nil)
-fn.highlight('BufferCurrentIndex',                    c.border,           c.dark2,           nil,                nil)
-fn.highlight('BufferCurrentMod',                      c.yellow,           c.dark2,            'bold,italic',      nil)
+fn.highlight('BufferCurrent',                         c.yellow,           c.dark2,            nil,                nil)
+fn.highlight('BufferCurrentIndex',                    c.border,           c.dark2,            nil,                nil)
+fn.highlight('BufferCurrentMod',                      c.yellow,           c.dark2,            bit,                nil)
 fn.highlight('BufferCurrentSign',                     c.border,           c.dark2,            nil,                nil)
 fn.highlight('BufferCurrentTarget',                   nil,                c.dark2,            nil,                nil)
-fn.highlight('BufferVisible',                         c.acc2,             nil,                'italic',           nil)
+fn.highlight('BufferVisible',                         c.acc2,             nil,                ita,                nil)
 fn.highlight('BufferVisibleIndex',                    c.border,           nil,                nil,                nil)
-fn.highlight('BufferVisibleMod',                      c.acc2,             nil,                'bold,italic',      nil)
+fn.highlight('BufferVisibleMod',                      c.acc2,             nil,                bit,                nil)
 fn.highlight('BufferVisibleSign',                     c.border,           nil,                nil,                nil)
 fn.highlight('BufferVisibleTarget',                   nil,                nil,                nil,                nil)
 fn.highlight('BufferInactive',                        c.comment,          nil,                nil,                nil)
 fn.highlight('BufferInactiveIndex',                   c.border,           nil,                nil,                nil)
-fn.highlight('BufferInactiveMod',                     c.comment,          nil,                'bold,italic',      nil)
+fn.highlight('BufferInactiveMod',                     c.comment,          nil,                bit,                nil)
 fn.highlight('BufferInactiveSign',                    c.border,           nil,                nil,                nil)
 fn.highlight('BufferInactiveTarget',                  nil,                nil,                nil,                nil)
 fn.highlight('BufferTabpages',                        nil,                nil,                nil,                nil)

@@ -2,7 +2,7 @@ local fn = require('utils.fn')
 local v = require('utils.vars')
 
 local servers = {
---	"sumneko_lua"
+	'sumneko_lua',
 }
 
 if not fn.exists(v.lspPath) then
@@ -19,8 +19,8 @@ end
 
 for _, s in pairs(servers) do
 
-	print('LSP', s)
 	local srv = require('lsp.'..s)
+	local lspconfig = require('lspconfig')
 
 	if not srv.isInstalled() then
 		srv.install()
@@ -31,11 +31,7 @@ for _, s in pairs(servers) do
 	end
 
 	if srv.isInstalled() then
---		require('lspconfig')[s].setup{
---			srv.config
---		}
-	else
-		print('server not installed: '..s)
+		lspconfig[s].setup(srv.config)
 	end
 end
 
