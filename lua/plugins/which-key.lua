@@ -117,7 +117,13 @@ wk.register({
 		c = {[[<cmd>lua require('telescope.builtin').git_commits()<CR>]], 'List commits'},
 		C = {[[<cmd>lua require('telescope.builtin').git_bcommits()<CR>]], 'List buffer commits'},
 		b = {[[<cmd>lua require('telescope.builtin').git_branches()<CR>]], 'Git branches'},
-		s = {[[<cmd>lua require('telescope.builtin').git_status()<CR>]], 'Git Status'},
+		S = {[[<cmd>lua require('telescope.builtin').git_status()<CR>]], 'Git Status'},
+		s = {[[<cmd>lua require('gitsigns').stage_hunk()<CR>]], 'Stage hunk'},
+		u = {[[<cmd>lua require('gitsigns').undo_stage_hunk()<CR>]], 'Undo stage hunk'},
+		r = {[[<cmd>lua require('gitsigns').reset_hunk()<CR>]], 'Reset hunk'},
+		R = {[[<cmd>lua require('gitsigns').reset_buffer()<CR>]], 'Reset buffer'},
+		p = {[[<cmd>lua require('gitsigns').preview_hunk()<CR>]], 'Preview hunk'},
+		B = {[[<cmd>lua require('gitsigns').blame_line()<CR>]], 'Blame line'},
 	},
 
 	T = {
