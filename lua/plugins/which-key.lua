@@ -109,9 +109,9 @@ wk.register({
 		name = 'terminal',
 		n = {[[<cmd> vnew term://]]..term..[[ <CR>]], 'New terminal vsplit'},
 		x = {[[<cmd> new term://]]..term..[[ | resize 10<CR>]], 'New terminal split'},
-    f = {[[<cmd>lua require('plugins.which-key').openFloatTerm()<CR>]], 'Float terminal'},
-    g = {[[<cmd>lua require('lspsaga.floaterm').open_float_terminal('lazygit')<CR>]], 'Lazygit'},
-    d = {[[<cmd>lua require('lspsaga.floaterm').open_float_terminal('lazydocker')<CR>]], 'Lazydocker'},
+		f = {[[<cmd>lua require('plugins.which-key').openFloatTerm()<CR>]], 'Float terminal'},
+		g = {[[<cmd>lua require('plugins.which-key').openFloatTerm('lazygit')<CR>]], 'Lazygit'},
+		d = {[[<cmd>lua require('plugins.which-key').openFloatTerm('lazydocker')<CR>]], 'Lazydocker'},
 	},
 
 	c = {
@@ -209,20 +209,28 @@ utils.map('t', '<C-h>', [[<C-\><C-n><C-w>h]])
 utils.map('t', '<C-j>', [[<C-\><C-n><C-w>j]])
 utils.map('t', '<C-k>', [[<C-\><C-n><C-w>k]])
 utils.map('t', '<C-l>', [[<C-\><C-n><C-w>l]])
-utils.map('t', '<C-q>', [[<C-\><C-n><cmd>lua require('lspsaga.floaterm').close_float_terminal()<CR>]])
 
 local M = {}
 
+-- open floating terminal and add keybindings to close it
 M.openFloatTerm = function(cmd)
-  require('lspsaga.floaterm').open_float_terminal()
-  local has_var,float_terminal_win = pcall(vim.api.nvim_buf_get_var,0,'float_terminal_win')
+  require('lspsaga.floaterm').open_float_terminal(cmd)
+  local hasWin, winHandle = pcall(vim.api.nvim_buf_get_var, 0, 'float_terminal_win')
+  if hasWin then
+    for _, h in pairs(winHandle) do
+	local buf = vim.api.nvim_win_get_buf(h)
+	wk.register({
+		['<C-q>'] = {[[<C-\><C-n><cmd>lua require('lspsaga.floaterm').close_float_terminal()<CR>]], 'which_key_ignore'}
+	}, { mode = 't', buffer = buf })
 
-  print('V', has_var)
-  print('H', vim.inspect(float_terminal_win))
+	wk.register({
+		['<C-q>'] = {[[<cmd>lua require('lspsaga.floaterm').close_float_terminal()<CR>]], 'which_key_ignore'}
+	}, { mode = 'n', buffer = buf })
+    end
+  end
 end
 
 return M
-
 
 
 
