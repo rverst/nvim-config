@@ -41,12 +41,6 @@ wk.setup {
 -- clear search highlight on <CR>
 utils.map('n', '<CR>', '<cmd>noh<CR><CR>')
 
--- copy/pase from/to clipboard
-utils.map('', '<leader>y', '"+y')
-utils.map('', '<leader>Y', '"+Y')
-utils.map('', '<leader>p', '"+p')
-utils.map('', '<leader>P', '"+P')
-
 -- switch windows with <ctrl> hjkl
 utils.map('n', '<C-h>', '<C-w>h')
 utils.map('n', '<C-j>', '<C-w>j')
@@ -88,11 +82,13 @@ else
 end
 
 wk.register({
-	p = 'paste from clipboard',
-	P = 'paste from clipboard',
-	y = 'yank to clipboard',
-	Y = 'yank line to clipboard',
-	q = 'quickfix',
+	p     = {[["+p]], 'Paste from clipboard'},
+	P     = {[["+P]], 'Paste from clipboard (before)'},
+	y     = {[["+y]], 'Yank to clipboard'},
+	Y     = {[["+Y]], 'Yank line to clipboard'},
+	q     = 'Quickfix',
+	C     = {[[<Plug>kommentary_motion_default]], 'Toggle comment [motion]'},
+	['/'] = {[[<Plug>kommentary_line_default]], 'Toggle line comment'},
 	f = {
 		name = 'find',
 		f = {[[<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ winblend = 10 }))<CR>]], 'find file'},
@@ -150,6 +146,13 @@ wk.register({
 		x = {[[<cmd> new term://]]..term..[[ | resize 10<CR>]], 'new terminal split'},
 	},
 
+	c = {
+		name = 'code',
+		c = {[[<Plug>kommentary_line_default]], 'Toggle line comment'},
+		C = {[[<Plug>kommentary_motion_default]], 'Toggle comment [motion]'},
+		-- additional keybinds in ../lsp/config.lua
+	},
+
 	b = {
 		name = 'bufferline',
 		['1'] = {[[<cmd>BufferGoto 1<CR>]], 'buffer 1'},
@@ -170,6 +173,16 @@ wk.register({
 	},
 
 }, { prefix = '<leader>'})
+
+wk.register({
+	['/'] = {[[<Plug>kommentary_visual_default]], 'Toggle comment'},
+	c = {
+		name = 'code',
+		c = {[[<Plug>kommentary_visual_default]], 'Toggle comment'},
+		-- additional keybinds in ../lsp/config.lua
+	},
+
+}, { prefix = '<leader>', mode = 'v'})
 
 --vimdm', [[<Cmd> Neoformat<CR>]], opt)
 --
