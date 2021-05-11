@@ -214,11 +214,13 @@ utils.map('t', '<C-q>', [[<C-\><C-n><cmd>lua require('lspsaga.floaterm').close_f
 local M = {}
 
 M.openFloatTerm = function(cmd)
-  print('REEGI')
-  require('lspsaga.floaterm').open_float_terminal();
+  require('lspsaga.floaterm').open_float_terminal()
+  local has_var,float_terminal_win = pcall(vim.api.nvim_buf_get_var,0,'float_terminal_win')
+
+  print('V', has_var)
+  print('H', vim.inspect(float_terminal_win))
 end
 
-M.openFloatTerm()
 return M
 
 
