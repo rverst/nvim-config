@@ -21,7 +21,7 @@ M.isInstalled = function()
 	return ok
 end
 
-M.install = function(update)
+M.install = function(_)
 	print([[No installation script for "sumneko_lua" provided. Please install "sumneko_lua" to: ]]..root..[[ See: https://github.com/sumneko/lua-language-server for details]])
 end
 
