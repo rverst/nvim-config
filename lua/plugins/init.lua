@@ -59,6 +59,12 @@ require('packer').startup(function(use)
 	}
 
 	use {
+		'lewis6991/gitsigns.nvim',
+		requires = { 'nvim-lua/plenary.nvim' },
+		config = function () require('plugins.gitsigns') end
+	}
+
+	use {
 		'ray-x/go.nvim',
 		config = function()  require('plugins.go-nvim') end,
 	}

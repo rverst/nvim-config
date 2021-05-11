@@ -13,14 +13,6 @@ M.OnAttach = function(client, bufnr)
   buf_set_keymap('n', '<leader>l', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   buf_set_keymap('n', '<leader>k', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
 
   -- Set some keybinds conditional on server capabilities fmt
   local fmt = false
@@ -36,13 +28,13 @@ M.OnAttach = function(client, bufnr)
 	  	e = 'show line diag [LSP]',
 	  	l = 'signature help [LSP]',
 	  	k = 'hover [LSP]',
-		q = 'set loclist [LSP]',
+	  	q = 'show loclist [LSP]',
 	  	D = 'type definition [LSP]',
-		w = {
-			name = 'workspace [LSP]',
-			a = {[[<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>]], 'add workspace folder'},
-			r = {[[<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>]], 'remove workspace folder'},
-			l = {[[<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>]], 'list workspace folder'},
+		  w = {
+        name = 'workspace [LSP]',
+        a = {[[<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>]], 'add workspace folder'},
+        r = {[[<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>]], 'remove workspace folder'},
+        l = {[[<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>]], 'list workspace folder'},
 		},
 
 		r = {
@@ -52,10 +44,40 @@ M.OnAttach = function(client, bufnr)
 
 		c = {
 			name = 'code',
-			a = {[[<cmd>lua vim.ksp.buf.code_action()]], 'action'},
+			r = {[[<cmd>lua require('telescope.builtin').lsp_references()<CR>]], 'references'},
+			s = {[[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], 'document symbols'},
+			S = {[[<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<CR>]], 'workspace symbols'},
+			a = {[[<cmd>lua require('telescope.builtin').lsp_code_actions()<CR>]], 'code actions'},
+			d = {[[<cmd>lua require('telescope.builtin').lsp_document_diagnostics()<CR>]], 'document diagnostic'},
+			D = {[[<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<CR>]], 'workspace diagnostic'},
 		}
 
 	}, { prefix = '<leader>'})
+
+  require('which-key').register({
+		c = {
+			name = 'code',
+			a = {[[<cmd>lua require('telescope.builtin').lsp_range_code_actions()<CR>]], 'code actions'},
+		}
+	}, { prefix = '<leader>', mode = 'v'})
+
+  require('which-key').register({
+	  g = {
+		  name = 'goto',
+			d = {[[<cmd>lua require('telescope.builtin').lsp_definitions()<CR>]], 'definition'},
+			D = {[[<Cmd>lua vim.lsp.buf.declaration()<CR>]], 'declaration'},
+			i = {[[<cmd>lua vim.lsp.buf.implementation()<CR>]], 'implementation'},
+			r = {[[<cmd>lua vim.lsp.buf.references()<CR>]], 'references'},
+		},
+
+    ['['] = {
+      d = {[[<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>]], 'Previous diagnostic'},
+    },
+
+    [']'] = {
+      d = {[[<cmd>lua vim.lsp.diagnostic.goto_next()<CR>]], 'Next diagnostic'},
+    },
+	}, { prefix = ''})
 
   if fmt then
   	require('which-key').register({f = 'format [LSP]'}, { prefix = '<leader>'})

@@ -43,7 +43,9 @@ utils.map('n', '<CR>', '<cmd>noh<CR><CR>')
 
 -- copy/pase from/to clipboard
 utils.map('', '<leader>y', '"+y')
+utils.map('', '<leader>Y', '"+Y')
 utils.map('', '<leader>p', '"+p')
+utils.map('', '<leader>P', '"+P')
 
 -- switch windows with <ctrl> hjkl
 utils.map('n', '<C-h>', '<C-w>h')
@@ -75,6 +77,9 @@ utils.map('t', '<ESC>', [[<C-\><C-n>]])
 utils.map('n', 'L', '<cmd>BufferNext<CR>')
 utils.map('n', 'K', '<cmd>BufferPrevious<CR>')
 
+-- quickfix
+--utils.map('n', '<leader>q', [[<cmd>lua require('telescope.builtin').quickfix()<CR>]])
+
 local term = ''
 if var.isWindows then
     term = 'pwsh.exe'
@@ -84,10 +89,14 @@ end
 
 wk.register({
 	p = 'paste from clipboard',
+	P = 'paste from clipboard',
 	y = 'yank to clipboard',
+	Y = 'yank line to clipboard',
+	q = 'quickfix',
 	f = {
 		name = 'find',
-		f = {[[<cmd>lua require('telescope.builtin').find_files()<CR>]], 'find file'},
+		f = {[[<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ winblend = 10 }))<CR>]], 'find file'},
+		F = {[[<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ winblend = 10 }))<CR>]], 'find file'},
 		n = {[[<cmd>lua require('telescope.builtin').file_browser()<CR>]], 'file browser'},
 		r = {[[<cmd>lua require('telescope.builtin').old_files()<CR>]], 'open recent file'},
 		b = {[[<cmd>lua require('telescope.builtin').buffers()<CR>]], 'find buffer'},
@@ -96,6 +105,28 @@ wk.register({
 		i = {[[<cmd>lua require('telescope.builtin').highlights()<CR>]], 'grep highlights'},
 		c = {[[<cmd>lua require('telescope.builtin').commands()<CR>]], 'grep commands'},
 		t = {[[<cmd>lua require('telescope.builtin').tags()<CR>]], 'grep tags'},
+		s = {[[<cmd>lua require('telescope.builtin').git_files()<CR>]], 'git files'},
+		w = {[[<cmd>lua require('telescope.builtin').grep_string()<CR>]], 'find word'},
+		m = {[[<cmd>lua require('telescope.builtin').marks()<CR>]], 'marks'},
+		k = {[[<cmd>lua require('telescope.builtin').keymaps()<CR>]], 'keymaps'},
+		o = {[[<cmd>lua require('telescope.builtin').vim_options()<CR>]], 'vim options'},
+	},
+
+	g = {
+		name = 'git',
+		c = {[[<cmd>lua require('telescope.builtin').git_commits()<CR>]], 'List commits'},
+		C = {[[<cmd>lua require('telescope.builtin').git_bcommits()<CR>]], 'List buffer commits'},
+		b = {[[<cmd>lua require('telescope.builtin').git_branches()<CR>]], 'Git branches'},
+		s = {[[<cmd>lua require('telescope.builtin').git_status()<CR>]], 'Git Status'},
+	},
+
+	T = {
+		name = 'telescope',
+		p = {[[<cmd>lua require('telescope.builtin').planets()<CR>]], 'Use the telescope'},
+		b = {[[<cmd>lua require('telescope.builtin').builtin()<CR>]], 'List builtin pickers'},
+		R = {[[<cmd>lua require('telescope.builtin').reloader()<CR>]], 'List lua modules and reload'},
+		s = {[[<cmd>lua require('telescope.builtin').symbols()<CR>]], 'List builtin symbols'},
+		r = {[[<cmd>lua require('telescope.builtin').registers()<CR>]], 'List registers'},
 	},
 
 	o = {
@@ -104,6 +135,7 @@ wk.register({
 		e = {[[<cmd>setlocal spell! spelllang=en_us<CR>]], 'toggle spellcheck (en)'},
 		d = {[[<cmd>setlocal spell! spelllang=de_de<CR>]], 'toggle spellcheck (de)'},
 		g = {[[<cmd>setlocal spell! spelllang=de_de<CR>]], 'toggle spellcheck (de)'},
+		s = {[[<cmd>lua require('telescope.builtin').spell_suggest()<CR>]], 'spell suggestion'},
 	},
 
 	t = {

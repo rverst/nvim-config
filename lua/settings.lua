@@ -84,7 +84,7 @@ end
 
 if v.isWsl or v.isWindows then
   clipName = 'windows-clipboard'
-  clipProvCopy = {'pbcopy.exe'}
+  clipProvCopy = {'clip.exe'}
   clipProvPaste = {'pbpaste.exe', '--lf'}
   clipCache = 1
 elseif v.isMacOs then

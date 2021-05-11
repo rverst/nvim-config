@@ -31,3 +31,11 @@ utils.augrp('ag_del_wp', [[BufWritePre * %s/\s\+$//e]])
 utils.augrp('packer_sync', {
 	[[BufWritePost ]]..fn.joinPath('*', 'plugins', 'init.lua')..[[ :luafile ]]..fn.joinPath('lua', 'plugins', 'init.lua'),
 	[[BufWritePost ]]..fn.joinPath('*', 'plugins', 'init.lua')..[[ :PackerSync]]})
+
+
+-- ToDo:
+-- Disable treesitter on telescope floating windows
+--utils.augrp('tel_dis_ts',{
+--	[[User TelescopeFindPre :echo "telescope PRE"]],
+--	[[User TelescopePreviewerLoaded :echo "telescope LOADED"]],
+--})
