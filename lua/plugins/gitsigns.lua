@@ -1,3 +1,8 @@
+local intDiff = false
+if vim.fn.executable('luajit') == 1 then
+	intDiff = true
+end
+
 require('gitsigns').setup {
   signs = {
     add          = {hl = 'GitSignsAdd'   , text = '+', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
@@ -35,6 +40,6 @@ require('gitsigns').setup {
   update_debounce = 100,
   status_formatter = nil, -- Use default
   use_decoration_api = true,
-  use_internal_diff = false,  -- If luajit is present
+  use_internal_diff = intDiff,  -- If luajit is present
   debug_mode = false
 }
