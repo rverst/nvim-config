@@ -9,7 +9,6 @@ M.OnAttach = function(client, bufnr)
 
 	local wk = require('which-key')
 	wk.register({
-
 		e = {[[<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>]], 'Show line diag [LSP]'},
 		l = {[[<cmd>lua vim.lsp.buf.signature_help()<CR>]], 'Signature help [LSP]'},
 		k = {[[<cmd>lua vim.lsp.buf.hover()<CR>]], 'Hover [LSP]'},
@@ -38,14 +37,12 @@ M.OnAttach = function(client, bufnr)
 	}, { prefix = '<leader>', buffer = bufnr})
 
 	wk.register({
-
 		c = {
 			a = {[[<cmd>lua require('telescope.builtin').lsp_range_code_actions()<CR>]], 'Code actions'},
 		}
 	}, { prefix = '<leader>', mode = 'v', buffer = bufnr})
 
 	wk.register({
-
 		g = {
 			name = 'goto',
 			d = {[[<cmd>lua require('telescope.builtin').lsp_definitions()<CR>]], 'Definition'},
@@ -67,7 +64,6 @@ M.OnAttach = function(client, bufnr)
 	if client.resolved_capabilities.document_formatting then
 		wk.register({ f = {[[<cmd>lua vim.lsp.buf.formatting()<CR>]], 'format [LSP]'} }, { prefix = "<leader>", buffer = bufnr })
 	end
-
 	if client.resolved_capabilities.document_range_formatting then
 		wk.register({ f = {[[<cmd>lua vim.lsp.buf.range_formatting()<CR>]], 'format [LSP]'} }, { prefix = "<leader>", buffer = bufnr })
 	end
