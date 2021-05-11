@@ -14,15 +14,15 @@ cmd 'packadd paq-nvim'
 local p = require('paq-nvim')
 p.paq{'savq/paq-nvim', opt=true} -- let paq manage itself
 
-p.paq 'nvim-lua/popup.nvim'
-p.paq 'nvim-lua/plenary.nvim'
-p.paq 'nvim-telescope/telescope.nvim'
+-- p.paq 'nvim-lua/popup.nvim'
+-- p.paq 'nvim-lua/plenary.nvim'
+-- p.paq 'nvim-telescope/telescope.nvim'
 
-p.paq {'nvim-treesitter/nvim-treesitter', run='TSUpdate'}
-p.paq {'nvim-treesitter/playground'}
+-- p.paq {'nvim-treesitter/nvim-treesitter', run='TSUpdate'}
+-- p.paq {'nvim-treesitter/playground'}
 
-p.paq 'neovim/nvim-lspconfig'
-p.paq 'hrsh7th/nvim-compe'
+-- p.paq 'neovim/nvim-lspconfig'
+-- p.paq 'hrsh7th/nvim-compe'
 p.paq 'onsails/lspkind-nvim'
 p.paq 'nvim-lua/lsp_extensions.nvim'
 p.paq 'glepnir/lspsaga.nvim'

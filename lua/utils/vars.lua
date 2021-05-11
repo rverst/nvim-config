@@ -10,7 +10,8 @@ function M:init()
   self.isWsl = self.os == OS.WSL
   self.isWindows = self.os == OS.Windows
 
-  self.vimPath = vim.fn.stdpath('config')
+  self.nvimPath = vim.fn.stdpath('config')
+  self.vimPath = self.nvimPath
   self.dataPath = vim.fn.stdpath('data')
   self.lspPath = fn.joinPath(self.dataPath, 'lsp_servers')
   self.undoDir = fn.joinPath(vim.fn.stdpath('cache'), 'undo')

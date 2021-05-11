@@ -30,49 +30,13 @@ wk.setup {
         padding = {2, 2, 2, 2} -- extra window padding [top, right, bottom, left]
     },
     layout = {
-        height = {min = 4, max = 25}, -- min and max height of the columns
+        height = {min = 4, max = 35}, -- min and max height of the columns
         width = {min = 20, max = 50}, -- min and max width of the columns
         spacing = 3 -- spacing between columns
     },
     hidden = {"<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
     show_help = true -- show help message on the command line when the popup is visible
 }
-
--- clear search highlight on <CR>
-utils.map('n', '<CR>', '<cmd>noh<CR><CR>')
-
--- switch windows with <ctrl> hjkl
-utils.map('n', '<C-h>', '<C-w>h')
-utils.map('n', '<C-j>', '<C-w>j')
-utils.map('n', '<C-k>', '<C-w>k')
-utils.map('n', '<C-l>', '<C-w>l')
-utils.map('i', '<C-h>', '<C-w>h')
-utils.map('i', '<C-j>', '<C-w>j')
-utils.map('i', '<C-k>', '<C-w>k')
-utils.map('i', '<C-l>', '<C-w>l')
-utils.map('v', '<C-h>', '<C-w>h')
-utils.map('v', '<C-j>', '<C-w>j')
-utils.map('v', '<C-k>', '<C-w>k')
-utils.map('v', '<C-l>', '<C-w>l')
-
--- equal splits
-utils.map('n', '<F2>', '<C-w>=')
-
--- Goyo
-utils.map('n', '<F4>', '<cmd>Goyo<CR>' )
-
--- toggle symbols outline
-utils.map('n', '<C-s>', '<cmd>SymbolsOutline<CR>')
-
--- <esc> to leave insert mode in terminal
-utils.map('t', '<ESC>', [[<C-\><C-n>]])
-
--- bufferline
-utils.map('n', 'L', '<cmd>BufferNext<CR>')
-utils.map('n', 'K', '<cmd>BufferPrevious<CR>')
-
--- quickfix
---utils.map('n', '<leader>q', [[<cmd>lua require('telescope.builtin').quickfix()<CR>]])
 
 local term = ''
 if var.isWindows then
@@ -86,13 +50,13 @@ wk.register({
 	P     = {[["+P]], 'Paste from clipboard (before)'},
 	y     = {[["+y]], 'Yank to clipboard'},
 	Y     = {[["+Y]], 'Yank line to clipboard'},
-	q     = 'Quickfix',
+	q     = {[[<cmd>lua require('telescope.builtin').quickfix()<CR>]], 'Quickfix'},
 	C     = {[[<Plug>kommentary_motion_default]], 'Toggle comment [motion]'},
 	['/'] = {[[<Plug>kommentary_line_default]], 'Toggle line comment'},
 	f = {
 		name = 'find',
 		f = {[[<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ winblend = 10 }))<CR>]], 'find file'},
-		F = {[[<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ winblend = 10 }))<CR>]], 'find file'},
+		F = {[[<cmd>lua require('telescope.builtin').find_files()<CR>]], 'find file'},
 		n = {[[<cmd>lua require('telescope.builtin').file_browser()<CR>]], 'file browser'},
 		r = {[[<cmd>lua require('telescope.builtin').old_files()<CR>]], 'open recent file'},
 		b = {[[<cmd>lua require('telescope.builtin').buffers()<CR>]], 'find buffer'},
@@ -129,21 +93,25 @@ wk.register({
 		R = {[[<cmd>lua require('telescope.builtin').reloader()<CR>]], 'List lua modules and reload'},
 		s = {[[<cmd>lua require('telescope.builtin').symbols()<CR>]], 'List builtin symbols'},
 		r = {[[<cmd>lua require('telescope.builtin').registers()<CR>]], 'List registers'},
+		f = {[[<cmd>lua require('telescope.builtin').filetypes()<CR>]], 'List filetypes'},
 	},
 
 	o = {
 		name = 'ortography',
-		o = {[[<cmd>setlocal spell! spelllang=en_us,de_de<CR>]], 'toggle spellcheck (en/de)'},
-		e = {[[<cmd>setlocal spell! spelllang=en_us<CR>]], 'toggle spellcheck (en)'},
-		d = {[[<cmd>setlocal spell! spelllang=de_de<CR>]], 'toggle spellcheck (de)'},
-		g = {[[<cmd>setlocal spell! spelllang=de_de<CR>]], 'toggle spellcheck (de)'},
-		s = {[[<cmd>lua require('telescope.builtin').spell_suggest()<CR>]], 'spell suggestion'},
+		o = {[[<cmd>setlocal spell! spelllang=en_us,de_de<CR>]], 'Toggle spellcheck (en/de)'},
+		e = {[[<cmd>setlocal spell! spelllang=en_us<CR>]], 'Toggle spellcheck (en)'},
+		d = {[[<cmd>setlocal spell! spelllang=de_de<CR>]], 'Toggle spellcheck (de)'},
+		g = {[[<cmd>setlocal spell! spelllang=de_de<CR>]], 'Toggle spellcheck (de)'},
+		s = {[[<cmd>lua require('telescope.builtin').spell_suggest()<CR>]], 'Spell suggestion'},
 	},
 
 	t = {
 		name = 'terminal',
-		n = {[[<cmd> vnew term://]]..term..[[ <CR>]], 'new terminal vsplit'},
-		x = {[[<cmd> new term://]]..term..[[ | resize 10<CR>]], 'new terminal split'},
+		n = {[[<cmd> vnew term://]]..term..[[ <CR>]], 'New terminal vsplit'},
+		x = {[[<cmd> new term://]]..term..[[ | resize 10<CR>]], 'New terminal split'},
+    f = {[[<cmd>lua require('plugins.which-key').openFloatTerm()<CR>]], 'Float terminal'},
+    g = {[[<cmd>lua require('lspsaga.floaterm').open_float_terminal('lazygit')<CR>]], 'Lazygit'},
+    d = {[[<cmd>lua require('lspsaga.floaterm').open_float_terminal('lazydocker')<CR>]], 'Lazydocker'},
 	},
 
 	c = {
@@ -172,7 +140,9 @@ wk.register({
 		['l'] = {[[<cmd>BufferOrderByLanguage<CR>]], 'order buffers by lang'},
 	},
 
-}, { prefix = '<leader>'})
+}, {
+  prefix = '<leader>'
+})
 
 wk.register({
 	['/'] = {[[<Plug>kommentary_visual_default]], 'Toggle comment'},
@@ -182,22 +152,77 @@ wk.register({
 		-- additional keybinds in ../lsp/config.lua
 	},
 
-}, { prefix = '<leader>', mode = 'v'})
+}, {
+  prefix = '<leader>',
+  mode = 'v'
+})
+
+wk.register({
+  ['<CR>'] = {[[<cmd>noh<CR><CR>]], 'which_key_ignore'},
+  ['<C-h>'] = {[[<C-w>h]], 'which_key_ignore'},
+  ['<C-j>'] = {[[<C-w>j]], 'which_key_ignore'},
+  ['<C-k>'] = {[[<C-w>k]], 'which_key_ignore'},
+  ['<C-l>'] = {[[<C-w>l]], 'which_key_ignore'},
+  ['L'] = {[[<cmd>BufferNext<CR>]], 'Next buffer'},
+  ['K'] = {[[<cmd>BufferPrevious<CR>]], 'Previous buffer'},
+  ['<F2>'] = {[[<C-w>=]], 'Equal splits'},
+  --['<F4>'] = {[[<cmd>Goyo<CR>]], 'Zen mode'},
+  --['<C-s>'] = {[[<cmd>SymbolsOutline<CR>]], 'Toggle symbols outline'},
+
+}, {})
+
+wk.register({
+  ['<C-h>'] = {[[<C-w>h]], 'which_key_ignore'},
+  ['<C-j>'] = {[[<C-w>j]], 'which_key_ignore'},
+  ['<C-k>'] = {[[<C-w>k]], 'which_key_ignore'},
+  ['<C-l>'] = {[[<C-w>l]], 'which_key_ignore'},
+
+}, {
+  mode = 'i'
+})
+
+wk.register({
+  ['<C-h>'] = {[[<C-w>h]], 'which_key_ignore'},
+  ['<C-j>'] = {[[<C-w>j]], 'which_key_ignore'},
+  ['<C-k>'] = {[[<C-w>k]], 'which_key_ignore'},
+  ['<C-l>'] = {[[<C-w>l]], 'which_key_ignore'},
+
+}, {
+  mode = 'v'
+})
+
+wk.register({
+  ['<Esc>'] = 'which_key_ignore',
+  ['<C-h>'] = 'which_key_ignore',
+  ['<C-j>'] = 'which_key_ignore',
+  ['<C-k>'] = 'which_key_ignore',
+  ['<C-l>'] = 'which_key_ignore',
+  ['<C-q>'] = 'which_key_ignore',
+
+}, {
+  mode = 't'
+})
+
+-- <esc> to leave insert mode in terminal
+utils.map('t', '<ESC>', [[<C-\><C-n>]])
+utils.map('t', '<C-h>', [[<C-\><C-n><C-w>h]])
+utils.map('t', '<C-j>', [[<C-\><C-n><C-w>j]])
+utils.map('t', '<C-k>', [[<C-\><C-n><C-w>k]])
+utils.map('t', '<C-l>', [[<C-\><C-n><C-w>l]])
+utils.map('t', '<C-q>', [[<C-\><C-n><cmd>lua require('lspsaga.floaterm').close_float_terminal()<CR>]])
+
+local M = {}
+
+M.openFloatTerm = function(cmd)
+  print('REEGI')
+  require('lspsaga.floaterm').open_float_terminal();
+end
+
+M.openFloatTerm()
+return M
+
+
+
 
 --vimdm', [[<Cmd> Neoformat<CR>]], opt)
---
 
--- lsp saga
--- utils.map('n', 'gh', '<cmd>lua require("lspsaga.provider").lsp_finder()<cr>')
--- utils.map('n', 'ca', '<cmd>lua require("lspsaga.codeaction").code_action()<CR>')
--- utils.map('v', 'ca', '<cmd><C-U>lua require("lspsaga.codeaction").range_code_action()<CR>')
-
--- utils.map('n', 'K', '<cmd>lua require("lspsaga.hover").render_hover_doc()<CR>')
--- utils.map('n', '<C-a>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>')
--- utils.map('n', '<C-z>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>')
-
--- utils.map('n', 'gs', '<cmd>lua require("lspsaga.signaturehelp").signature_help()<CR>')
-
--- FixMe: not working...
--- utils.map('n', '<A-d>', '<cmd>lua require("lspsaga.floaterm").open_float_terminal("lazygit")<CR>')
--- utils.map('t', '<A-d>', '<C-\\><C-n><cmd>lua require("lspsaga.floaterm").close_float_terminal()<CR>')

@@ -31,8 +31,17 @@ end
 
 checkInstall()
 
+local packer = require('packer')
 
-require('packer').startup(function(use)
+packer.init({
+  profile = {
+    enable = true,
+    threshold = 1, -- integer in milliseconds, plugins which load faster than this won't be shown in profile output
+  }
+})
+
+
+packer.startup(function(use)
 
 	use {
 		'qbthomason/packer.nvim'
@@ -46,16 +55,22 @@ require('packer').startup(function(use)
 
 	use {
 		'nvim-treesitter/nvim-treesitter',
+		run = { 'TSUpdate' },
 		requires = {{'nvim-treesitter/playground'},
 			{'windwp/nvim-autopairs'},
 			{'windwp/nvim-ts-autotag'},
 		},
-		config = function() require('plugins.treesitter') end
+		config = function() require('plugins.treesitter') end,
 	}
 
 	use {
 		'neovim/nvim-lspconfig',
 		config = function() require('lsp') end,
+	}
+
+	use {
+		'glepnir/lspsaga.nvim',
+		config = function() require('plugins.lspsaga') end,
 	}
 
 	use {
@@ -92,6 +107,12 @@ require('packer').startup(function(use)
 	}
 
 	use {
+		'b3nj5m1n/kommentary',
+		config = function () require('plugins.kommentary') end,
+		event = 'VimEnter'
+	}
+
+	use {
 		'norcalli/nvim-base16.lua'
 	}
 
@@ -99,6 +120,11 @@ require('packer').startup(function(use)
 		'norcalli/nvim-colorizer.lua',
 		config = function() require('colorizer').setup() end
 	}
+
+	use {
+		'tweekmonster/startuptime.vim'
+	}
+
 end, {
   display = {
 	  open_fn = function()

@@ -32,6 +32,9 @@ utils.augrp('packer_sync', {
 	[[BufWritePost ]]..fn.joinPath('*', 'plugins', 'init.lua')..[[ :luafile ]]..fn.joinPath('lua', 'plugins', 'init.lua'),
 	[[BufWritePost ]]..fn.joinPath('*', 'plugins', 'init.lua')..[[ :PackerSync]]})
 
+-- utils.augrp('_autest', {
+-- 	[[TermOpen * :echo "TERMINAL"]]
+-- })
 
 -- ToDo:
 -- Disable treesitter on telescope floating windows
