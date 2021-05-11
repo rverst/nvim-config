@@ -13,7 +13,7 @@ vim.o.updatetime = 250
 vim.o.cmdheight = cmdheight
 vim.o.winheight = cmdheight
 vim.o.winminheight = cmdheight
-vim.o.winminwidth = cmdheight*2
+vim.o.winminwidth = cmdheight * 2
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.timeoutlen = 250
@@ -26,12 +26,12 @@ vim.o.showmode = false
 vim.o.termguicolors = true
 vim.o.scrolloff = hScrolloff
 vim.o.sidescrolloff = vScrolloff
-vim.o.fileformats='unix,mac,dos'
+vim.o.fileformats = 'unix,mac,dos'
 vim.o.completeopt = 'menuone,noselect'
 vim.o.wildmode = 'longest:list:full'
-vim.o.shortmess = vim.o.shortmess..'c'
-vim.o.spellsuggest='fast,12'
-vim.o.spelloptions='camel'
+vim.o.shortmess = vim.o.shortmess .. 'c'
+vim.o.spellsuggest = 'fast,12'
+vim.o.spelloptions = 'camel'
 
 vim.o.undodir = v.undoDir
 vim.o.undofile = true
@@ -39,9 +39,9 @@ vim.bo.undofile = true
 
 vim.o.mouse = 'nv'
 
---"n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
---local cur =  'n-v-c-sm:block-Cursor,i:ver100-iCursor,n-v-c-sm:blinkon0'
---vim.o.guicursor=cur
+-- "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
+-- local cur =  'n-v-c-sm:block-Cursor,i:ver100-iCursor,n-v-c-sm:blinkon0'
+-- vim.o.guicursor=cur
 
 vim.b.swapfile = false
 vim.bo.swapfile = false
@@ -62,10 +62,10 @@ vim.wo.relativenumber = true
 vim.wo.signcolumn = 'yes:2'
 vim.wo.wrap = false
 
-vim.wo.foldmethod='expr'
-vim.wo.foldexpr='nvim_treesitter#foldexpr()'
-vim.wo.foldcolumn='0'
-vim.wo.foldenable=false
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.wo.foldcolumn = '0'
+vim.wo.foldenable = false
 
 local clipName
 local clipProvCopy
@@ -80,7 +80,6 @@ if v.isWindows then
   set shellredir=\|\ Out-File\ -Encoding\ UTF8
   ]])
 end
-
 
 if v.isWsl or v.isWindows then
   clipName = 'windows-clipboard'
@@ -97,15 +96,8 @@ end
 if clipProvCopy then
   vim.g.clipboard = {
     name = clipName,
-    copy = {
-      ['+'] = clipProvCopy,
-      ['*'] = clipProvCopy
-    },
-    paste = {
-      ['+'] = clipProvPaste,
-      ['*'] = clipProvPaste
-    },
+    copy = {['+'] = clipProvCopy, ['*'] = clipProvCopy},
+    paste = {['+'] = clipProvPaste, ['*'] = clipProvPaste},
     cache_enabled = clipCache
   }
 end
-

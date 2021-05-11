@@ -4,7 +4,6 @@ local base16 = require('base16')
 local none = 'none'
 
 base16(vim.g.mytheme, true)
---base16(base16.themes['gruvbox-dark-pale'], true)
 
 vim.o.background = 'dark'
 vim.cmd('hi clear CursorLine')
@@ -26,6 +25,7 @@ local rev = 'inverse'
 
 
 --           'Group'                                  Foreground          Background          Decorations         SP Color
+-- LuaFormatter off
 fn.highlight('Normal',                                nil,                c.bg,               nil,                nil)
 fn.highlight('LineNr',                                nil,                c.none,             nil,                nil)
 fn.highlight('SignColumn',                            nil,                c.none,             nil,                nil)
@@ -144,3 +144,6 @@ fn.highlight('Type',                                  c.blue_light,       nil,  
 fn.highlight('Typedef',                               c.magenta_light,    nil,                nil,                nil)
 
 fn.highlight('TSVariable',                            c.magenta_light,    nil,                nil,                nil)
+
+--LuaFormatter on
+

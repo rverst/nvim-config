@@ -1,24 +1,16 @@
 local fn = require('utils.fn')
 
 local function calcColors(hex)
-  if #hex ~= 7 then
-    return nil
-  end
+  if #hex ~= 7 then return nil end
 
-  local r = tonumber(hex:sub(2,3), 16)
-  local g = tonumber(hex:sub(4,5), 16)
-  local b = tonumber(hex:sub(6,7), 16)
+  local r = tonumber(hex:sub(2, 3), 16)
+  local g = tonumber(hex:sub(4, 5), 16)
+  local b = tonumber(hex:sub(6, 7), 16)
 
-  return {
-    hex = hex,
-    raw = hex:sub(2,7),
-    r = r,
-    g = g,
-    b = b,
-    term = fn.rgbToX256(r, g, b)
-  }
+  return {hex = hex, raw = hex:sub(2, 7), r = r, g = g, b = b, term = fn.rgbToX256(r, g, b)}
 end
 
+-- LuaFormatter off
 local c = {}
 c.black         = calcColors('#000000')
 c.white         = calcColors('#FFFFFF')
@@ -56,6 +48,7 @@ c.bg            = c.dark1
 c.fg            = c.white_dark
 
 c.none          = { hex = 'NONE', term = 'NONE' }
+-- LuaFormatter on
 
 local theme = {
   base00 = c.bg.raw,
@@ -73,17 +66,17 @@ local theme = {
   base0C = c.green.raw,
   base0D = c.orange.raw,
   base0E = c.red_light.raw,
-  base0F = c.red_dark.raw,
+  base0F = c.red_dark.raw
 }
 
 vim.g.mytheme = theme
 vim.g.colors = c
 
 -- themes['smyck'] = {
---  base00 = '#232323', base01 = '#3c3836', base02 = '#504945', base03 = '#8a8a8a',
---  base04 = '#bdae92', base05 = '#d5c4a1', base06 = '#ebedb0', base07 = '#f7f7f7',
---  base08 = '#e04223', base09 = '#d0b03c', base0A = '#ffe377', base0B = '#cdce23',
---  base0C = '#8eb33b', base0D = '#4e90a7', base0E = '#e06990', base0F = '#c75646',
+--      base00 = '#232323', base01 = '#3c3836', base02 = '#504945', base03 = '#8a8a8a',
+--      base04 = '#bdae92', base05 = '#d5c4a1', base06 = '#ebedb0', base07 = '#f7f7f7',
+--      base08 = '#e04223', base09 = '#d0b03c', base0A = '#ffe377', base0B = '#cdce23',
+--      base0C = '#8eb33b', base0D = '#4e90a7', base0E = '#e06990', base0F = '#c75646',
 -- }
 -- themes['gruvbox-dark-hard'] = {
 -- 	base00 = '#1d2021'; base01 = '#3c3836'; base02 = '#504945'; base03 = '#665c54';
@@ -109,6 +102,4 @@ vim.g.colors = c
 -- 	base08 = '#fb4934'; base09 = '#fe8019'; base0A = '#fabd2f'; base0B = '#b8bb26';
 -- 	base0C = '#8ec07c'; base0D = '#83a598'; base0E = '#d3869b'; base0F = '#d65d0e';
 -- }
-
-
 

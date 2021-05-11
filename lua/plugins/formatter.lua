@@ -5,9 +5,7 @@ require('formatter').setup({
       function()
         return {
           exe = 'prettier',
-          args = {
-            '--stdin-filepath', vim.api.nvim_buf_get_name(0), '--single-quote'
-          },
+          args = {'--stdin-filepath', vim.api.nvim_buf_get_name(0), '--single-quote'},
           stdin = true
         }
       end
@@ -16,7 +14,10 @@ require('formatter').setup({
       function()
         return {
           exe = 'lua-format',
-          args = {'--align-args', '--indent-width', 2, '--tab-width', 2, '--'},
+          args = {
+            '--align-args', '--indent-width', 2, '--tab-width', 2, '--column-table-limit', 100,
+            '--double-quote-to-single-quote', '--'
+          },
           stdin = true
         }
       end
