@@ -85,6 +85,12 @@ packer.startup(function(use)
 	}
 
 	use {
+		'mhartington/formatter.nvim',
+		config = function() require('plugins.formatter') end,
+		rocks = {'luaformatter', {'luaformatter', version = '1.3.5'}}
+	}
+
+	use {
 		'folke/which-key.nvim',
 		config = function() require('plugins.which-key') end
 	}
