@@ -167,7 +167,9 @@ wk.register({
   ['<C-k>'] = {[[<C-w>k]], 'which_key_ignore'},
   ['<C-l>'] = {[[<C-w>l]], 'which_key_ignore'},
   ['L'] = {[[<cmd>BufferNext<CR>]], 'Next buffer'},
-  ['K'] = {[[<cmd>BufferPrevious<CR>]], 'Previous buffer'},
+  ['H'] = {[[<cmd>BufferPrevious<CR>]], 'Previous buffer'},
+  ['J'] = {[[<cmd>move +1<CR>]], 'Move line down'},
+  ['K'] = {[[<cmd>move -2<CR>]], 'Move line up'},
   ['<F2>'] = {[[<C-w>=]], 'Equal splits'},
 
   [']'] = {
