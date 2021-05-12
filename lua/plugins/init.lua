@@ -83,6 +83,12 @@ packer.startup(function(use)
   use {'folke/which-key.nvim', config = function() require('plugins.which-key') end}
 
   use {
+    'kyazdani42/nvim-tree.lua',
+    requires = {'kyazdani42/nvim-web-devicons'},
+    config = function() require('plugins.nvim-tree') end
+  }
+
+  use {
     'glepnir/galaxyline.nvim',
     requires = {'kyazdani42/nvim-web-devicons', opt = true},
     config = function() require('plugins.statusline') end

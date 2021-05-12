@@ -171,6 +171,8 @@ wk.register({
   ['J'] = {[[<cmd>move +1<CR>]], 'Move line down'},
   ['K'] = {[[<cmd>move -2<CR>]], 'Move line up'},
   ['<F2>'] = {[[<C-w>=]], 'Equal splits'},
+  ['<C-n>'] = {[[<cmd>NvimTreeToggle<CR>]], 'Toggle file explorer'},
+  ['<C-s>'] = {[[<cmd>SymbolsOutline<CR>]], 'Toggle symbols outline'},
 
   [']'] = {
     c = 'Next hunk'
@@ -179,7 +181,6 @@ wk.register({
     c = 'Previous hunk'
   },
   -- ['<F4>'] = {[[<cmd>Goyo<CR>]], 'Zen mode'},
-  -- ['<C-s>'] = {[[<cmd>SymbolsOutline<CR>]], 'Toggle symbols outline'},
 
 }, {})
 
