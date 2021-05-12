@@ -1,7 +1,17 @@
 local fn = require('utils.fn')
 local v = require('utils.vars')
 
-local servers = {'sumneko_lua'}
+local servers = {
+	'sumneko_lua',
+	'bashls',
+  'dockerls',
+  'cssls',
+  'html',
+  'jsonls',
+  'tsserver',
+  'vimls',
+  'yamlls',
+}
 
 if not fn.exists(v.lspPath) then
   local cmd
@@ -15,12 +25,15 @@ end
 
 for _, s in pairs(servers) do
 
-  local srv = require('lsp.' .. s)
   local lspconfig = require('lspconfig')
+  local config = {
+    on_attach = require('lsp.config').OnAttach
+  }
 
-  if not srv.isInstalled() then srv.install() end
+  -- some ls need special configurations, e.g. the manual installed one
+  if s == "sumneko_lua" then
+    config = require('lsp.'..s)
+  end
 
-  if fn.isUpdate() then srv.update() end
-
-  if srv.isInstalled() then lspconfig[s].setup(srv.config) end
+  lspconfig[s].setup(config)
 end

@@ -1,4 +1,4 @@
-local M = {}
+local Config = {}
 local fn = require('utils.fn')
 local v = require('utils.vars')
 
@@ -17,21 +17,7 @@ end
 
 local sumneko_bin = fn.joinPath(root, 'bin', oss, bin)
 
-M.isInstalled = function()
-  local ok, _ = fn.exists(sumneko_bin)
-  return ok
-end
-
-M.install = function(_)
-  print([[No installation script for "sumneko_lua" provided. Please install "sumneko_lua" to: ]] ..
-            root .. [[ See: https://github.com/sumneko/lua-language-server for details]])
-end
-
-M.uninstall = function() end
-
-M.update = function() M.install(true) end
-
-M.config = {
+Config = {
   cmd = {sumneko_bin, '-E', fn.joinPath(root, 'main.lua')},
   root_dir = function() return vim.loop.cwd() end,
   settings = {
@@ -50,5 +36,5 @@ M.config = {
   on_attach = require('lsp.config').OnAttach
 }
 
-return M
+return Config
 

@@ -59,7 +59,10 @@ packer.startup(function(use)
     config = function() require('plugins.treesitter') end
   }
 
-  use {'neovim/nvim-lspconfig', config = function() require('lsp') end}
+  use {'neovim/nvim-lspconfig',
+       requires = {'alexaandru/nvim-lspupdate'},
+       config = function() require('lsp') end
+   }
 
   use {'glepnir/lspsaga.nvim', config = function() require('plugins.lspsaga') end}
 
