@@ -149,6 +149,8 @@ wk.register({
 }, {prefix = '<leader>'})
 
 wk.register({
+  p = {[["+p]], 'Paste from clipboard'},
+  y = {[["+y]], 'Yank to clipboard'},
   ['/'] = {[[<Plug>kommentary_visual_default]], 'Toggle comment'},
   c = {
     name = 'code',
