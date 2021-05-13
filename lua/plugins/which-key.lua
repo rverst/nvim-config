@@ -1,6 +1,7 @@
 local wk = require('which-key')
 local utils = require('utils')
 local var = require('utils.vars')
+local term = require('utils.term')
 
 wk.setup {
   plugins = {
@@ -19,13 +20,13 @@ wk.setup {
     }
   },
   icons = {
-    breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-    separator = "➜", -- symbol used between a key and it's label
-    group = "+" -- symbol prepended to a group
+    breadcrumb = '»', -- symbol used in the command line area that shows your active key combo
+    separator = '➜', -- symbol used between a key and it's label
+    group = '+' -- symbol prepended to a group
   },
   window = {
-    border = "single", -- none, single, double, shadow
-    position = "bottom", -- bottom, top
+    border = 'single', -- none, single, double, shadow
+    position = 'bottom', -- bottom, top
     margin = {1, 0, 1, 0}, -- extra window margin [top, right, bottom, left]
     padding = {2, 2, 2, 2} -- extra window padding [top, right, bottom, left]
   },
@@ -34,16 +35,9 @@ wk.setup {
     width = {min = 20, max = 50}, -- min and max width of the columns
     spacing = 3 -- spacing between columns
   },
-  hidden = {"<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
+  hidden = {'<silent>', '<cmd>', '<Cmd>', '<CR>', 'call', 'lua', '^:', '^ '}, -- hide mapping boilerplate
   show_help = true -- show help message on the command line when the popup is visible
 }
-
-local term = ''
-if var.isWindows then
-  term = 'pwsh.exe'
-else
-  term = 'zsh'
-end
 
 wk.register({
   p = {[["+p]], 'Paste from clipboard'},
@@ -56,7 +50,10 @@ wk.register({
 
   f = {
     name = 'find',
-    f = {[[<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ winblend = 10 }))<CR>]], 'find file'},
+    f = {
+      [[<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ winblend = 10 }))<CR>]],
+      'find file'
+    },
     F = {[[<cmd>lua require('telescope.builtin').find_files()<CR>]], 'find file'},
     n = {[[<cmd>lua require('telescope.builtin').file_browser()<CR>]], 'file browser'},
     r = {[[<cmd>lua require('telescope.builtin').old_files()<CR>]], 'open recent file'},
@@ -75,7 +72,7 @@ wk.register({
 
   d = {
     f = {[[<cmd>Format<CR>]], 'Format code'},
-    F = {[[<cmd>FormatWrite<CR>]], 'Format code and write'},
+    F = {[[<cmd>FormatWrite<CR>]], 'Format code and write'}
   },
 
   g = {
@@ -91,7 +88,7 @@ wk.register({
     p = {[[<cmd>lua require('gitsigns').preview_hunk()<CR>]], 'Preview hunk'},
     B = {[[<cmd>lua require('gitsigns').blame_line()<CR>]], 'Blame line'},
     ['.'] = 'Next hunk',
-    [','] = 'Previous hunk',
+    [','] = 'Previous hunk'
   },
 
   T = {
@@ -115,9 +112,11 @@ wk.register({
 
   t = {
     name = 'terminal',
-    n = {[[<cmd> vnew term://]] .. term .. [[ <CR>]], 'New terminal vsplit'},
-    x = {[[<cmd> new term://]] .. term .. [[ | resize 10<CR>]], 'New terminal split'},
-    f = {[[<cmd>lua require('plugins.which-key').openFloatTerm()<CR>]], 'Float terminal'},
+    n = {[[<cmd>lua require('plugins.which-key').openTerminal('v')<CR>]], 'Vertical terminal'},
+    x = {
+      [[<cmd>lua require('plugins.which-key').openTerminal('h', '', 10)<CR>]], 'horizontal terminal'
+    },
+    f = {[[<cmd>lua require('plugins.which-key').openFloatTerm('')<CR>]], 'Float terminal'},
     g = {[[<cmd>lua require('plugins.which-key').openFloatTerm('lazygit')<CR>]], 'Lazygit'},
     d = {[[<cmd>lua require('plugins.which-key').openFloatTerm('lazydocker')<CR>]], 'Lazydocker'}
   },
@@ -153,11 +152,17 @@ wk.register({
 wk.register({
   p = {[["+p]], 'Paste from clipboard'},
   y = {[["+y]], 'Yank to clipboard'},
+  f = {[[<cmd>Format<CR>]], 'Format code'},
+  F = {[[<cmd>FormatWrite<CR>]], 'Format code and write'},
   ['/'] = {[[<Plug>kommentary_visual_default]], 'Toggle comment'},
   c = {
     name = 'code',
     c = {[[<Plug>kommentary_visual_default]], 'Toggle comment'}
     -- additional keybinds in ../lsp/config.lua
+  },
+  d = {
+    f = {[[<cmd>Format<CR>]], 'Format code'},
+    F = {[[<cmd>FormatWrite<CR>]], 'Format code and write'}
   }
 
 }, {prefix = '<leader>', mode = 'v'})
@@ -176,12 +181,8 @@ wk.register({
   ['<C-n>'] = {[[<cmd>NvimTreeToggle<CR>]], 'Toggle file explorer'},
   ['<C-s>'] = {[[<cmd>SymbolsOutline<CR>]], 'Toggle symbols outline'},
 
-  [']'] = {
-    c = 'Next hunk'
-  },
-  ['['] = {
-    c = 'Previous hunk'
-  },
+  [']'] = {c = 'Next hunk'},
+  ['['] = {c = 'Previous hunk'}
   -- ['<F4>'] = {[[<cmd>Goyo<CR>]], 'Zen mode'},
 
 }, {})
@@ -212,35 +213,63 @@ wk.register({
 
 }, {mode = 't'})
 
--- <esc> to leave insert mode in terminal
-utils.map('t', '<ESC>', [[<C-\><C-n>]])
-utils.map('t', '<C-h>', [[<C-\><C-n><C-w>h]])
-utils.map('t', '<C-j>', [[<C-\><C-n><C-w>j]])
-utils.map('t', '<C-k>', [[<C-\><C-n><C-w>k]])
-utils.map('t', '<C-l>', [[<C-\><C-n><C-w>l]])
-
 local M = {}
 
--- open floating terminal and add keybindings to close it
-M.openFloatTerm = function(cmd)
-  require('lspsaga.floaterm').open_float_terminal(cmd)
-  local hasWin, winHandle = pcall(vim.api.nvim_buf_get_var, 0, 'float_terminal_win')
-  if hasWin then
-    for _, h in pairs(winHandle) do
-      local buf = vim.api.nvim_win_get_buf(h)
-      wk.register({
-        ['<C-q>'] = {
-          [[<C-\><C-n><cmd>lua require('lspsaga.floaterm').close_float_terminal()<CR>]],
-          'which_key_ignore'
-        }
-      }, {mode = 't', buffer = buf})
+M.openTerminal = function(orientation, command, size, autoclose)
+  local cmd = command or ''
+  local s = size or 0
+  local acl = autoclose or true
 
-      wk.register({
-        ['<C-q>'] = {
-          [[<cmd>lua require('lspsaga.floaterm').close_float_terminal()<CR>]], 'which_key_ignore'
-        }
-      }, {mode = 'n', buffer = buf})
-    end
+  local c = ''
+  if orientation == 'h' then
+    c = 'new term://' .. vim.o.shell
+  else
+    c = 'vnew term://' .. vim.o.shell
+  end
+
+  if s > 0 then c = c .. ' | resize ' .. size end
+  vim.cmd(c)
+
+  local tBuf = vim.api.nvim_get_current_buf()
+  -- <esc> to leave insert mode in terminal
+  utils.buf_map(tBuf, 't', '<ESC>', [[<C-\><C-n>]])
+  utils.buf_map(tBuf, 't', '<C-h>', [[<C-\><C-n><C-w>h]])
+  utils.buf_map(tBuf, 't', '<C-j>', [[<C-\><C-n><C-w>j]])
+  utils.buf_map(tBuf, 't', '<C-k>', [[<C-\><C-n><C-w>k]])
+  utils.buf_map(tBuf, 't', '<C-l>', [[<C-\><C-n><C-w>l]])
+
+  if acl then
+    utils.augrp('close_term',
+                [[TermClose * :lua vim.api.nvim_buf_delete(]].. tBuf .. [[,{force=1})]])
+  end
+end
+
+-- open floating terminal and add keybindings (<C-q>) to close it
+M.openFloatTerm = function(command, autoclose, border_style)
+  local cmd = command or ''
+  local acl = autoclose or true
+  local bst = border_style or 0
+
+  -- local cBuf = vim.api.nvim_get_current_buf()
+  -- local cWin = vim.api.nvim_get_current_win()
+  local tBuf = term.openFloatTerm(cmd, bst)
+  wk.register({
+    ['<C-q>'] = {
+      [[<C-\><C-n><cmd>lua require('lspsaga.floaterm').close_float_terminal()<CR>]],
+      'which_key_ignore'
+    }
+  }, {mode = 't', buffer = tBuf})
+
+  wk.register({
+    ['<C-q>'] = {
+      [[<cmd>lua require('lspsaga.floaterm').close_float_terminal()<CR>]], 'which_key_ignore'
+    }
+  }, {mode = 'n', buffer = tBuf})
+
+  -- add autocmd to auto-close the floating window if the shell (the command) exits
+  -- ToDo: statusline needs a redraw ore something
+  if acl then
+    utils.augrp('close_float_term', [[TermClose * :lua require('utils.term').closeFloatTerm()]])
   end
 end
 
