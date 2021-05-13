@@ -239,10 +239,13 @@ M.openTerminal = function(orientation, command, size, autoclose)
   utils.buf_map(tBuf, 't', '<C-l>', [[<C-\><C-n><C-w>l]])
 
   if acl then
-    utils.augrp('close_term',
-                [[TermClose * :lua vim.api.nvim_buf_delete(]].. tBuf .. [[,{force=1})]])
+    vim.cmd(
+        [[au TermClose * ++once :lua require('plugins.which-key').closeTerminal(]] .. tBuf ..
+            [[)]])
   end
 end
+
+M.closeTerminal = function(buf) vim.api.nvim_buf_delete(buf, {force = 1}) end
 
 -- open floating terminal and add keybindings (<C-q>) to close it
 M.openFloatTerm = function(command, autoclose, border_style)
@@ -269,7 +272,7 @@ M.openFloatTerm = function(command, autoclose, border_style)
   -- add autocmd to auto-close the floating window if the shell (the command) exits
   -- ToDo: statusline needs a redraw ore something
   if acl then
-    utils.augrp('close_float_term', [[TermClose * :lua require('utils.term').closeFloatTerm()]])
+    vim.cmd([[au TermClose * ++once :lua require('utils.term').closeFloatTerm()]])
   end
 end
 

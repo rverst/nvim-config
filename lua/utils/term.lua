@@ -4,7 +4,7 @@ local window = require('lspsaga.window')
 
 -- opens a floating terminal
 -- the function is borrowed from lspsaga (https://github.com/glepnir/lspsaga.nvim/blob/333178b4e941eb19d9c97c0b0b5640c76363b0ad/lua/lspsaga/floaterm.lua#L4)
--- but return the bufferNr of the terminal window
+-- but returns the bufferNr of the terminal window
 -- so it's easy to bind keys to that buffer
 M.openFloatTerm = function(command, border_style)
   local cmd = command or ''
