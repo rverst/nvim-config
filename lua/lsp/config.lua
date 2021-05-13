@@ -25,7 +25,7 @@ M.OnAttach = function(client, bufnr)
       l = {[[<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>]], 'List workspace folder'}
     },
 
-    r = {name = 'rename', n = {[[<cmd>lua vim.lsp.buf.rename()]], 'Rename'}},
+    r = {name = 'rename', n = {[[<cmd>lua vim.lsp.buf.rename()<CR>]], 'Rename'}},
 
     c = {
       r = {[[<cmd>lua require('telescope.builtin').lsp_references()<CR>]], 'References'},
