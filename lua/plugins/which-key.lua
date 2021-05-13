@@ -89,7 +89,9 @@ wk.register({
     r = {[[<cmd>lua require('gitsigns').reset_hunk()<CR>]], 'Reset hunk'},
     R = {[[<cmd>lua require('gitsigns').reset_buffer()<CR>]], 'Reset buffer'},
     p = {[[<cmd>lua require('gitsigns').preview_hunk()<CR>]], 'Preview hunk'},
-    B = {[[<cmd>lua require('gitsigns').blame_line()<CR>]], 'Blame line'}
+    B = {[[<cmd>lua require('gitsigns').blame_line()<CR>]], 'Blame line'},
+    ['.'] = 'Next hunk',
+    [','] = 'Previous hunk',
   },
 
   T = {
