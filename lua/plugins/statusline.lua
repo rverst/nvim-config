@@ -73,20 +73,15 @@ local linePercent = function()
   end
 end
 
-local lspActive = function()
-  local client = require('galaxyline/provider_lsp').get_lsp_client()
-  return client ~= 'No Active Lsp'
-end
-
 local lspClient = function()
   return function()
     local client = require('galaxyline/provider_lsp').get_lsp_client()
     if client == 'No Active Lsp' then
-      return 'n/a'
+      return ''
     elseif client == 'sumneko_lua' then
-      return 'lua'
+      client = 'lua'
     end
-    return client
+    return '  ' .. client .. ' '
   end
 end
 
@@ -167,17 +162,9 @@ gls.left = {
     }
   }, {
     LspClient = {
-      provider = {space, printer(' '), lspClient()},
-      condition = all(lspActive, neg(isTerminal)),
-      highlight = {getFileIconColor, c.dark3.hex}
-    }
-  },
-
-  {
-    LeftEnd = {
-      provider = space,
+      provider = lspClient(),
       condition = neg(isTerminal),
-      highlight = {c.dark3.hex, c.dark3.hex}
+      highlight = {getFileIconColor, c.dark3.hex},
     }
   }, {
     DiagnosticError = {
@@ -261,6 +248,14 @@ gls.right = {
   }, {
     FileFormat = {
       provider = {space, fileFormat, space},
+      condition = neg(isTerminal),
+      highlight = {c.acc1.hex, c.dark3.hex},
+      separator = separators.left,
+      separator_highlight = {c.dark1.hex, c.dark3.hex}
+    }
+  }, {
+    FileEncode = {
+      provider = {space, 'FileEncode', space},
       condition = neg(isTerminal),
       highlight = {c.acc1.hex, c.dark3.hex},
       separator = separators.left,
