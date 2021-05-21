@@ -1,9 +1,15 @@
 local fn = require('utils.fn')
 local v = require('utils.vars')
 
-local servers = {
-	'sumneko_lua',
-	'bashls',
+-- language servers installed manually
+local manualServers = {
+  'sumneko_lua',
+}
+
+-- language servers handled by nvim-lspupdate
+local autoServers = {
+  'rls',
+  'bashls',
   'dockerls',
   'cssls',
   'html',
@@ -23,17 +29,17 @@ if not fn.exists(v.lspPath) then
   if os.execute(cmd) ~= 0 then error('unable to create lsp root dir (' .. v.lspPath .. ')') end
 end
 
-for _, s in pairs(servers) do
+local lspconfig = require('lspconfig')
 
-  local lspconfig = require('lspconfig')
+for _, s in pairs(autoServers) do
   local config = {
     on_attach = require('lsp.config').OnAttach
   }
 
-  -- some ls need special configurations, e.g. the manual installed one
-  if s == "sumneko_lua" then
-    config = require('lsp.'..s)
-  end
+  lspconfig[s].setup(config)
+end
 
+for _, s in pairs(manualServers) do
+  local config = require('lsp.'..s)
   lspconfig[s].setup(config)
 end
