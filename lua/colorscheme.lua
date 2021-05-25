@@ -1,4 +1,5 @@
-local c = vim.g.colors
+local g = vim.g
+local c = g.colors
 local fn = require('utils.fn')
 local base16 = require('base16')
 local none = 'none'
@@ -7,6 +8,8 @@ base16(vim.g.mytheme, true)
 
 vim.o.background = 'dark'
 vim.cmd('hi clear CursorLine')
+
+
 
 -- Available decorations
 ---------------------------------
@@ -147,3 +150,19 @@ fn.highlight('TSVariable',                            c.magenta_light,    nil,  
 
 --LuaFormatter on
 
+
+g.terminal_color_0 = c.black.hex
+g.terminal_color_1 = c.red.hex
+g.terminal_color_2 = c.green.hex
+g.terminal_color_3 = c.yellow.hex
+g.terminal_color_4 = c.blue.hex
+g.terminal_color_5 = c.magenta.hex
+g.terminal_color_6 = c.cyan.hex
+g.terminal_color_7 = c.white.hex
+g.terminal_color_8 = c.gray.hex
+g.terminal_color_9 = c.red_light.hex
+g.terminal_color_10 = c.green_light.hex
+g.terminal_color_11 = c.yellow_light.hex
+g.terminal_color_12 = c.blue_light.hex
+g.terminal_color_13 = c.magenta_light.hex
+g.terminal_color_15 = c.white.hex
