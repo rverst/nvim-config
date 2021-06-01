@@ -25,6 +25,7 @@ local bit = 'bold,italic'
 local uit = 'underline,italic'
 local inv = 'inverse'
 local rev = 'inverse'
+local non = 'none'
 
 
 --           'Group'                                  Foreground          Background          Decorations         SP Color
@@ -120,7 +121,7 @@ fn.highlight('BufferInactiveIcon',                    nil,                nil,  
 -- standard syntax highlighting
 fn.highlight('Boolean',                               c.orange,           nil,                nil,                nil)
 fn.highlight('Character',                             c.green,            nil,                nil,                nil)
-fn.highlight('Comment',                               c.comment,          nil,                nil,                nil)
+fn.highlight('Comment',                               c.comment,          nil,                ita,                nil)
 fn.highlight('Conditional',                           c.orange_light,     nil,                nil,                nil)
 fn.highlight('Constant',                              c.purple,           nil,                nil,                nil)
 fn.highlight('Define',                                c.orange_light,     nil,                nil,                nil)
@@ -131,7 +132,7 @@ fn.highlight('Identifier',                            c.purple,           nil,  
 fn.highlight('Include',                               c.orange_light,     nil,                nil,                nil)
 fn.highlight('Keyword',                               c.orange,           nil,                nil,                nil)
 fn.highlight('Label',                                 c.yellow_light,     nil,                nil,                nil)
-fn.highlight('Number',                                c.blue,             nil,                nil,                nil)
+fn.highlight('Number',                                c.cyan,             nil,                nil,                nil)
 fn.highlight('Operator',                              c.acc2,             nil,                nil,                nil)
 fn.highlight('PreProc',                               c.yellow_light,     nil,                nil,                nil)
 fn.highlight('Repeat',                                c.orange,           nil,                nil,                nil)
@@ -146,7 +147,51 @@ fn.highlight('Todo',                                  c.yellow_light,     nil,  
 fn.highlight('Type',                                  c.blue_light,       nil,                nil,                nil)
 fn.highlight('Typedef',                               c.magenta_light,    nil,                nil,                nil)
 
-fn.highlight('TSVariable',                            c.magenta_light,    nil,                nil,                nil)
+-- Treesitter
+-- Misc
+fn.highlight('TSError', c.red_light,     nil,     nil,     nil)
+fn.highlight('TSPunctDelimiter', c.fg,     nil,     nil,     nil)
+fn.highlight('TSPunctBracket', c.fg,     nil,     nil,     nil)
+fn.highlight('TSPunctSpecial', c.fg,     nil,     nil,     nil)
+-- Constants
+fn.highlight('TSConstant', c.purple,     nil,     nil,     nil)
+fn.highlight('TSConstBuiltin', c.purple,     nil,     ita,     nil)
+-- -- These things overrides all palletes above
+-- TSConstMacro: "orange"
+-- TSStringRegex: "orange"
+fn.highlight('TSString', c.green_dark,     nil,     nil,     nil)
+-- TSStringEscape: "yellow_light"
+fn.highlight('TSCharacter', c.green,     nil,     nil,     nil)
+fn.highlight('TSNumber', c.magenta_light,     nil,     nil,     nil)
+-- TSBoolean: "blue"
+-- TSFloat: "light_yellow"
+-- TSAnnotation: "yellow"
+-- TSAttribute: "orange"
+-- TSNamespace: "blue_light"
+-- Functions
+fn.highlight('TSFuncBuiltin', c.yellow,     nil,     nil,     nil)
+fn.highlight('TSFunction', c.yellow,     nil,     nil,     nil)
+fn.highlight('TSFuncMacro', c.yellow,     nil,     nil,     nil)
+fn.highlight('TSParameter', c.blue,     nil,     nil,     nil)
+fn.highlight('TSParameterReference', c.blue_light,     nil,     nil,     nil)
+fn.highlight('TSMethod', c.yellow,     nil,     nil,     nil)
+fn.highlight('TSField', c.purple,     nil,     nil,     nil)
+fn.highlight('TSProperty', c.aqua,     nil,     nil,     nil)
+fn.highlight('TSConstructor', c.aqua_light,     nil,     nil,     nil)
+-- Keywords
+fn.highlight('TSConditional', c.purple,     nil,     nil,     nil)
+fn.highlight('TSRepeat', c.purple,     nil,     nil,     nil)
+fn.highlight('TSLabel', c.blue,     nil,     nil,     nil)
+ -- Does not work for yield and return they should be diff then class and def
+fn.highlight('TSKeyword', c.orange,     nil,     nil,     nil)
+fn.highlight('TSKeywordFunction', c.purple,     nil,     nil,     nil)
+fn.highlight('TSKeywordOperator', c.blue,     nil,     nil,     nil)
+fn.highlight('TSOperator', c.fg,     nil,     nil,     nil)
+fn.highlight('TSException', c.purple,     nil,     nil,     nil)
+fn.highlight('TSType', c.yellow,     nil,     nil,     nil)
+fn.highlight('TSTypeBuiltin', c.orange_light,     nil,     ita,     nil)
+fn.highlight('TSStructure', c.blue,     nil,     nil,     nil)
+fn.highlight('TSVariable',                            c.acc2,       nil,                nil,                nil)
 
 --LuaFormatter on
 

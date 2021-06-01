@@ -128,6 +128,12 @@ wk.register({
     -- additional keybinds in ../lsp/config.lua
   },
 
+  m = {
+    name = 'misc',
+    i = {[[<cmd>TSHighlightCapturesUnderCursor<CR>]], 'Highlight captures under cursor'},
+    p = {[[<cmd>TSPlaygroundToggle<CR>]], 'Toggle treesitter playgound'},
+  },
+
   b = {
     name = 'bufferline',
     ['1'] = {[[<cmd>BufferGoto 1<CR>]], 'buffer 1'},
