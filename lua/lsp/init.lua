@@ -26,14 +26,14 @@ if not fn.exists(v.lspPath) then
 end
 
 local lspconfig = require('lspconfig')
+for _, s in pairs(servers) do
 
-  local lspconfig = require('lspconfig')
   local config = {on_attach = require('lsp.config').OnAttach}
 
   -- some ls need special configurations, e.g. the manual installed one
-  if s == 'sumneko_lua' then config = require('lsp.' .. s) end
+  if s == 'sumneko_lua' then
+	  config = require('lsp.' .. s)
+  end
 
-for _, s in pairs(manualServers) do
-  local config = require('lsp.'..s)
   lspconfig[s].setup(config)
 end

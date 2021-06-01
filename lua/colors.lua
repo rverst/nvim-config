@@ -1,55 +1,58 @@
 local fn = require('utils.fn')
 
 local function calcColors(hex)
-  if #hex ~= 7 then return nil end
+  if #hex ~= 7 then
+    return nil
+  end
 
   local r = tonumber(hex:sub(2, 3), 16)
   local g = tonumber(hex:sub(4, 5), 16)
   local b = tonumber(hex:sub(6, 7), 16)
 
-  return {hex = hex, raw = hex:sub(2, 7), r = r, g = g, b = b, term = fn.rgbToX256(r, g, b)}
+  return { hex = hex, raw = hex:sub(2, 7), r = r, g = g, b = b, term = fn.rgbToX256(r, g, b) }
 end
 
--- LuaFormatter off
-local c = {}
-c.black         = calcColors('#000000')
-c.white         = calcColors('#FFFFFF')
-c.dark1         = calcColors('#232323')
-c.dark2         = calcColors('#3C3836')
-c.dark3         = calcColors('#504945')
-c.gray          = calcColors('#8A8A8A')
-c.white_dark    = calcColors('#F7F7F7')
-c.red           = calcColors('#C75646')
-c.red_light     = calcColors('#E09690')
-c.red_dark      = calcColors('#D75F5F')
-c.red_error     = calcColors('#E04223')
-c.green         = calcColors('#8EB33B')
-c.green_light   = calcColors('#CDCE23')
-c.green_dark    = calcColors('#6B8E23')
-c.yellow        = calcColors('#D0B03C')
-c.yellow_light  = calcColors('#FFE377')
-c.blue          = calcColors('#4E90A7')
-c.blue_light    = calcColors('#9CD9F0')
-c.magenta       = calcColors('#8B008B')
-c.magenta_light = calcColors('#DA70D6')
-c.cyan          = calcColors('#218693')
-c.cyan_light    = calcColors('#77dfd8')
-c.border        = calcColors('#BDAE92')
-c.acc1          = calcColors('#D5C4A1')
-c.acc2          = calcColors('#EBEDD0')
-c.orange        = calcColors('#FE8019')
-c.orange_light  = calcColors('#FABD2F')
-c.purple        = calcColors('#C8A0D1')
-c.purple_light  = calcColors('#FBB1F9')
-c.comment       = calcColors('#656565')
-c.cursorline    = calcColors('#282828')
-c.cursor        = calcColors('#EBDBB2')
-c.bg            = c.dark1
-c.fg            = c.white_dark
+-- stylua: ignore
+local c = {
+black         = calcColors('#000000'),
+white         = calcColors('#FFFFFF'),
+dark1         = calcColors('#232323'),
+dark2         = calcColors('#3C3836'),
+dark3         = calcColors('#504945'),
+gray          = calcColors('#8A8A8A'),
+white_dark    = calcColors('#F7F7F7'),
+red           = calcColors('#C75646'),
+red_light     = calcColors('#E09690'),
+red_dark      = calcColors('#D75F5F'),
+red_error     = calcColors('#E04223'),
+green         = calcColors('#8EB33B'),
+green_light   = calcColors('#CDCE23'),
+green_dark    = calcColors('#6B8E23'),
+yellow        = calcColors('#D0B03C'),
+yellow_light  = calcColors('#FFE377'),
+blue          = calcColors('#4E90A7'),
+blue_light    = calcColors('#9CD9F0'),
+magenta       = calcColors('#8B008B'),
+magenta_light = calcColors('#DA70D6'),
+cyan          = calcColors('#218693'),
+cyan_light    = calcColors('#77dfd8'),
+border        = calcColors('#BDAE92'),
+acc1          = calcColors('#D5C4A1'),
+acc2          = calcColors('#EBEDD0'),
+orange        = calcColors('#FE8019'),
+orange_light  = calcColors('#FABD2F'),
+purple        = calcColors('#C8A0D1'),
+purple_light  = calcColors('#FBB1F9'),
+comment       = calcColors('#656565'),
+cursorline    = calcColors('#282828'),
+cursor        = calcColors('#EBDBB2'),
+none          = { hex = 'NONE', term = 'NONE' },
+}
 
-c.none          = { hex = 'NONE', term = 'NONE' }
--- LuaFormatter on
+c.bg = c.dark1
+c.fg = c.white_dark
 
+-- stylua: ignore
 local theme = {
   base00 = c.bg.raw,
   base01 = c.dark2.raw,
@@ -102,4 +105,3 @@ vim.g.colors = c
 -- 	base08 = '#fb4934'; base09 = '#fe8019'; base0A = '#fabd2f'; base0B = '#b8bb26';
 -- 	base0C = '#8ec07c'; base0D = '#83a598'; base0E = '#d3869b'; base0F = '#d65d0e';
 -- }
-

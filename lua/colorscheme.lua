@@ -149,20 +149,20 @@ fn.highlight('Typedef',                               c.magenta_light,    nil,  
 
 -- Treesitter
 -- Misc
-fn.highlight('TSError', c.red_light,     nil,     nil,     nil)
-fn.highlight('TSPunctDelimiter', c.fg,     nil,     nil,     nil)
-fn.highlight('TSPunctBracket', c.fg,     nil,     nil,     nil)
-fn.highlight('TSPunctSpecial', c.fg,     nil,     nil,     nil)
+fn.highlight('TSError',                               c.red_light,     nil,     nil,     nil)
+fn.highlight('TSPunctDelimiter',                      c.fg,     nil,     nil,     nil)
+fn.highlight('TSPunctBracket',                      c.fg,     nil,     nil,     nil)
+fn.highlight('TSPunctSpecial',                      c.fg,     nil,     nil,     nil)
 -- Constants
-fn.highlight('TSConstant', c.purple,     nil,     nil,     nil)
-fn.highlight('TSConstBuiltin', c.purple,     nil,     ita,     nil)
+fn.highlight('TSConstant',                      c.purple,     nil,     nil,     nil)
+fn.highlight('TSConstBuiltin',                      c.purple,     nil,     ita,     nil)
 -- -- These things overrides all palletes above
 -- TSConstMacro: "orange"
 -- TSStringRegex: "orange"
-fn.highlight('TSString', c.green_dark,     nil,     nil,     nil)
+fn.highlight('TSString',                      c.green_dark,     nil,     nil,     nil)
 -- TSStringEscape: "yellow_light"
-fn.highlight('TSCharacter', c.green,     nil,     nil,     nil)
-fn.highlight('TSNumber', c.magenta_light,     nil,     nil,     nil)
+fn.highlight('TSCharacter',                      c.green,     nil,     nil,     nil)
+fn.highlight('TSNumber',                      c.magenta_light,     nil,     nil,     nil)
 -- TSBoolean: "blue"
 -- TSFloat: "light_yellow"
 -- TSAnnotation: "yellow"
@@ -192,9 +192,6 @@ fn.highlight('TSType', c.yellow,     nil,     nil,     nil)
 fn.highlight('TSTypeBuiltin', c.orange_light,     nil,     ita,     nil)
 fn.highlight('TSStructure', c.blue,     nil,     nil,     nil)
 fn.highlight('TSVariable',                            c.acc2,       nil,                nil,                nil)
-
---LuaFormatter on
-
 
 g.terminal_color_0 = c.black.hex
 g.terminal_color_1 = c.red.hex

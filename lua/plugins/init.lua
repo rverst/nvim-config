@@ -40,9 +40,9 @@ packer.init({
   }
 })
 
-packer.startup(function(use)
+packer.startup({function(use)
 
-  use {'qbthomason/packer.nvim', opt = true}
+  use {'wbthomason/packer.nvim'}
 
   use {
     'nvim-telescope/telescope.nvim',
@@ -81,8 +81,8 @@ packer.startup(function(use)
 
   use {
     'mhartington/formatter.nvim',
-    config = function() require('plugins.formatter') end
-    -- rocks = {'luaformatter', {'luaformatter', version = '0.3.5'}}
+    config = function() require('plugins.formatter') end,
+    --rocks = {'luaformatter', {'luaformatter', version = '0.3.5'}}
   }
 
   use {'folke/which-key.nvim', config = function() require('plugins.which-key') end}
@@ -122,6 +122,14 @@ packer.startup(function(use)
 
   use {'tweekmonster/startuptime.vim'}
 
-end, {display = {open_fn = function() return require('packer.util').float({border = 'single'}) end}})
+end,
+  config = {
+    display = {
+      open_fn = function()
+	return require('packer.util').float({border = 'single'})
+      end
+    }
+  }
+})
 
 checkUpdate()
