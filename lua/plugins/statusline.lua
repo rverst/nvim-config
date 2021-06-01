@@ -2,7 +2,7 @@ local gl = require('galaxyline')
 local gls = gl.section
 local c = vim.g.colors
 
--- LuaFormat off
+-- stylua: ignore
 local modes = {
   ['c']  = {'COMMAND',            c.orange_light.hex},
   ['n']  = {'NORMAL',             c.blue.hex},
@@ -30,7 +30,6 @@ local modes = {
   ['BUFFERS'] =  c.red.hex,
   ['TABLES'] =   c.orange.hex
 }
--- LuaFormat on
 
 local separators = {left = '│', right = '│'}
 
