@@ -36,8 +36,27 @@ require('telescope').setup {
     qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
     -- Developer configurations: Not meant for general override
     buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker,
-    mappings = {i = {['<esc>'] = actions.close}}
+    mappings = {i = {
+			["<esc>"] = actions.close,
+			["<C-q>"] = actions.close,
+		}},
   }
 }
 
+local M = {}
+M.search_dotfiles = function()
+	require('telescope.builtin').find_files({
+		prompt_title = "< dotfiles >",
+		cwd = "$HOME/.config/dotfiles",
+	})
+end
+
+M.search_vimconfig = function()
+	require('telescope.builtin').find_files({
+		prompt_title = "< dotfiles >",
+		cwd = "$HOME/.config/dotfiles/nvim",
+	})
+end
+
+return M
 -- mappings are in ./which-key.lua

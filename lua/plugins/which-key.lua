@@ -51,11 +51,13 @@ wk.register({
     name = 'find',
     f = {
       [[<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ winblend = 10 }))<CR>]],
-      'find file',
+      'find file (narrow)',
     },
-    F = { [[<cmd>lua require('telescope.builtin').find_files()<CR>]], 'find file' },
+    F = { [[<cmd>lua require('telescope.builtin').find_files()<CR>]], 'find file (wide)' },
     n = { [[<cmd>lua require('telescope.builtin').file_browser()<CR>]], 'file browser' },
-    r = { [[<cmd>lua require('telescope.builtin').old_files()<CR>]], 'open recent file' },
+    r = { [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], 'open recent file' },
+    d = { [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], 'find in buffer' },
+    D = { [[<cmd>lua require('telescope.builtin').current_buffer_tags()<CR>]], 'tags of buffer' },
     b = { [[<cmd>lua require('telescope.builtin').buffers()<CR>]], 'find buffer' },
     g = { [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], 'live grep' },
     h = { [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], 'grep help' },
@@ -67,6 +69,10 @@ wk.register({
     m = { [[<cmd>lua require('telescope.builtin').marks()<CR>]], 'marks' },
     k = { [[<cmd>lua require('telescope.builtin').keymaps()<CR>]], 'keymaps' },
     o = { [[<cmd>lua require('telescope.builtin').vim_options()<CR>]], 'vim options' },
+    v = { [[<cmd>lua require('plugins.telescope').search_vimconfig()<CR>]], 'search nvim config' },
+    ['.'] = { [[<cmd>lua require('plugins.telescope').search_dotfiles()<CR>]], 'search dotfiles' },
+
+
   },
 
   d = {
