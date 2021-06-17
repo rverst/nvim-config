@@ -62,6 +62,16 @@ M.OnAttach = function(client, bufnr)
     },
   }, {prefix = '', buffer = bufnr})
 
+  if client.name == "rls" then
+    wk.register({
+    c = {
+      x = {[[<cmd>lua require('plugins.which-key').openFloatTerm('cargo run')<CR>]], 'Run'},
+      b = {[[<cmd>lua require('plugins.which-key').openFloatTerm('cargo build')<CR>]], 'Build'},
+    }
+
+    }, {prefix = '<leader>', buffer = bufnr})
+  end
+
   -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
     wk.register({f = {[[<cmd>lua vim.lsp.buf.formatting()<CR>]], 'format [LSP]'}},
