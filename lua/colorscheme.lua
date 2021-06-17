@@ -1,4 +1,5 @@
-local c = vim.g.colors
+local g = vim.g
+local c = g.colors
 local fn = require('utils.fn')
 local base16 = require('base16')
 local none = 'none'
@@ -7,6 +8,8 @@ base16(vim.g.mytheme, true)
 
 vim.o.background = 'dark'
 vim.cmd('hi clear CursorLine')
+
+
 
 -- Available decorations
 ---------------------------------
@@ -146,20 +149,20 @@ fn.highlight('Typedef',                               c.magenta_light,    nil,  
 
 -- Treesitter
 -- Misc
-fn.highlight('TSError', c.red_light,     nil,     nil,     nil)
-fn.highlight('TSPunctDelimiter', c.fg,     nil,     nil,     nil)
-fn.highlight('TSPunctBracket', c.fg,     nil,     nil,     nil)
-fn.highlight('TSPunctSpecial', c.fg,     nil,     nil,     nil)
+fn.highlight('TSError',                               c.red_light,     nil,     nil,     nil)
+fn.highlight('TSPunctDelimiter',                      c.fg,     nil,     nil,     nil)
+fn.highlight('TSPunctBracket',                      c.fg,     nil,     nil,     nil)
+fn.highlight('TSPunctSpecial',                      c.fg,     nil,     nil,     nil)
 -- Constants
-fn.highlight('TSConstant', c.purple,     nil,     nil,     nil)
-fn.highlight('TSConstBuiltin', c.purple,     nil,     ita,     nil)
+fn.highlight('TSConstant',                      c.purple,     nil,     nil,     nil)
+fn.highlight('TSConstBuiltin',                      c.purple,     nil,     ita,     nil)
 -- -- These things overrides all palletes above
 -- TSConstMacro: "orange"
 -- TSStringRegex: "orange"
-fn.highlight('TSString', c.green_dark,     nil,     nil,     nil)
+fn.highlight('TSString',                      c.green_dark,     nil,     nil,     nil)
 -- TSStringEscape: "yellow_light"
-fn.highlight('TSCharacter', c.green,     nil,     nil,     nil)
-fn.highlight('TSNumber', c.magenta_light,     nil,     nil,     nil)
+fn.highlight('TSCharacter',                      c.green,     nil,     nil,     nil)
+fn.highlight('TSNumber',                      c.magenta_light,     nil,     nil,     nil)
 -- TSBoolean: "blue"
 -- TSFloat: "light_yellow"
 -- TSAnnotation: "yellow"
@@ -190,5 +193,18 @@ fn.highlight('TSTypeBuiltin', c.orange_light,     nil,     ita,     nil)
 fn.highlight('TSStructure', c.blue,     nil,     nil,     nil)
 fn.highlight('TSVariable',                            c.acc2,       nil,                nil,                nil)
 
---LuaFormatter on
-
+g.terminal_color_0 = c.black.hex
+g.terminal_color_1 = c.red.hex
+g.terminal_color_2 = c.green.hex
+g.terminal_color_3 = c.yellow.hex
+g.terminal_color_4 = c.blue.hex
+g.terminal_color_5 = c.magenta.hex
+g.terminal_color_6 = c.cyan.hex
+g.terminal_color_7 = c.white.hex
+g.terminal_color_8 = c.gray.hex
+g.terminal_color_9 = c.red_light.hex
+g.terminal_color_10 = c.green_light.hex
+g.terminal_color_11 = c.yellow_light.hex
+g.terminal_color_12 = c.blue_light.hex
+g.terminal_color_13 = c.magenta_light.hex
+g.terminal_color_15 = c.white.hex

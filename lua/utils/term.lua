@@ -49,7 +49,13 @@ M.openFloatTerm = function(command, border_style)
 end
 
 -- closes a floating terminal window
-M.closeFloatTerm = function()
+M.closeFloatTerm = function(mouse)
+  local m = mouse or ''
+  local cm = vim.o.mouse
+  if m ~= cm then
+	  vim.o .mouse = m
+  end
+
   local has_var, float_terminal_win = pcall(api.nvim_buf_get_var, 0, 'float_terminal_win')
   if not has_var then return end
   if float_terminal_win[1] ~= nil and api.nvim_win_is_valid(float_terminal_win[1]) and

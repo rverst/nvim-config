@@ -14,6 +14,7 @@
 vim.g.mapleader = ' '
 
 local fn = require('utils.fn')
+local v = require('utils.vars')
 
 -- set some color variables, the actual colorscheme is loaded later
 require('colors')
@@ -21,6 +22,11 @@ require('settings')
 
 -- load the plugin manager
 require('plugins')
+
+if not v.isPackerSynced then
+  print("Packer is not synced, run: PackerSync")
+  return
+end
 
 require('colorscheme')
 require('autocmds')

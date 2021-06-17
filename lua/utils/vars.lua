@@ -16,6 +16,7 @@ function M:init()
   self.lspPath = fn.joinPath(self.dataPath, 'lsp_servers')
   self.undoDir = fn.joinPath(vim.fn.stdpath('cache'), 'undo')
 
+  self.isPackerSynced = fn.exists(fn.joinPath(self.nvimPath, 'plugin', 'packer_compiled.vim'))
 end
 
 M:init()
