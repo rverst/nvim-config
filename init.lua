@@ -23,10 +23,6 @@ require('settings')
 -- load the plugin manager
 require('plugins')
 
-if not v.isPackerSynced then
-  print("Packer is not synced, run: PackerSync")
-  return
-end
 
 require('colorscheme')
 require('autocmds')

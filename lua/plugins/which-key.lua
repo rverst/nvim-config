@@ -183,6 +183,7 @@ wk.register({
 })
 
 wk.register({
+  ['<F1>'] = { [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], 'which_key_ignore' },
   ['<CR>'] = { [[<cmd>noh<CR><CR>]], 'which_key_ignore' },
   ['<C-h>'] = { [[<C-w>h]], 'which_key_ignore' },
   ['<C-j>'] = { [[<C-w>j]], 'which_key_ignore' },
@@ -202,6 +203,7 @@ wk.register({
 }, {})
 
 wk.register({
+  ['<F1>'] = { [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], 'which_key_ignore' },
   ['<C-h>'] = { [[<C-w>h]], 'which_key_ignore' },
   ['<C-j>'] = { [[<C-w>j]], 'which_key_ignore' },
   ['<C-k>'] = { [[<C-w>k]], 'which_key_ignore' },
@@ -211,6 +213,7 @@ wk.register({
 })
 
 wk.register({
+  ['<F1>'] = { [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], 'which_key_ignore' },
   ['<C-h>'] = { [[<C-w>h]], 'which_key_ignore' },
   ['<C-j>'] = { [[<C-w>j]], 'which_key_ignore' },
   ['<C-k>'] = { [[<C-w>k]], 'which_key_ignore' },
@@ -220,6 +223,7 @@ wk.register({
 })
 
 wk.register({
+  ['<F1>'] = { [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], 'which_key_ignore' },
   ['<Esc>'] = 'which_key_ignore',
   ['<C-h>'] = 'which_key_ignore',
   ['<C-j>'] = 'which_key_ignore',
