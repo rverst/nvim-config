@@ -11,7 +11,14 @@
 
 --]]
 
+
 vim.g.mapleader = ' '
+
+if vim.g.shell or vim.g.shell == "fish" then
+  vim.g.shell = 'sh'
+end
+
+-- print(vim.inspect(vim.api.nvim_eval('shell')))
 
 local fn = require('utils.fn')
 local v = require('utils.vars')
