@@ -26,7 +26,8 @@ utils.augrp('ag_hl_todo', {
 })
 
 -- delete trailing spaces on save
-utils.augrp('ag_del_wp', [[BufWritePre * %s/\s\+$//e]])
+-- need to disable this for some file types like markdown
+--utils.augrp('ag_del_wp', [[BufWritePre * %s/\s\+$//e]])
 
 -- PackerSync
 utils.augrp('packer_sync', {

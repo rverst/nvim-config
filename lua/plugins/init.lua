@@ -56,9 +56,9 @@ packer.startup({function(use)
     after = 'telescope.nvim',
     run = {'TSUpdate'},
     requires = {
-		{'nvim-treesitter/playground', opt = true},
-		{'windwp/nvim-autopairs'},
-		{'windwp/nvim-ts-autotag'}
+	{'nvim-treesitter/playground', opt = true},
+	{'windwp/nvim-autopairs'},
+	{'windwp/nvim-ts-autotag'}
     },
     config = function() require('plugins.treesitter') end
   }
@@ -69,6 +69,17 @@ packer.startup({function(use)
   }
 
   use {'glepnir/lspsaga.nvim', config = function() require('plugins.lspsaga') end}
+
+
+  use {
+    'mfussenegger/nvim-dap',
+    requires = {{'nvim-telescope/telescope-dap.nvim'}, 
+		{'rcarriga/nvim-dap-ui'},
+		{'Pocco81/DAPInstall.nvim'}
+		},
+    config = function() require('plugins.dap-config') end,
+	}
+
 
   use {
     'lewis6991/gitsigns.nvim',

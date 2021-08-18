@@ -49,11 +49,11 @@ wk.register({
 
   f = {
     name = 'find',
-    f = {
+    F = {
       [[<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ winblend = 10 }))<CR>]],
       'find file (narrow)',
     },
-    F = { [[<cmd>lua require('telescope.builtin').find_files()<CR>]], 'find file (wide)' },
+    f = { [[<cmd>lua require('telescope.builtin').find_files()<CR>]], 'find file (wide)' },
     n = { [[<cmd>lua require('telescope.builtin').file_browser()<CR>]], 'file browser' },
     r = { [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], 'open recent file' },
     d = { [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], 'find in buffer' },
@@ -76,8 +76,12 @@ wk.register({
   },
 
   d = {
-    f = { [[<cmd>Format<CR>]], 'Format code' },
-    F = { [[<cmd>FormatWrite<CR>]], 'Format code and write' },
+    name = 'debug',
+    b = { [[<cmd>lua require('dap').toggle_breakpoint()<CR>]], 'Toggle breakpoint' },
+    B = { [[<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>]], 'Set breakpoint' },
+    L = { [[<cmd>lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point messgage: '))<CR>]], 'Set log point' },
+    r = { [[<cmd>lua require('dap').repl.open()<CR>]], 'Repl open' },
+    l = { [[<cmd>lua require('dap').run_last()<CR>]], 'Run last' },
   },
 
   g = {
@@ -131,6 +135,8 @@ wk.register({
     name = 'code',
     c = { [[<Plug>kommentary_line_default]], 'Toggle line comment' },
     C = { [[<Plug>kommentary_motion_default]], 'Toggle comment [motion]' },
+    -- f = { [[<cmd>Format<CR>]], 'Format code' },
+    F = { [[<cmd>FormatWrite<CR>]], 'Format code and write' },
     -- additional keybinds in ../lsp/config.lua
   },
 
@@ -184,6 +190,10 @@ wk.register({
 
 wk.register({
   ['<F1>'] = { [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], 'which_key_ignore' },
+  ['<F5>'] = { [[<cmd>lua require('dap').continue()<CR>]], 'Continue' },
+  ['<F7>'] = { [[<cmd>lua require('dap').step_over()<CR>]], 'Step out' },
+  ['<F8>'] = { [[<cmd>lua require('dap').step_into()<CR>]], 'Step into' },
+  ['<F9>'] = { [[<cmd>lua require('dap').step_out()<CR>]], 'Step out' },
   ['<CR>'] = { [[<cmd>noh<CR><CR>]], 'which_key_ignore' },
   ['<C-h>'] = { [[<C-w>h]], 'which_key_ignore' },
   ['<C-j>'] = { [[<C-w>j]], 'which_key_ignore' },
@@ -276,17 +286,15 @@ M.openFloatTerm = function(command, autoclose, border_style)
   local acl = autoclose or true
   local bst = border_style or 0
 
-  print(vim.o.mouse)
-  local mouse = vim.o.mouse
+  vim.g.my_mouse = vim.o.mouse
   vim.o.mouse = ''
 
-  print(vim.o.mouse)
   -- local cBuf = vim.api.nvim_get_current_buf()
   -- local cWin = vim.api.nvim_get_current_win()
   local tBuf = term.openFloatTerm(cmd, bst)
   wk.register({
     ['<C-q>'] = {
-      [[<C-\><C-n><cmd>lua require('utils.term').closeFloatTerminal()<CR>]],
+      [[<C-\><C-n><cmd>lua require('utils.term').closeFloatTerm()<CR>]],
       'which_key_ignore',
     },
   }, {
@@ -296,7 +304,7 @@ M.openFloatTerm = function(command, autoclose, border_style)
 
   wk.register({
     ['<C-q>'] = {
-      [[<cmd>lua require('utils.term').closeFloatTerminal()<CR>]],
+      [[<cmd>lua require('utils.term').closeFloatTerm()<CR>]],
       'which_key_ignore',
     },
   }, {
@@ -307,7 +315,7 @@ M.openFloatTerm = function(command, autoclose, border_style)
   -- add autocmd to auto-close the floating window if the shell (the command) exits
   -- ToDo: statusline needs a redraw ore something
   if acl then
-    vim.cmd([[au TermClose * ++once :lua require('utils.term').closeFloatTerm(]] .. mouse .. [[])]])
+    vim.cmd([[au TermClose * ++once :lua require('utils.term').closeFloatTerm()]])
   end
 end
 

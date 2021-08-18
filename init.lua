@@ -13,6 +13,10 @@
 
 vim.g.mapleader = ' '
 
+-- disable buildin plugins
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 local fn = require('utils.fn')
 local v = require('utils.vars')
 
