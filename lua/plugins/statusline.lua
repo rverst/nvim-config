@@ -92,6 +92,8 @@ local shortListShow = function()
     return false
   elseif t == 'outline' then
     return false
+  elseif t:find('dap') == 1 then
+    return true
   end
   return true
 end
@@ -99,6 +101,11 @@ end
 local isTerminal = function()
   local t = vim.bo.buftype:lower()
   return t == 'terminal'
+end
+
+local isDapUi = function()
+  local t = vim.bo.filetype:lower()
+  return t:find('dap') == 1
 end
 
 local bufferType = function() return vim.bo.filetype:lower() end
@@ -109,7 +116,7 @@ local printer = function(s) return function() return s end end
 
 local space = printer(' ')
 
-gl.short_line_list = {'defx', 'packager', 'vista', 'NvimTree'}
+gl.short_line_list = {'defx', 'packager', 'vista', 'NvimTree', 'dapui_scopes', 'dapui_breakpoints', 'dapui_watches', 'dapui_stacks', 'dap-repl' }
 
 gls.left = {
   {LeftStart = {provider = space, highlight = {c.dark3.hex, c.dark3.hex}}}, {
@@ -292,9 +299,10 @@ gls.short_line_left = {
       condition = all(bufferNotEmpty, shortListShow),
       highlight = {c.dark2.hex, c.dark2.hex}
     }
-  }, {
+  }, 
+  {
     ShortFileName = {
-      provider = {space, 'FileIcon', 'FileName'},
+      provider = {'FileName'},
       condition = all(bufferNotEmpty, shortListShow, neg(isTerminal)),
       highlight = {c.acc1.hex, c.dark2.hex, 'bold'}
     }

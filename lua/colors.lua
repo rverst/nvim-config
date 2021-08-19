@@ -46,6 +46,9 @@ purple_light  = calcColors('#FBB1F9'),
 comment       = calcColors('#656565'),
 cursorline    = calcColors('#282828'),
 cursor        = calcColors('#EBDBB2'),
+virtual_text  = calcColors('#535510'),
+virtual_info  = calcColors('#CC6600'),
+virtual_error = calcColors('#CC4C4C'),
 none          = { hex = 'NONE', term = 'NONE' },
 }
 

@@ -72,13 +72,27 @@ packer.startup({function(use)
 
 
   use {
-    'mfussenegger/nvim-dap',
-    requires = {{'nvim-telescope/telescope-dap.nvim'}, 
-		{'rcarriga/nvim-dap-ui'},
-		{'Pocco81/DAPInstall.nvim'}
+    'nvim-telescope/telescope-dap.nvim',
+    after = 'telescope.nvim',
+    requires = {{'mfussenegger/nvim-dap'},
+		{'Pocco81/DAPInstall.nvim'},
+		{'nvim-telescope/telescope.nvim'},
+		{'nvim-treesitter/nvim-treesitter'}
 		},
-    config = function() require('plugins.dap-config') end,
-	}
+    config = function() require('plugins.nvim-dap') end,
+  }
+
+  use {
+    'rcarriga/nvim-dap-ui',
+    requires = {'mfussenegger/nvim-dap'},
+    config = function() require('plugins.nvim-dap-ui') end,
+  }
+  
+  use {
+    'theHamsta/nvim-dap-virtual-text',
+     after = 'telescope-dap.nvim',
+     config = function () require('plugins.nvim-dap-virtual-text') end,
+  }
 
 
   use {

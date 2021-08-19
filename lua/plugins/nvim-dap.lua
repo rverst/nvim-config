@@ -1,6 +1,15 @@
 local dap  = require('dap')
+local utils = require('utils')
 
-  dap.adapters.go = function(callback, config)
+vim.fn.sign_define('DapBreakpointRejected', { text='', texthl='DapBreakpointRejected', linehl='', numhl=''})
+vim.fn.sign_define('DapLogPoint', { text='', texthl='DapLogPoint', linehl='', numhl=''})
+vim.fn.sign_define('DapStopped', { text='', texthl='DapStopped', linehl='', numhl=''})
+vim.fn.sign_define('DapBreakpoint', { text='', texthl='DapBreakpoint', linehl='', numhl=''})
+
+utils.augrp('ag_repl_autocimpl', [[FileType dap-repl lua require('dap.ext.autocompl').attach()]])
+
+
+dap.adapters.go = function(callback, config)
     local stdout = vim.loop.new_pipe(false)
     local handle
     local pid_or_err
@@ -32,10 +41,10 @@ local dap  = require('dap')
         callback({type = "server", host = "127.0.0.1", port = port})
       end,
       100)
-  end
+end
 
   -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
-  dap.configurations.go = {
+dap.configurations.go = {
     {
       type = "go",
       name = "Debug",
@@ -60,45 +69,4 @@ local dap  = require('dap')
     } 
 }
 
-
-require("dapui").setup({
-  icons = { expanded = "?", collapsed = "?" },
-  mappings = {
-    -- Use a table to apply multiple mappings
-    expand = { "<CR>", "<2-LeftMouse>" },
-    open = "o",
-    remove = "d",
-    edit = "e",
-    repl = "r",
-  },
-  sidebar = {
-    open_on_start = true,
-    -- You can change the order of elements in the sidebar
-    elements = {
-      -- Provide as ID strings or tables with "id" and "size" keys
-      {
-        id = "scopes",
-        size = 0.25, -- Can be float or integer > 1
-      },
-      { id = "breakpoints", size = 0.25 },
-      { id = "stacks", size = 0.25 },
-      { id = "watches", size = 00.25 },
-    },
-    width = 40,
-    position = "left", -- Can be "left" or "right"
-  },
-  tray = {
-    open_on_start = true,
-    elements = { "repl" },
-    height = 10,
-    position = "bottom", -- Can be "bottom" or "top"
-  },
-  floating = {
-    max_height = nil, -- These can be integers or a float between 0 and 1.
-    max_width = nil, -- Floats will be treated as percentage of your screen.
-    mappings = {
-      close = { "q", "<Esc>" },
-    },
-  },
-  windows = { indent = 1 },
-})
+require('telescope').load_extension('dap')
