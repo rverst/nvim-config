@@ -190,18 +190,22 @@ wk.register({
 
 wk.register({
   ['<F1>'] = { [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], 'which_key_ignore' },
+  ['<F3>'] = { [[<cmd>vertical resize -5<CR>]], 'Decrease vert. size (-5)' },
+  ['<F4>'] = { [[<cmd>vertical resize +5<CR>]], 'Increase vert. size (+5)' },
+  ['<F15>'] = { [[<cmd>resize -5<CR>]], 'Decrease hori. size (-5)' },
+  ['<F16>'] = { [[<cmd>resize +5<CR>]], 'Increase hori. size (+5)' },
   ['<F5>'] = { [[<cmd>lua require('dap').continue()<CR>]], 'Continue' },
   ['<F7>'] = { [[<cmd>lua require('dap').step_into()<CR>]], 'Step into' },
   ['<F8>'] = { [[<cmd>lua require('dap').step_over()<CR>]], 'Step over' },
-  ['<S-F8>'] = { [[<cmd>lua require('dap').step_out()<CR>]], 'Step out' },
+  ['<F20>'] = { [[<cmd>lua require('dap').step_out()<CR>]], 'Step out' },
   ['<F9>'] = { [[<cmd>lua require('dap').step_out()<CR>]], 'Run to cursor' },
   ['<CR>'] = { [[<cmd>noh<CR><CR>]], 'which_key_ignore' },
   ['<C-h>'] = { [[<C-w>h]], 'which_key_ignore' },
   ['<C-j>'] = { [[<C-w>j]], 'which_key_ignore' },
   ['<C-k>'] = { [[<C-w>k]], 'which_key_ignore' },
   ['<C-l>'] = { [[<C-w>l]], 'which_key_ignore' },
-  ['<F12>'] = { [[<C-w> 5>]], 'which_key_ignore' },
-  ['<F24>'] = { [[<C-w> 5<]], 'which_key_ignore' },
+  ['<F12>'] = { [[<cmd>vertical resize +5<CR>]], 'which_key_ignore' },
+  ['<F24>'] = { [[<cmd>vertical resize -5<CR>]], 'which_key_ignore' },
   ['L'] = { [[<cmd>BufferNext<CR>]], 'Next buffer' },
   ['H'] = { [[<cmd>BufferPrevious<CR>]], 'Previous buffer' },
   ['J'] = { [[<cmd>move +1<CR>]], 'Move line down' },
@@ -212,7 +216,6 @@ wk.register({
 
   [']'] = { c = 'Next hunk' },
   ['['] = { c = 'Previous hunk' },
-  -- ['<F4>'] = {[[<cmd>Goyo<CR>]], 'Zen mode'},
 }, {})
 
 wk.register({
