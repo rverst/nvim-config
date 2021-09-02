@@ -25,8 +25,8 @@ local inv = 'inverse'
 local rev = 'inverse'
 local non = 'none'
 
---           'Group'                                  Foreground          Background          Decorations         SP Color
 -- stylua: ignore start
+-- 'Group'                                          Foreground          Background          Decorations         SP Color
 fn.highlight('Normal',                                nil,                c.bg,               nil,                nil)
 fn.highlight('LineNr',                                nil,                c.none,             nil,                nil)
 fn.highlight('SignColumn',                            nil,                c.none,             nil,                nil)

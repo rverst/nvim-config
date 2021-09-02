@@ -83,21 +83,21 @@ end
 
 if v.isWsl or v.isWindows then
   clipName = 'windows-clipboard'
-  clipProvCopy = {'clip.exe'}
-  clipProvPaste = {'pbpaste.exe', '--lf'}
+  clipProvCopy = { 'clip.exe' }
+  clipProvPaste = { 'pbpaste.exe', '--lf' }
   clipCache = 1
 elseif v.isMacOs then
   clipName = 'macos-clipboard'
-  clipProvCopy = {'pbcopy'}
-  clipProvPaste = {'pbpaste'}
+  clipProvCopy = { 'pbcopy' }
+  clipProvPaste = { 'pbpaste' }
   clipCache = 0
 end
 
 if clipProvCopy then
   vim.g.clipboard = {
     name = clipName,
-    copy = {['+'] = clipProvCopy, ['*'] = clipProvCopy},
-    paste = {['+'] = clipProvPaste, ['*'] = clipProvPaste},
-    cache_enabled = clipCache
+    copy = { ['+'] = clipProvCopy, ['*'] = clipProvCopy },
+    paste = { ['+'] = clipProvPaste, ['*'] = clipProvPaste },
+    cache_enabled = clipCache,
   }
 end
