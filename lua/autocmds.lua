@@ -24,25 +24,25 @@ utils.augrp('ag_hl_todo', {
   [[WinEnter,VimEnter * :silent! call matchadd('Fixme', '\<\([Ff][Ii][Xx][Mm][Ee]\|[Bb][Uu][Gg]\)\([?:!]\|\>\)', -1)]],
 })
 
+-- automatic file formatting
+if vim.fn.executable('stylua') == 1 then
+  utils.augrp('ag_lua_fmt', {
+    [[BufWritePost *.lua :silent! FormatWrite]],
+  })
+end
+
+if vim.fn.executable('rustfmt') == 1 then
+  utils.augrp('ag_rust_fmt', {
+    [[BufWritePost *.rs :silent! FormatWrite]],
+  })
+end
+
+utils.augrp('ag_go_fmt', {
+  [[BufWritePost *.go :silent! Gofmt]],
+})
 -- delete trailing spaces on save
 -- need to disable this for some file types like markdown
 --utils.augrp('ag_del_wp', [[BufWritePre * %s/\s\+$//e]])
-
--- PackerSync
-utils.augrp('ag_packer_sync', {
-  [[BufWritePost ]] .. fn.joinPath('*', 'plugins', 'init.lua') .. [[ :luafile ]] .. fn.joinPath(
-    'lua',
-    'plugins',
-    'init.lua'
-  ),
-  [[BufWritePost ]] .. fn.joinPath('*', 'plugins', 'init.lua') .. [[ :PackerSync]],
-})
-
-if vim.fn.executable('stylua') == 1 then
-  utils.augrp('ag_lua_fmt', {
-    [[BufWritePre *.lua :FormatWrite]],
-  })
-end
 
 -- utils.augrp('_autest', {
 -- 	[[TermOpen * :echo "TERMINAL"]]

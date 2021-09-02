@@ -26,7 +26,6 @@ require('settings')
 -- load the plugin manager
 require('plugins')
 
-
 require('colorscheme')
 require('autocmds')
 
