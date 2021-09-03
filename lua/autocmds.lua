@@ -1,4 +1,4 @@
-local utils = require('utils')
+ local utils = require('utils')
 local fn = require('utils.fn')
 
 -- highlight yank
@@ -8,6 +8,10 @@ utils.augrp('ag_hl_yank',
 -- switch numbering in insert mode
 utils.augrp('ag_sw_line_number',
             {[[InsertEnter * set norelativenumber]], [[InsertLeave * set relativenumber]]})
+
+-- leave insert mode on focus lost
+utils.augrp('ag_esc_insert',
+  {[[FocusLost * :stopinsert<CR>]]})
 
 -- disable line numbering in terminal buffers
 utils.augrp('ag_dis_term_number', {
