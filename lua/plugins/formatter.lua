@@ -14,9 +14,9 @@ require('formatter').setup({
         }
       end,
     },
-    -- https://github.com/johnnymorganz/stylu
+    -- https://github.com/johnnymorganz/stylua
     -- cargo install stylua
-    -- use `-- stylua: ignore` to ignore parts of a file
+    -- use `-- stylua: ignore` to ignore parts of a file (ignore start, ignore end for blocks)
     lua = {
       function()
         return {
@@ -26,6 +26,18 @@ require('formatter').setup({
             fn.joinPath(va.nvimPath, 'misc', 'stylua.toml'),
             '-',
           },
+          stdin = true,
+        }
+      end,
+    },
+    -- go fmt
+    go = {},
+    -- Rustfmt
+    rust = {
+      function()
+        return {
+          exe = 'rustfmt',
+          args = { '--emit=stdout' },
           stdin = true,
         }
       end,

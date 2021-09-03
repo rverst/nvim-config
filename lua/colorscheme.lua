@@ -9,8 +9,6 @@ base16(vim.g.mytheme, true)
 vim.o.background = 'dark'
 vim.cmd('hi clear CursorLine')
 
-
-
 -- Available decorations
 ---------------------------------
 -- *bold* *underline* *undercurl*
@@ -27,9 +25,8 @@ local inv = 'inverse'
 local rev = 'inverse'
 local non = 'none'
 
-
---           'Group'                                  Foreground          Background          Decorations         SP Color
--- LuaFormatter off
+-- stylua: ignore start
+-- 'Group'                                          Foreground          Background          Decorations         SP Color
 fn.highlight('Normal',                                nil,                c.bg,               nil,                nil)
 fn.highlight('LineNr',                                nil,                c.none,             nil,                nil)
 fn.highlight('SignColumn',                            nil,                c.none,             nil,                nil)
@@ -222,6 +219,7 @@ fn.highlight('TSType', c.yellow,     nil,     nil,     nil)
 fn.highlight('TSTypeBuiltin', c.orange_light,     nil,     ita,     nil)
 fn.highlight('TSStructure', c.blue,     nil,     nil,     nil)
 fn.highlight('TSVariable',                            c.acc2,       nil,                nil,                nil)
+-- stylua: ignore end
 
 g.terminal_color_0 = c.black.hex
 g.terminal_color_1 = c.red.hex

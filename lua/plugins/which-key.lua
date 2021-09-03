@@ -71,15 +71,16 @@ wk.register({
     o = { [[<cmd>lua require('telescope.builtin').vim_options()<CR>]], 'vim options' },
     v = { [[<cmd>lua require('plugins.telescope').search_vimconfig()<CR>]], 'search nvim config' },
     ['.'] = { [[<cmd>lua require('plugins.telescope').search_dotfiles()<CR>]], 'search dotfiles' },
-
-
   },
 
   d = {
     name = 'debug',
     b = { [[<cmd>lua require('dap').toggle_breakpoint()<CR>]], 'Toggle breakpoint' },
     B = { [[<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>]], 'Set breakpoint' },
-    L = { [[<cmd>lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point messgage: '))<CR>]], 'Set log point' },
+    L = {
+      [[<cmd>lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point messgage: '))<CR>]],
+      'Set log point',
+    },
     r = { [[<cmd>lua require('dap').repl.open()<CR>]], 'Repl open' },
     l = { [[<cmd>lua require('dap').run_last()<CR>]], 'Run last' },
   },
@@ -327,4 +328,3 @@ end
 
 return M
 
--- vimdm', [[<Cmd> Neoformat<CR>]], opt)
