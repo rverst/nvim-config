@@ -17,6 +17,10 @@ end
 
 local sumneko_bin = fn.joinPath(root, 'bin', oss, bin)
 
+if not fn.exists(sumneko_bin) then
+  return false
+end
+
 Config = {
   cmd = { sumneko_bin, '-E', fn.joinPath(root, 'main.lua') },
   root_dir = function()

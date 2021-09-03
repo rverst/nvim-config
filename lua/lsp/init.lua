@@ -34,7 +34,11 @@ for _, s in pairs(servers) do
   -- some ls need special configurations, e.g. the manual installed one
   if s == 'sumneko_lua' then
     config = require('lsp.' .. s)
+    if not config then
+      goto continue
+    end
   end
 
   lspconfig[s].setup(config)
+  ::continue::
 end
