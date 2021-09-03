@@ -67,7 +67,10 @@ vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.wo.foldcolumn = '0'
 vim.wo.foldenable = false
 
+-- A few custom commands that don't make me feel my 
+-- inability to let go of the shift key in time too much.
 vim.cmd('command Q quit')
+vim.cmd('command Wq write | quit')
 
 local clipName
 local clipProvCopy
