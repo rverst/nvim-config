@@ -67,6 +67,8 @@ vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.wo.foldcolumn = '0'
 vim.wo.foldenable = false
 
+vim.cmd('command Q quit')
+
 local clipName
 local clipProvCopy
 local clipProvPaste
