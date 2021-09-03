@@ -322,9 +322,8 @@ M.openFloatTerm = function(command, autoclose, border_style)
   -- add autocmd to auto-close the floating window if the shell (the command) exits
   -- ToDo: statusline needs a redraw ore something
   if acl then
-    vim.cmd([[au TermClose * ++once :lua require('utils.term').closeFloatTerm(]] .. mouse .. [[)]])
+    vim.cmd([[au TermClose * ++once :lua require('utils.term').closeFloatTerm()]])
   end
 end
 
 return M
-
