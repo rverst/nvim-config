@@ -12,7 +12,7 @@ local function calcColors(hex)
   return { hex = hex, raw = hex:sub(2, 7), r = r, g = g, b = b, term = fn.rgbToX256(r, g, b) }
 end
 
--- stylua: ignore
+-- stylua: ignore start
 local c = {
 black         = calcColors('#000000'),
 white         = calcColors('#FFFFFF'),
@@ -46,13 +46,16 @@ purple_light  = calcColors('#FBB1F9'),
 comment       = calcColors('#656565'),
 cursorline    = calcColors('#282828'),
 cursor        = calcColors('#EBDBB2'),
+virtual_text  = calcColors('#535510'),
+virtual_info  = calcColors('#CC6600'),
+virtual_error = calcColors('#CC4C4C'),
 none          = { hex = 'NONE', term = 'NONE' },
 }
+-- stylua: ignore end
 
 c.bg = c.dark1
 c.fg = c.white_dark
 
--- stylua: ignore
 local theme = {
   base00 = c.bg.raw,
   base01 = c.dark2.raw,
@@ -69,7 +72,7 @@ local theme = {
   base0C = c.green.raw,
   base0D = c.orange.raw,
   base0E = c.red_light.raw,
-  base0F = c.red_dark.raw
+  base0F = c.red_dark.raw,
 }
 
 vim.g.mytheme = theme

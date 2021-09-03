@@ -9,8 +9,6 @@ base16(vim.g.mytheme, true)
 vim.o.background = 'dark'
 vim.cmd('hi clear CursorLine')
 
-
-
 -- Available decorations
 ---------------------------------
 -- *bold* *underline* *undercurl*
@@ -27,9 +25,8 @@ local inv = 'inverse'
 local rev = 'inverse'
 local non = 'none'
 
-
---           'Group'                                  Foreground          Background          Decorations         SP Color
--- LuaFormatter off
+-- stylua: ignore start
+-- 'Group'                                          Foreground          Background          Decorations         SP Color
 fn.highlight('Normal',                                nil,                c.bg,               nil,                nil)
 fn.highlight('LineNr',                                nil,                c.none,             nil,                nil)
 fn.highlight('SignColumn',                            nil,                c.none,             nil,                nil)
@@ -76,7 +73,37 @@ fn.highlight('NvimTreeOpenedFolderName',              c.yellow_light,     nil,  
 fn.highlight('NvimTreeIndentMarker',                  c.dark2,            nil,                nil,                nil)
 
 -- SymbolsOutline
-fn.highlight('FocusedSymbol',                         c.orange,           c.dark2,            bit,                 nil)
+fn.highlight('FocusedSymbol',                         c.orange,           c.dark2,            bit,                nil)
+
+-- dap
+fn.highlight('DapBreakpoint',                         c.red,           	  nil,                nil,                nil)
+fn.highlight('DapBreakpointRejected',                 c.red_error,    	  nil,                nil,                nil)
+fn.highlight('DapStopped',                            c.green_light,   	  nil,                nil,                nil)
+fn.highlight('DapLogPoint',                           c.blue_light,    	  nil,                nil,                nil)
+
+-- dapui
+fn.highlight('DapUIType',           		      c.orange_light,  	  nil,                nil,                nil)
+fn.highlight('DapUIScope',           		      c.yellow_light,     nil,                nil,                nil)
+fn.highlight('DapUISource',           		      c.blue_light,       nil,                nil,                nil)
+fn.highlight('DapUIThread',           		      c.blue,             nil,                nil,                nil)
+fn.highlight('DapUIVariable',           	      c.purple,           nil,                nil,                nil)
+fn.highlight('DapUIFrameName',           	      c.acc1,             nil,                nil,                nil)
+fn.highlight('DapUIDecoration',           	      c.cyan_light,       nil,                nil,                nil)
+fn.highlight('DapUILineNumber',           	      c.acc2,             nil,                nil,                nil)
+fn.highlight('DapUIFloatBorder',           	      c.border,           nil,                nil,                nil)
+fn.highlight('DapUIWatchesEmpty',           	      c.acc2,        	  nil,                nil,                nil)
+fn.highlight('DapUIWatchesError',           	      c.red_error,    	  nil,                nil,                nil)
+fn.highlight('DapUIWatchesValue',           	      c.orange,       	  nil,                nil,                nil)
+fn.highlight('DapUIStoppedThread',           	      c.red_light,    	  nil,                nil,                nil)
+fn.highlight('DapUIBreakpointsInfo',           	      c.yellow_light, 	  nil,                nil,                nil)
+fn.highlight('DapUIBreakpointsLine',           	      c.green,         	  nil,                nil,                nil)
+fn.highlight('DapUIBreakpointsPath',           	      c.cyan,          	  nil,                nil,                nil)
+fn.highlight('DapUIBreakpointsCurrentLine',           c.green_light,   	  nil,                nil,                nil)
+
+-- nvim-dap-virtual-text
+fn.highlight('NvimDapVirtualText',           	      c.virtual_text,  	  nil,                nil,                nil)
+fn.highlight('NvimDapVirtualTextInfo',                c.virtual_info,  	  nil,                nil,                nil)
+fn.highlight('NvimDapVirtualTextError',               c.virtual_error, 	  nil,                nil,                nil)
 
 -- LSP
 fn.highlight('LspDiagnosticsDefaultError',            c.red,              nil,                ita,                nil)
@@ -192,6 +219,7 @@ fn.highlight('TSType', c.yellow,     nil,     nil,     nil)
 fn.highlight('TSTypeBuiltin', c.orange_light,     nil,     ita,     nil)
 fn.highlight('TSStructure', c.blue,     nil,     nil,     nil)
 fn.highlight('TSVariable',                            c.acc2,       nil,                nil,                nil)
+-- stylua: ignore end
 
 g.terminal_color_0 = c.black.hex
 g.terminal_color_1 = c.red.hex
