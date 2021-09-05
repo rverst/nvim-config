@@ -86,6 +86,13 @@ packer.startup({
     })
 
     use({
+      'onsails/lspkind-nvim',
+      config = function()
+        require('plugins.lspkind')
+      end,
+    })
+
+    use({
       'nvim-telescope/telescope-dap.nvim',
       after = 'telescope.nvim',
       requires = {
@@ -170,13 +177,15 @@ packer.startup({
       end,
     })
 
-    use({
-      'hrsh7th/nvim-compe',
-      event = 'InsertEnter',
-      config = function()
-        require('plugins.compe')
-      end,
-    })
+    use({ 'hrsh7th/nvim-cmp', config = "require('plugins.cmp')" })
+    use({ 'hrsh7th/cmp-vsnip', requires = 'hrsh7th/nvim-cmp' })
+    use({ 'hrsh7th/cmp-buffer', requires = 'hrsh7th/nvim-cmp' })
+    use({ 'hrsh7th/cmp-path', requires = 'hrsh7th/nvim-cmp' })
+    use({ 'hrsh7th/cmp-calc', requires = 'hrsh7th/nvim-cmp' })
+    use({ 'hrsh7th/cmp-nvim-lua', requires = 'hrsh7th/nvim-cmp' })
+    use({ 'hrsh7th/cmp-nvim-lsp', requires = 'hrsh7th/nvim-cmp' })
+    use({ 'L3MON4D3/LuaSnip', requires = { 'hrsh7th/nvim-cmp' }, { 'saadparwaiz1/cmp_luasnip' } })
+    use({ 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' })
 
     use({
       'b3nj5m1n/kommentary',

@@ -190,6 +190,10 @@ wk.register({
 })
 
 wk.register({
+  h = { [[<cmd>lua require('lspsaga.provider').lsp_finder()<CR>]], 'Show definition' },
+}, { prefix = 'g' })
+
+wk.register({
   ['<F1>'] = { [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], 'which_key_ignore' },
   ['<F3>'] = { [[<cmd>vertical resize -5<CR>]], 'Decrease vert. size (-5)' },
   ['<F4>'] = { [[<cmd>vertical resize +5<CR>]], 'Increase vert. size (+5)' },
