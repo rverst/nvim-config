@@ -13,7 +13,7 @@
 
 vim.g.mapleader = ' '
 
-if vim.g.shell or vim.g.shell == "fish" then
+if vim.g.shell or vim.g.shell == 'fish' then
   vim.g.shell = 'sh'
 end
 

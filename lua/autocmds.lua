@@ -1,4 +1,4 @@
- local utils = require('utils')
+local utils = require('utils')
 local fn = require('utils.fn')
 
 -- highlight yank
@@ -8,8 +8,7 @@ utils.augrp('ag_hl_yank', [[TextYankPost * silent! lua vim.highlight.on_yank {on
 utils.augrp('ag_sw_line_number', { [[InsertEnter * set norelativenumber]], [[InsertLeave * set relativenumber]] })
 
 -- leave insert mode on focus lost
-utils.augrp('ag_esc_insert',
-  {[[FocusLost * :stopinsert<CR>]]})
+utils.augrp('ag_leave_insert_focuslost', { [[FocusLost * :stopinsert]] })
 
 -- disable line numbering in terminal buffers
 utils.augrp('ag_dis_term_number', {
