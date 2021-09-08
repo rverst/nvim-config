@@ -18,13 +18,13 @@ require('dapui').setup({
       { id = 'stacks', size = 0.25 },
       { id = 'watches', size = 00.25 },
     },
-    width = 60,
+    -- width = 60,
     position = 'left', -- Can be "left" or "right"
   },
   tray = {
     open_on_start = true,
     elements = { 'repl' },
-    height = 12,
+    -- height = 12,
     position = 'bottom', -- Can be "bottom" or "top"
   },
   floating = {

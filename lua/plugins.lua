@@ -184,8 +184,8 @@ packer.startup({
     use({ 'hrsh7th/cmp-calc', requires = 'hrsh7th/nvim-cmp' })
     use({ 'hrsh7th/cmp-nvim-lua', requires = 'hrsh7th/nvim-cmp' })
     use({ 'hrsh7th/cmp-nvim-lsp', requires = 'hrsh7th/nvim-cmp' })
+    use({ 'hrsh7th/vim-vsnip', requires = 'hrsh7th/nvim-cmp' })
     use({ 'L3MON4D3/LuaSnip', requires = { 'hrsh7th/nvim-cmp' }, { 'saadparwaiz1/cmp_luasnip' } })
-    use({ 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' })
 
     use({
       'b3nj5m1n/kommentary',
@@ -193,6 +193,14 @@ packer.startup({
       config = function()
         require('plugins.kommentary')
       end,
+    })
+
+    use({
+      'michaelb/sniprun',
+      config = function()
+        require('plugins.sniprun')
+      end,
+      run = 'bash ./install.sh',
     })
 
     use({ 'norcalli/nvim-base16.lua' })

@@ -7,6 +7,7 @@ cmp.setup({
       -- You must install `vim-vsnip` if you use the following as-is.
       -- vim.fn['vsnip#anonymous'](args.body)
       require('luasnip').lsp_expand(args.body)
+      --vim.fn["vsnip#anonymous"](args.body)
     end,
   },
 
@@ -47,7 +48,6 @@ cmp.setup({
     { name = 'buffer' },
     { name = 'path' },
     { name = 'calc' },
-    { name = 'cmp-tabnine' },
     { name = 'nvim_lua' },
     { name = 'vsnip' },
     { name = 'luasnip' },
