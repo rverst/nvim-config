@@ -50,10 +50,10 @@ wk.register({
   f = {
     name = 'find',
     F = {
-      [[<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ winblend = 10 }))<CR>]],
+      [[<cmd>lua require('plugins.telescope').project_files(require('telescope.themes').get_dropdown({ winblend = 10 }))<CR>]],
       'find file (narrow)',
     },
-    f = { [[<cmd>lua require('telescope.builtin').find_files()<CR>]], 'find file (wide)' },
+    f = { [[<cmd>lua require('plugins.telescope').project_files()<CR>]], 'find file (wide)' },
     n = { [[<cmd>lua require('telescope.builtin').file_browser()<CR>]], 'file browser' },
     r = { [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], 'open recent file' },
     d = { [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], 'find in buffer' },
