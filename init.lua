@@ -11,6 +11,7 @@
 
 --]]
 
+vim.g.start_time = vim.fn.reltime()
 vim.g.mapleader = ' '
 
 if vim.g.shell or vim.g.shell == 'fish' then
@@ -18,8 +19,7 @@ if vim.g.shell or vim.g.shell == 'fish' then
 end
 
 -- disable buildin plugins
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+vim.g.did_load_filetypes = 1 -- handeled by `nathom/filetype.nvim`
 
 local fn = require('utils.fn')
 
@@ -33,4 +33,5 @@ require('plugins')
 require('colorscheme')
 require('autocmds')
 
+require('dashboard')
 fn.clearUpdate()

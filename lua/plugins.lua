@@ -47,6 +47,7 @@ packer.startup({
     use({ 'wbthomason/packer.nvim' })
     use({ 'antoinemadec/FixCursorHold.nvim' }) -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
 
+    use({ 'nathom/filetype.nvim' })
     use({
       'nvim-telescope/telescope.nvim',
       requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } },
@@ -212,6 +213,8 @@ packer.startup({
         require('colorizer').setup()
       end,
     })
+
+    use({ 'glepnir/dashboard-nvim' })
 
     use({ 'tweekmonster/startuptime.vim' })
   end,
