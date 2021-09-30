@@ -1,7 +1,7 @@
 local g = vim.g
 local v = vim.version()
 
-local width = 55 
+local width = 55
 local vs = vim.fn.printf('v%d.%d.%d', v.major, v.minor, v.patch)
 if v.api_prerelease then
   vs = vs .. ' (pre)'
@@ -39,7 +39,7 @@ g.dashboard_custom_section = {
     command = 'Telescope find_files',
   },
   b = {
-    description = { '  Recents                   SPC f o' },
+    description = { '  Recents                   SPC f r' },
     command = 'Telescope oldfiles',
   },
   c = {
