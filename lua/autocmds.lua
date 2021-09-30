@@ -17,6 +17,9 @@ utils.augrp('ag_dis_term_number', {
   [[TermOpen * :set nonumber norelativenumber]],
 })
 
+-- set tabwith (overwrite)
+utils.augrp('ag_tabstop', [[Bufenter * :set tabstop=2]])
+
 -- check if the file was changed outside nvim
 utils.augrp('ag_check_edit', [[FocusGained,Bufenter * :checktime]])
 
