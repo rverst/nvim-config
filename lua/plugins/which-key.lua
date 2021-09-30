@@ -8,6 +8,9 @@ wk.setup({
     registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
     -- the presets plugin, adds help for a bunch of default keybindings in Neovim
     -- No actual key bindings are created
+    spelling = {
+      enabled = true,
+    },
     presets = {
       operators = true, -- adds help for operators like d, y, ...
       motions = true, -- adds help for motions
@@ -38,6 +41,7 @@ wk.setup({
   show_help = true, -- show help message on the command line when the popup is visible
 })
 
+-- normal <leader> mappings
 wk.register({
   p = { [["+p]], 'Paste from clipboard' },
   P = { [["+P]], 'Paste from clipboard (before)' },
@@ -147,6 +151,12 @@ wk.register({
     p = { [[<cmd>TSPlaygroundToggle<CR>]], 'Toggle treesitter playgound' },
   },
 
+  s = {
+    name = 'session',
+    s = { [[<cmd>SessionSave<CR>]], 'Save session' },
+    l = { [[<cmd>SessionLoad<CR>]], 'Load session' },
+  },
+
   b = {
     name = 'bufferline',
     ['1'] = { [[<cmd>BufferGoto 1<CR>]], 'buffer 1' },
@@ -169,6 +179,7 @@ wk.register({
   prefix = '<leader>',
 })
 
+-- visual <leader> mappings
 wk.register({
   p = { [["+p]], 'Paste from clipboard' },
   y = { [["+y]], 'Yank to clipboard' },
@@ -189,10 +200,7 @@ wk.register({
   mode = 'v',
 })
 
-wk.register({
-  h = { [[<cmd>lua require('lspsaga.provider').lsp_finder()<CR>]], 'Show definition' },
-}, { prefix = 'g' })
-
+-- normal mappings
 wk.register({
   ['<F1>'] = { [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], 'which_key_ignore' },
   ['<F3>'] = { [[<cmd>vertical resize -5<CR>]], 'Decrease vert. size (-5)' },
@@ -224,6 +232,11 @@ wk.register({
 }, {})
 
 wk.register({
+  h = { [[<cmd>lua require('lspsaga.provider').lsp_finder()<CR>]], 'Show definition' },
+}, { prefix = 'g' })
+
+-- insert mappings
+wk.register({
   ['<F1>'] = { [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], 'which_key_ignore' },
   ['<C-h>'] = { [[<C-w>h]], 'which_key_ignore' },
   ['<C-j>'] = { [[<C-w>j]], 'which_key_ignore' },
@@ -233,6 +246,7 @@ wk.register({
   mode = 'i',
 })
 
+-- visual mappings
 wk.register({
   ['<F1>'] = { [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], 'which_key_ignore' },
   ['<C-h>'] = { [[<C-w>h]], 'which_key_ignore' },
@@ -243,6 +257,7 @@ wk.register({
   mode = 'v',
 })
 
+-- terminal mappings
 wk.register({
   ['<F1>'] = { [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], 'which_key_ignore' },
   ['<Esc>'] = 'which_key_ignore',
@@ -257,8 +272,7 @@ wk.register({
 
 local M = {}
 
-M.openTerminal = function(orientation, command, size, autoclose)
-  local cmd = command or ''
+M.openTerminal = function(orientation, size, autoclose)
   local s = size or 0
   local acl = autoclose or true
 

@@ -1,9 +1,20 @@
-local telescope = require('telescope')
-local actions = require('telescope.actions')
+local p1, telescope = pcall(require, 'telescope')
+local p2, actions = pcall(require, 'telescope.actions')
+if not p1 or not p2 then
+  return
+end
 
 telescope.setup = {
   defaults = {
-
+    vimgrep_arguments = {
+      'rg',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case',
+    },
     mappings = {
       i = {
         ['<esc>'] = actions.close,
