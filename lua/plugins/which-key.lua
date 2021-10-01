@@ -67,7 +67,8 @@ wk.register({
     i = { [[<cmd>lua require('telescope.builtin').highlights()<CR>]], 'grep highlights' },
     c = { [[<cmd>lua require('telescope.builtin').commands()<CR>]], 'grep commands' },
     t = { [[<cmd>lua require('telescope.builtin').tags()<CR>]], 'grep tags' },
-    s = { [[<cmd>lua require('telescope.builtin').git_files()<CR>]], 'git files' },
+    G = { [[<cmd>lua require('telescope.builtin').git_files()<CR>]], 'git files' },
+    s = { [[<cmd>Telescope sessions<CR>]], 'Find session' },
     w = { [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], 'find word' },
     m = { [[<cmd>lua require('telescope.builtin').marks()<CR>]], 'marks' },
     n = { [[<cmd>enew<CR>]], 'new file' },
@@ -153,8 +154,9 @@ wk.register({
 
   s = {
     name = 'session',
-    s = { [[<cmd>SessionSave<CR>]], 'Save session' },
-    l = { [[<cmd>SessionLoad<CR>]], 'Load session' },
+    s = { [[<cmd>SaveSession<CR>]], 'Save session' },
+    l = { [[<cmd>LoadSession<CR>]], 'Load laset session' },
+    f = { [[<cmd>Telescope sessions<CR>]], 'Find session' },
   },
 
   b = {

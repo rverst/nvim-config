@@ -32,25 +32,29 @@ g.dashboard_custom_header = {
 g.dashboard_custom_section = {
   ['1'] = {
     description = { '  Load Last Session         SPC s l' },
-    command = 'SessionLoad',
+    command = 'LoadSession!',
   },
   ['2'] = {
+    description = { '  Find Sessions             SPC s f' },
+    command = 'Telescope sessions',
+  },
+  ['3'] = {
     description = { '  Find File                 SPC f f' },
     command = 'Telescope find_files',
   },
-  b = {
+  ['4'] = {
     description = { '  Recents                   SPC f r' },
     command = 'Telescope oldfiles',
   },
-  c = {
+  ['5'] = {
     description = { '  Find Word                 SPC f g' },
     command = 'Telescope live_grep',
   },
-  d = {
+  ['6'] = {
     description = { '洛  New File                 SPC f n' },
     command = 'enew',
   },
-  e = {
+  ['7'] = {
     description = { '  Bookmarks                 SPC b m' },
     command = 'Telescope marks',
   },

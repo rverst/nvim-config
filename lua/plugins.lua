@@ -216,6 +216,10 @@ packer.startup({
 
     use({ 'glepnir/dashboard-nvim' })
 
+    use({ 'Shatur/neovim-session-manager', config = function()
+      require('plugins.sessions')
+    end })
+
     use({ 'tweekmonster/startuptime.vim' })
   end,
   config = {
