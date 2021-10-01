@@ -31,7 +31,15 @@ require('formatter').setup({
       end,
     },
     -- go fmt
-    go = {},
+    go = {
+      function()
+        return {
+          exe = 'gofmt',
+          args = { '-s' },
+          stdin = true,
+        }
+      end,
+    },
     -- Rustfmt
     rust = {
       function()

@@ -46,14 +46,10 @@ vim.o.mouse = 'nv'
 vim.b.swapfile = false
 vim.bo.swapfile = false
 
-vim.b.expandtab = true
-vim.bo.expandtab = true
-vim.b.smartindent = true
-vim.bo.smartindent = true
-vim.b.tabstop = indent
 vim.bo.tabstop = indent
-vim.b.shiftwidth = indent
 vim.bo.shiftwidth = indent
+vim.bo.expandtab = true
+vim.bo.smartindent = true
 
 vim.o.numberwidth = 3
 vim.wo.cursorline = true
@@ -67,7 +63,7 @@ vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.wo.foldcolumn = '0'
 vim.wo.foldenable = false
 
--- A few custom commands that don't make me feel my 
+-- A few custom commands that don't make me feel my
 -- inability to let go of the shift key in time too much.
 vim.cmd('command Q quit')
 vim.cmd('command Wq write | quit')
