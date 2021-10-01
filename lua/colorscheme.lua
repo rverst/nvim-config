@@ -76,7 +76,7 @@ fn.highlight('NvimTreeIndentMarker',                  c.dark2,            nil,  
 fn.highlight('FocusedSymbol',                         c.orange,           c.dark2,            bit,                nil)
 
 -- dashboard
-fn.highlight('DashboardHeader',                       c.cyan,     				c.none,             nil,                nil)
+fn.highlight('DashboardHeader',                       c.green_light,   		c.none,             nil,                nil)
 fn.highlight('DashboardCenter',                       c.green,            c.none,             nil,                nil)
 fn.highlight('DashboardShortcut',                     c.orange,           c.none,             ita,                nil)
 fn.highlight('DashboardFooter',                       c.yellow,           c.none,             nil,                nil)
