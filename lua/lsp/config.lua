@@ -10,13 +10,20 @@ M.OnAttach = function(client, bufnr)
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   local wk = require('which-key')
+
+  wk.register({
+    s = { [[<cmd>lua require("lspsaga.hover").render_hover_doc()<CR>]], 'Hover [lspsaga]' },
+  }, {
+    buffer = bufnr,
+  })
+
   wk.register({
 
     e = { [[<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>]], 'Show line diag [LSP]' },
     l = { [[<cmd>lua vim.lsp.buf.signature_help()<CR>]], 'Signature help [LSP]' },
     L = { [[<cmd>lua require("lspsaga.signaturehelp").signature_help()<CR>]], 'Signature help [lspsaga]' },
-    k = { [[<cmd>lua vim.lsp.buf.hover()<CR>]], 'Hover [LSP]' },
-    K = { [[<cmd>lua require("lspsaga.hover").render_hover_doc()<CR>]], 'Hover [lspsaga]' },
+    K = { [[<cmd>lua vim.lsp.buf.hover()<CR>]], 'Hover [LSP]' },
+    k = { [[<cmd>lua require("lspsaga.hover").render_hover_doc()<CR>]], 'Hover [lspsaga]' },
     D = { [[<cmd>lua vim.lsp.buf.type_definition()<CR>]], 'Type definition [LSP]' },
     ['<C-a>'] = { [[<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>]], 'which_key_ignore' },
     ['<C-z>'] = { [[<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>]], 'which_key_ignore' },
@@ -87,17 +94,18 @@ M.OnAttach = function(client, bufnr)
 
   -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
-    wk.register(
-      { f = { [[<cmd>lua vim.lsp.buf.formatting()<CR>]], 'format [LSP]' } },
-      { prefix = '<leader>', buffer = bufnr }
-    )
+    wk.register({ c = { [[<cmd>lua vim.lsp.buf.formatting()<CR>]], 'format [LSP]' } }, {
+      prefix = '<leader>',
+      buffer = bufnr,
+    })
   end
 
   if client.resolved_capabilities.document_range_formatting then
-    wk.register(
-      { f = { [[<cmd>lua vim.lsp.buf.range_formatting()<CR>]], 'format [LSP]' } },
-      { prefix = '<leader>', buffer = bufnr }
-    )
+    wk.register({ c = { [[<cmd>lua vim.lsp.buf.range_formatting()<CR>]], 'format [LSP]' } }, {
+      prefix = '<leader>',
+      buffer = bufnr,
+      mode = 'v',
+    })
   end
 
   -- Set autocommands conditional on server_capabilities

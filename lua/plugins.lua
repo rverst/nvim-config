@@ -131,12 +131,12 @@ packer.startup({
       end,
     })
 
-    use({
-      'ray-x/go.nvim',
-      config = function()
-        require('plugins.go-nvim')
-      end,
-    })
+    -- use({
+    --   'ray-x/go.nvim',
+    --   config = function()
+    --     require('plugins.go-nvim')
+    --   end,
+    -- })
 
     use({
       'mhartington/formatter.nvim',

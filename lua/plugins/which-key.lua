@@ -136,7 +136,7 @@ wk.register({
     name = 'code',
     c = { [[<Plug>kommentary_line_default]], 'Toggle line comment' },
     C = { [[<Plug>kommentary_motion_default]], 'Toggle comment [motion]' },
-    -- f = { [[<cmd>Format<CR>]], 'Format code' },
+    f = { [[<cmd>Format<CR>]], 'Format code' },
     F = { [[<cmd>FormatWrite<CR>]], 'Format code and write' },
     -- additional keybinds in ../lsp/config.lua
   },

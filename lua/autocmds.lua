@@ -40,8 +40,9 @@ if vim.fn.executable('rustfmt') == 1 then
   })
 end
 
-utils.augrp('ag_go_fmt', {
-  [[BufWritePost *.go :silent! Gofmt]],
+utils.augrp('golang', {
+  -- [[BufWritePost *.go :silent! Gofmt]],
+  [[BufEnter *.go :set tabstop=2]],
 })
 -- delete trailing spaces on save
 -- need to disable this for some file types like markdown
