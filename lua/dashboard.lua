@@ -51,7 +51,7 @@ g.dashboard_custom_section = {
     command = 'Telescope live_grep',
   },
   ['6'] = {
-    description = { '洛  New File                 SPC f n' },
+    description = { '洛 New File                  SPC f n' },
     command = 'enew',
   },
   ['7'] = {
