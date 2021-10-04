@@ -4,32 +4,6 @@ OS = { Unknown = 1, MacOs = 2, Linux = 3, Windows = 4, WSL = 5 }
 
 local scopes = { o = vim.o, b = vim.bo, w = vim.wo }
 
--- set options, scopes are 'o' == global, 'b' == buffer, 'w' == window
-function M.opt(scope, key, value)
-  scopes[scope][key] = value
-  if scope ~= 'o' then
-    scopes['o'][key] = value
-  end
-end
-
--- set keymapping
-function M.map(mode, lhs, rhs, opts)
-  local options = { noremap = true }
-  if opts then
-    options = vim.tbl_extend('force', options, opts)
-  end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
--- set keymapping for buffer
-function M.buf_map(buffer, mode, lhs, rhs, opts)
-  local options = { noremap = true }
-  if opts then
-    options = vim.tbl_extend('force', options, opts)
-  end
-  vim.api.nvim_buf_set_keymap(buffer, mode, lhs, rhs, options)
-end
-
 -- set autocommand(s) in an autogroup, removing the autocommands in the group first (au!)
 -- prevents the commands from being attached multiple times if the init.lua is sourced
 function M.augrp(name, cmds)

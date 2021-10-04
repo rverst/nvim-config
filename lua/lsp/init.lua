@@ -1,18 +1,44 @@
 local fn = require('utils.fn')
 local v = require('utils.vars')
 
+pcall(require, 'lsp.handlers')
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits',
+  },
+}
+
 local servers = {
-  'sumneko_lua',
-  'gopls',
-  'rls',
-  'bashls',
-  'dockerls',
-  'cssls',
-  'html',
-  'jsonls',
-  'tsserver',
-  'vimls',
-  'yamlls',
+  sumneko_lua = require('lsp.sumneko_lua'),
+  gopls = {
+    settings = {
+      gopls = {
+        codelenses = {
+          references = true,
+          test = true,
+          tidy = true,
+          upgrade_dependency = true,
+          generate = true,
+        },
+        gofumpt = true,
+      },
+    },
+  },
+  rls = {},
+  bashls = {},
+  dockerls = {},
+  cssls = {},
+  html = {},
+  jsonls = {},
+  tsserver = {},
+  vimls = {},
+  yamlls = {},
 }
 
 if not fn.exists(v.lspPath) then
@@ -28,17 +54,17 @@ if not fn.exists(v.lspPath) then
 end
 
 local lspconfig = require('lspconfig')
-for _, s in pairs(servers) do
-  local config = { on_attach = require('lsp.config').OnAttach }
-
-  -- some ls need special configurations, e.g. the manual installed one
-  if s == 'sumneko_lua' then
-    config = require('lsp.' .. s)
-    if not config then
-      goto continue
-    end
-  end
-
-  lspconfig[s].setup(config)
-  ::continue::
+for name, opts in pairs(servers) do
+  local client = lspconfig[name]
+  client.setup({
+    flags = { debounce_text_changes = 150 },
+    cmd = opts.cmd or client.cmd,
+    filetypes = opts.filetypes or client.filetypes,
+    on_attach = opts.on_attach or require('lsp.config').OnAttach,
+    on_init = opts.on_init or require('lsp.config').OnInit,
+    handlers = opts.handlers or client.handlers,
+    root_dir = opts.root_dir or client.root_dir,
+    capabilities = opts.capabilities or capabilities,
+    settings = opts.settings or {},
+  })
 end

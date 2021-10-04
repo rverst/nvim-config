@@ -1,5 +1,9 @@
 local M = {}
 
+M.OnInit = function()
+  print('LSP client init')
+end
+
 M.OnAttach = function(client, bufnr)
   local function buf_set_option(...)
     vim.api.nvim_buf_set_option(bufnr, ...)
@@ -114,6 +118,13 @@ M.OnAttach = function(client, bufnr)
     utils.augrp('lsp_doc_highlight', {
       [[CursorHold <buffer> lua vim.lsp.buf.document_highlight()]],
       [[CursorMoved <buffer> lua vim.lsp.buf.clear_references()]],
+    })
+  end
+
+  if client.resolved_capabilities.code_lens then
+    local utils = require('utils')
+    utils.augrp('lsp_doc_highlight', {
+      [[CursorHold,CursorHoldI * lua vim.lsp.codelens.refresh()]],
     })
   end
 end
