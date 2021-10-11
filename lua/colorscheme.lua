@@ -72,6 +72,9 @@ fn.highlight('NvimTreeFolderName',                    c.yellow,           nil,  
 fn.highlight('NvimTreeOpenedFolderName',              c.yellow_light,     nil,                nil,                nil)
 fn.highlight('NvimTreeIndentMarker',                  c.dark2,            nil,                nil,                nil)
 
+fn.highlight('FloatNormal',     		      	          c.acc1,           	c.dark2,            nil,                nil)
+fn.highlight('FloatBorder',     		      	          c.border,           c.dark2,            nil,                nil)
+
 -- SymbolsOutline
 fn.highlight('FocusedSymbol',                         c.orange,           c.dark2,            bit,                nil)
 

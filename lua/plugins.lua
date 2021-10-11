@@ -124,6 +124,11 @@ packer.startup({
     })
 
     use({
+      'nvim-telescope/telescope-symbols.nvim',
+      after = 'telescope.nvim',
+    })
+
+    use({
       'lewis6991/gitsigns.nvim',
       event = 'BufRead',
       requires = { 'nvim-lua/plenary.nvim' },
@@ -216,9 +221,12 @@ packer.startup({
 
     use({ 'glepnir/dashboard-nvim' })
 
-    use({ 'Shatur/neovim-session-manager', config = function()
-      require('plugins.sessions')
-    end })
+    use({
+      'Shatur/neovim-session-manager',
+      config = function()
+        require('plugins.sessions')
+      end,
+    })
 
     use({ 'tweekmonster/startuptime.vim' })
   end,

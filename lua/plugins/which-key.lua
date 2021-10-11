@@ -75,6 +75,7 @@ wk.register({
     k = { [[<cmd>lua require('telescope.builtin').keymaps()<CR>]], 'keymaps' },
     o = { [[<cmd>lua require('telescope.builtin').vim_options()<CR>]], 'vim options' },
     v = { [[<cmd>lua require('plugins.telescope').search_vimconfig()<CR>]], 'search nvim config' },
+    e = { [[<cmd>lua require('telescope.builtin').symbols()<CR>]], 'search symbols' },
     ['.'] = { [[<cmd>lua require('plugins.telescope').search_dotfiles()<CR>]], 'search dotfiles' },
   },
 

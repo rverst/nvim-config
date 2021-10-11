@@ -1,5 +1,4 @@
 local fn = require('utils.fn')
-
 local function calcColors(hex)
   if #hex ~= 7 then
     return nil
