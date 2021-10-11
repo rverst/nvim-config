@@ -37,6 +37,11 @@ if vim.fn.executable('stylua') == 1 then
   })
 end
 
+-- packer compile
+utils.augrp('packer', {
+  [[BufWritePost plugins.lua PackerCompile]],
+})
+
 if vim.fn.executable('rustfmt') == 1 then
   utils.augrp('ag_rust_fmt', {
     [[BufWritePost *.rs :silent! FormatWrite]],

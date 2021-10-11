@@ -72,6 +72,12 @@ packer.startup({
     })
 
     use({
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      --event = 'BufRead',
+      after = 'nvim-treesitter',
+    })
+
+    use({
       'neovim/nvim-lspconfig',
       --       requires = {'alexaandru/nvim-lspupdate'},
       config = function()
@@ -191,7 +197,13 @@ packer.startup({
     use({ 'hrsh7th/cmp-nvim-lua', requires = 'hrsh7th/nvim-cmp' })
     use({ 'hrsh7th/cmp-nvim-lsp', requires = 'hrsh7th/nvim-cmp' })
     use({ 'hrsh7th/vim-vsnip', requires = 'hrsh7th/nvim-cmp' })
-    use({ 'L3MON4D3/LuaSnip', requires = { 'hrsh7th/nvim-cmp' }, { 'saadparwaiz1/cmp_luasnip' } })
+    use({
+      'L3MON4D3/LuaSnip',
+      requires = { { 'hrsh7th/nvim-cmp' }, { 'saadparwaiz1/cmp_luasnip' } },
+      config = function()
+        require('snippets')
+      end,
+    })
 
     use({
       'b3nj5m1n/kommentary',
