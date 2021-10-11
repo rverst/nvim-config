@@ -1,7 +1,6 @@
 local M = {}
 
 M.OnInit = function()
-  print('LSP client init')
 end
 
 M.OnAttach = function(client, bufnr)
@@ -13,8 +12,9 @@ M.OnAttach = function(client, bufnr)
   -- See `:help omnifunc` and `:help ins-completion` for more information.
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  local wk = require('which-key')
+  require('lsp.handlers')
 
+  local wk = require('which-key')
   wk.register({
     s = { [[<cmd>lua require("lspsaga.hover").render_hover_doc()<CR>]], 'Hover [lspsaga]' },
   }, {
