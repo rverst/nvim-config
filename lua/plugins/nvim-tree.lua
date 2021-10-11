@@ -79,11 +79,15 @@ t.setup({
   -- disables netrw completely (default: true)
   disable_netrw = true,
   -- hijack netrw window on startup (default: true)
-  hijack_netrw = false,
+  hijack_netrw = true,
   -- open the tree when running this setup function (default: false)
   open_on_setup = false,
   -- will not open on setup if the filetype is in this list (default: {})
   ignore_ft_on_setup = {},
+  update_to_buf_dir = {
+    enable = true,
+    auto_open = true,
+  },
   -- closes neovim automatically when the tree is the last **WINDOW** in the view (default: false)
   auto_close = false,
   -- opens the tree when changing/opening a new tab if the tree wasn't previously opened (default: false)
@@ -93,7 +97,9 @@ t.setup({
   -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually)  (default: false)
   update_cwd = false,
   -- show lsp diagnostics in the signcolumn (default: false)
-  lsp_diagnostics = false,
+  diagnostics = {
+    enable = false,
+  },
   -- update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file
   update_focused_file = {
     -- enables the feature (default: false)
