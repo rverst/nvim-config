@@ -3,7 +3,7 @@ local wk = require('which-key')
 wk.setup({
   plugins = {
     marks = true, -- shows a list of your marks on ' and `
-    registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+    registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode (slows down macros)
     spelling = {
       enabled = true,
       suggestions = 20,
@@ -36,9 +36,9 @@ wk.setup({
     width = { min = 20, max = 50 }, -- min and max width of the columns
     spacing = 4, -- spacing between columns
   },
-  hidden = { '<silent>', '<cmd>', '<Cmd>', '<CR>', '<cr>', 'call', 'lua', '^:', '^ ' }, -- hide mapping boilerplate
+  hidden = { '<silent>', '<cmd>', '<Cmd>', '<CR>', '<cr>', '<Plug>', '<plug>', 'call', 'lua', '^:', '^ ' }, -- hide mapping boilerplate
   show_help = true, -- show help message on the command line when the popup is visible
-  triggers_blacklist = {
-    n = { '@' },
-  },
+  -- triggers_blacklist = {
+  --   n = { '@' },
+  -- },
 })

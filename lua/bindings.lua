@@ -5,6 +5,10 @@ local m = require('mapx').setup({
 })
 
 -- just to calm the LSP diagnostics
+if _G['nmap'] == nil then
+  _G['nmap'] = function(...) end
+end
+
 if _G['nnoremap'] == nil then
   _G['nnoremap'] = function(...) end
 end
@@ -46,8 +50,8 @@ nnoremap('<F12>', '<cmd>vertical resize +5<cr>', 'which_key_ignore')
 nnoremap('<F24>', '<cmd>vertical resize -5<cr>', 'which_key_ignore')
 nnoremap('L', '<cmd>BufferNext<cr>', 'Next buffer')
 nnoremap('H', '<cmd>BufferPrevious<cr>', 'Previous buffer')
-nnoremap('J', '<cmd>move +1<cr>', 'Move line down')
-nnoremap('K', '<cmd>move -2<cr>', 'Move line up')
+-- nnoremap('J', '<cmd>move +1<cr>', 'Move line down')
+-- nnoremap('K', '<cmd>move -2<cr>', 'Move line up')
 nnoremap('<F2>', '<C-w>=', 'Equal splits')
 nnoremap('<C-n>', '<cmd>NvimTreeToggle<cr>', 'Toggle file explorer')
 nnoremap('<C-s>', '<cmd>SymbolsOutline<cr>', 'Toggle symbols outline')
@@ -140,7 +144,6 @@ nnoremap('<leader>cc', '<Plug>kommentary_line_default', 'Toggle line comment')
 nnoremap('<leader>cC', '<Plug>kommentary_motion_default', 'Toggle comment [motion]')
 nnoremap('<leader>cf', '<cmd>Format<cr>', 'Format code')
 nnoremap('<leader>cF', '<cmd>FormatWrite<cr>', 'Format code and write')
--- additional keybinds in ../lsp/config.lua
 
 m.nname('<leader>m', 'Misc')
 nnoremap('<leader>mi', '<cmd>TSHighlightCapturesUnderCursor<cr>', 'Highlight captures under cursor')
@@ -180,6 +183,59 @@ vnoremap('<leader>/', '<plug>kommentary_visual_default<cr>', 'Toggle comment')
 local utils = require('utils')
 local term = require('utils.term')
 local M = {}
+
+-- bindings for LSP buffers, used in lsp/config.lua
+M.lspBindings = function(bufNr, clientName, formatting, rangeFormatting)
+  -- stylua: ignore start
+
+  nnoremap('K', '<cmd>lua vim.lsp.buf.hover()<cr>', 'silent', { buffer = bufNr}, 'Hover [LSP]')
+
+  nnoremap(']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', 'silent', { buffer = bufNr}, 'Next diagnostics')
+  nnoremap('[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', 'silent', { buffer = bufNr}, 'Previous diagnostics')
+  
+  nnoremap('gd', '<cmd>lua require("telescope.builtin").lsp_definition()<cr>', 'silent', { buffer = bufNr}, 'Definition')
+  nnoremap('gD', '<cmd>lua vim.lsp.diagnostic.declaration()<cr>', 'silent', { buffer = bufNr}, 'Declaration')
+  nnoremap('gi', '<cmd>lua vim.lsp.diagnostic.implementation()<cr>', 'silent', { buffer = bufNr}, 'Implementation')
+  nnoremap('gr', '<cmd>lua vim.lsp.diagnostic.references()<cr>', 'silent', { buffer = bufNr}, 'References')
+
+
+	nnoremap('<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>', 'silent', { buffer = bufNr}, 'Line diagnostic')
+  nnoremap('<leader>l', '<cmd>lua vim.lsp.buf.signature_help()<cr>', 'silent', { buffer = bufNr}, 'Signature help')
+  nnoremap('<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<cr>', 'silent', { buffer = bufNr}, 'Type definition')
+  nnoremap('<leader>r', '<cmd>lua vim.lsp.buf.rename()<cr>', 'silent', { buffer = bufNr}, 'Rename')
+
+	m.nname('<leader>w', 'Workspace')
+	nnoremap('<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<cr>', 'silent', { buffer = bufNr}, 'Add workspace folder')
+	nnoremap('<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>', 'silent', { buffer = bufNr}, 'Remove workspace folder')
+	nnoremap('<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<cr>', 'silent', { buffer = bufNr}, 'List workspace folder')
+
+  nnoremap('<leader>cr', '<cmd>lua require("telescope.builtin").lsp_references()<cr>', 'silent', { buffer = bufNr }, 'References') 
+  nnoremap('<leader>cs', '<cmd>lua require("telescope.builtin").lsp_document_symbols()<cr>', 'silent', { buffer = bufNr }, 'Document symbols') 
+  nnoremap('<leader>cS', '<cmd>lua require("telescope.builtin").lsp_workspace_symbols()<cr>', 'silent', { buffer = bufNr }, 'Workspace symbols') 
+  nnoremap('<leader>ca', '<cmd>lua require("telescope.builtin").lsp_code_actions()<cr>', 'silent', { buffer = bufNr }, 'Code actions') 
+  nnoremap('<leader>cA', '<cmd>lua require("lspsaga.codeaction").code_action()<cr>', 'silent', { buffer = bufNr }, 'Code actions [lspsaga]')
+  nnoremap('<leader>cd', '<cmd>lua require("telescope.builtin").lsp_document_diagnostics()<cr>', 'silent', { buffer = bufNr }, 'Document diagnostic') 
+  nnoremap('<leader>cD', '<cmd>lua require("telescope.builtin").lsp_workspace_diagnostics()<cr>', 'silent', { buffer = bufNr }, 'Workspace diagnostic') 
+  nnoremap('<leader>cf', '<cmd>lua require("lspsaga.provider").lsp_finder()<cr>', 'silent', { buffer = bufNr }, 'Def/Ref finder [lspsaga]')
+
+  vnoremap('<leader>ca', '<cmd>lua require("telescope.builtin").lsp_range_code_actions()<cr>', 'silent', { buffer = bufNr }, 'Code actions') 
+  vnoremap('<leader>cA', '<cmd>lua require("lspsaga.codeaction").range_code_action()<cr>', 'silent', { buffer = bufNr }, 'Code actions [lspsaga]')
+
+	if formatting then
+	  nnoremap('<leader>F', '<cmd>lua vim.lsp.buf.formatting()<cr>', 'silent', { buffer = bufNr}, 'Format [LSP]')
+	end
+
+	if rangeFormatting then
+	  vnoremap('<leader>F', '<cmd>lua vim.lsp.buf.range_formatting()<cr>', 'silent', { buffer = bufNr}, 'Format [LSP]')
+	end
+
+	if clientName == 'rls' then
+    nnoremap('<leader>cx', '<cmd>lua require("bindings").openFloatTerm("cargo run")<cr>', 'silent', { buffer = bufNr }, 'Run') 
+    nnoremap('<leader>cb', '<cmd>lua require("bindings").openFloatTerm("cargo build")<cr>', 'silent', { buffer = bufNr }, 'Build') 
+  end
+
+  -- stylua: ignore end
+end
 
 M.openTerminal = function(orientation, size, autoclose)
   local s = size or 0
