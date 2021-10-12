@@ -11,7 +11,7 @@ local l = string.len(vs)
 local ws = string.rep(' ', width - l)
 
 g.dashboard_disable_at_vimenter = 0
-g.dashboard_disable_statusline = 1
+g.dashboard_disable_statusline = 0
 
 g.dashboard_default_executive = 'telescope'
 

@@ -159,6 +159,13 @@ packer.startup({
     })
 
     use({
+      'b0o/mapx.nvim',
+      config = function()
+        require('bindings')
+      end,
+    })
+
+    use({
       'folke/which-key.nvim',
       config = function()
         require('plugins.which-key')
