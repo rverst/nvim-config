@@ -58,12 +58,12 @@ cmp.setup({
 
   -- You should specify your *installed* sources.
   sources = {
-    { name = 'nvim_lsp' },
-    { name = 'buffer' },
-    { name = 'path' },
-    { name = 'calc' },
     { name = 'nvim_lua' },
-    { name = 'vsnip' },
+    { name = 'nvim_lsp', priority = 9001 },
+    { name = 'path' },
     { name = 'luasnip' },
+    { name = 'vsnip' },
+    { name = 'buffer', priority = 2, keyword_length = 5, max_item_count = 10 },
+    { name = 'calc' },
   },
 })

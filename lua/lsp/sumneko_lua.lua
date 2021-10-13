@@ -37,6 +37,10 @@ Config = {
         },
       },
       telemetry = { enable = false },
+      completion = {
+        keywordSnippets = 'Disable',
+        showWord = 'Disable',
+      },
     },
   },
   on_attach = require('lsp.config').OnAttach,
