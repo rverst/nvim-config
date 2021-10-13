@@ -48,6 +48,14 @@ packer.startup({
     use({ 'antoinemadec/FixCursorHold.nvim' }) -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
 
     use({ 'nathom/filetype.nvim' })
+
+    use({
+      'rcarriga/nvim-notify',
+      config = function()
+        vim.notify = require('notify')
+      end,
+    })
+
     use({
       'nvim-telescope/telescope.nvim',
       requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } },
