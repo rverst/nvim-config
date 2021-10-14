@@ -1,6 +1,9 @@
-local api = vim.api
 local M = {}
-local window = require('lspsaga.window')
+local ok, window = pcall(require, 'lspsaga.window')
+if not ok then
+  vim.notify("cant't load 'lspsaga.window'", 'warn')
+end
+local api = vim.api
 
 -- opens a floating terminal
 -- the function is borrowed from lspsaga (https://github.com/glepnir/lspsaga.nvim/blob/333178b4e941eb19d9c97c0b0b5640c76363b0ad/lua/lspsaga/floaterm.lua#L4)

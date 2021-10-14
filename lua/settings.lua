@@ -1,5 +1,3 @@
-local v = require('utils.vars')
-
 local cmdheight = 2
 local indent = 2
 local vScrolloff = 4
@@ -34,7 +32,7 @@ vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.spellsuggest = 'fast,12'
 vim.o.spelloptions = 'camel'
 
-vim.o.undodir = v.undoDir
+vim.o.undodir = rv.undoDir
 vim.o.undofile = true
 vim.bo.undofile = true
 
@@ -74,7 +72,7 @@ local clipProvCopy
 local clipProvPaste
 local clipCache
 
-if v.isWindows then
+if rv.isWindows then
   vim.cmd([[
   let &shell = has('win32') ? 'powershell' : 'pwsh'
   set shellquote= shellpipe=\| shellxquote=
@@ -83,12 +81,12 @@ if v.isWindows then
   ]])
 end
 
-if v.isWsl or v.isWindows then
+if rv.isWsl or rv.isWindows then
   clipName = 'windows-clipboard'
   clipProvCopy = { 'clip.exe' }
   clipProvPaste = { 'pbpaste.exe', '--lf' }
   clipCache = 1
-elseif v.isMacOs then
+elseif rv.isMacOs then
   clipName = 'macos-clipboard'
   clipProvCopy = { 'pbcopy' }
   clipProvPaste = { 'pbpaste' }

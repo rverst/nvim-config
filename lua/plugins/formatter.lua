@@ -1,5 +1,4 @@
-local fn = require('utils.fn')
-local va = require('utils.vars')
+local utils = require('utils')
 
 require('formatter').setup({
   logging = false,
@@ -23,7 +22,7 @@ require('formatter').setup({
           exe = 'stylua',
           args = {
             '--config-path',
-            fn.joinPath(va.nvimPath, 'misc', 'stylua.toml'),
+            utils.joinPath(rv.nvimPath, 'misc', 'stylua.toml'),
             '-',
           },
           stdin = true,

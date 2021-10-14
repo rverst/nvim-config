@@ -1,5 +1,4 @@
-local fn = require('utils.fn')
-local v = require('utils.vars')
+local utils = require('utils')
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
@@ -39,15 +38,15 @@ local servers = {
   yamlls = {},
 }
 
-if not fn.exists(v.lspPath) then
+if not utils.exists(rv.lspPath) then
   local cmd
-  if v.isWindows then
-    cmd = [[New-Item -Path "]] .. v.lspPath .. [[" -ItemType Directory]]
+  if rv.isWindows then
+    cmd = [[New-Item -Path "]] .. rv.lspPath .. [[" -ItemType Directory]]
   else
-    cmd = [[mkdir -p "]] .. v.lspPath .. [["]]
+    cmd = [[mkdir -p "]] .. rv.lspPath .. [["]]
   end
   if os.execute(cmd) ~= 0 then
-    error('unable to create lsp root dir (' .. v.lspPath .. ')')
+    error('unable to create lsp root dir (' .. rv.lspPath .. ')')
   end
 end
 

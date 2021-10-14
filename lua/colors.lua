@@ -1,4 +1,4 @@
-local fn = require('utils.fn')
+local utils = require('utils')
 local function calcColors(hex)
   if #hex ~= 7 then
     return nil
@@ -8,7 +8,7 @@ local function calcColors(hex)
   local g = tonumber(hex:sub(4, 5), 16)
   local b = tonumber(hex:sub(6, 7), 16)
 
-  return { hex = hex, raw = hex:sub(2, 7), r = r, g = g, b = b, term = fn.rgbToX256(r, g, b) }
+  return { hex = hex, raw = hex:sub(2, 7), r = r, g = g, b = b, term = utils.rgbToX256(r, g, b) }
 end
 
 -- stylua: ignore start

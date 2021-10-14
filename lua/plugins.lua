@@ -1,31 +1,30 @@
-local va = require('utils.vars')
-local fn = require('utils.fn')
+local utils = require('utils')
 
 local repo = 'https://github.com/wbthomason/packer.nvim'
-local path = fn.joinPath(va.dataPath, 'site', 'pack', 'packer', 'start', 'packer.nvim')
+local path = utils.joinPath(rv.dataPath, 'site', 'pack', 'packer', 'start', 'packer.nvim')
 local cloneRepo = function()
-  fn.execute('git clone ' .. repo .. ' ' .. path)
+  utils.execute('git clone ' .. repo .. ' ' .. path)
   vim.cmd('packadd packer.nvim')
 end
 
 local updateRepo = function()
   local c = ' && '
-  if fn.isWindows then
+  if utils.isWindows then
     c = ' ; '
   end
   local cmd = 'cd ' .. path .. c .. 'git pull --ff-only --rebase=false --progress'
-  fn.execute(cmd)
+  utils.execute(cmd)
 end
 
 local checkInstall = function()
-  if not fn.exists(path) then
+  if not utils.exists(path) then
     cloneRepo()
     return
   end
 end
 
 local checkUpdate = function()
-  if fn.isUpdate() then
+  if utils.isUpdate() then
     updateRepo()
     require('packer').sync()
   end

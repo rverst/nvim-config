@@ -1,28 +1,27 @@
 local Config = {}
-local fn = require('utils.fn')
-local v = require('utils.vars')
+local utils = require('utils')
 
-local root = fn.joinPath(v.lspPath, 'lua-language-server')
+local root = utils.joinPath(rv.lspPath, 'lua-language-server')
 
 local oss
 local bin = 'lua-language-server'
-if v.isMacOs then
+if rv.isMacOs then
   oss = 'macos'
-elseif v.isLinux or v.isWsl then
+elseif rv.isLinux or rv.isWsl then
   oss = 'Linux'
-elseif v.isWindows then
+elseif rv.isWindows then
   oss = 'Windows'
   bin = bin .. '.exe'
 end
 
-local sumneko_bin = fn.joinPath(root, 'bin', oss, bin)
+local sumneko_bin = utils.joinPath(root, 'bin', oss, bin)
 
-if not fn.exists(sumneko_bin) then
+if not utils.exists(sumneko_bin) then
   return false
 end
 
 Config = {
-  cmd = { sumneko_bin, '-E', fn.joinPath(root, 'main.lua') },
+  cmd = { sumneko_bin, '-E', utils.joinPath(root, 'main.lua') },
   root_dir = function()
     return vim.loop.cwd()
   end,

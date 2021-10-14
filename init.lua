@@ -14,14 +14,16 @@
 vim.g.start_time = vim.fn.reltime()
 vim.g.mapleader = ' '
 
-if vim.g.shell or vim.g.shell == 'fish' then
+if vim.g.shell == nil or vim.g.shell == 'fish' then
   vim.g.shell = 'sh'
 end
 
 -- disable buildin plugins
 vim.g.did_load_filetypes = 1 -- handeled by `nathom/filetype.nvim`
 
-local fn = require('utils.fn')
+require('global')
+
+local utils = require('utils')
 
 -- set some color variables, the actual colorscheme is loaded later
 require('colors')
@@ -34,4 +36,5 @@ require('colorscheme')
 require('autocmds')
 
 require('dashboard')
-fn.clearUpdate()
+
+utils.clearUpdate()

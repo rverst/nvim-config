@@ -77,21 +77,23 @@ m.nname('<leader>f', 'Find')
 nnoremap('<leader>ff', '<cmd>lua require("plugins.telescope").project_files()<cr>', 'Find files')
 nnoremap('<leader>fv', '<cmd>lua require("plugins.telescope").search_vimconfig()<cr>', 'Search nvim config')
 nnoremap('<leader>f.', '<cmd>lua require("plugins.telescope").search_dotfiles()<cr>', 'Search dotfiles')
+nnoremap('<leader>fo', '<cmd>lua require("plugins.telescope").search_path()<cr>', 'Search path')
+nnoremap('<leader>fF', '<cmd>lua require("telescope.builtin").find_files()<cr>', 'Find files')
 nnoremap('<leader>fr', '<cmd>lua require("telescope.builtin").registers()<cr>', 'Registers')
 nnoremap('<leader>fR', '<cmd>lua require("telescope.builtin").oldfiles()<cr>', 'Open recent file')
 nnoremap('<leader>fd', '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<cr>', 'Find in buffer')
 nnoremap('<leader>fD', '<cmd>lua require("telescope.builtin").current_buffer_tags()<cr>', 'Tags of buffer')
 nnoremap('<leader>fb', '<cmd>lua require("telescope.builtin").buffers()<cr>', 'Find buffer')
-nnoremap('<leader>fg', '<cmd>lua require("telescope.builtin").live_grep()<cr>', 'Live grep')
+nnoremap('<leader>fg', '<cmd>lua require("telescope.builtin").live_grep()<cr>', 'Livegrep pwd')
+nnoremap('<leader>fG', '<cmd>lua require("plugins.telescope").grep_path()<cr>', 'Livegrep path')
 nnoremap('<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>', 'Help grep')
 nnoremap('<leader>fi', '<cmd>lua require("telescope.builtin").highlights()<cr>', 'Highlights')
 nnoremap('<leader>fc', '<cmd>lua require("telescope.builtin").commands()<cr>', 'Commands')
 nnoremap('<leader>ft', '<cmd>lua require("telescope.builtin").tags()<cr>', 'Tags')
-nnoremap('<leader>fG', '<cmd>lua require("telescope.builtin").git_files()<cr>', 'Git files')
 nnoremap('<leader>fw', '<cmd>lua require("telescope.builtin").grep_string()<cr>', 'Find word')
 nnoremap('<leader>fm', '<cmd>lua require("telescope.builtin").marks()<cr>', 'Marks')
 nnoremap('<leader>fk', '<cmd>lua require("telescope.builtin").keymaps()<cr>', 'Keymaps')
-nnoremap('<leader>fo', '<cmd>lua require("telescope.builtin").vim_options()<cr>', 'Nvim options')
+nnoremap('<leader>fO', '<cmd>lua require("telescope.builtin").vim_options()<cr>', 'Nvim options')
 nnoremap('<leader>fe', '<cmd>lua require("telescope.builtin").symbols()<cr>', 'Search symbols')
 nnoremap('<leader>fs', '<cmd>Telescope sessions<cr>', 'Find session')
 nnoremap('<leader>fn', '<cmd>enew<cr>', 'New file')
@@ -181,7 +183,6 @@ vnoremap('<leader>/', '<plug>kommentary_visual_default<cr>', 'Toggle comment')
 -- stylua: ignore end
 
 local utils = require('utils')
-local term = require('utils.term')
 local M = {}
 
 -- bindings for LSP buffers, used in lsp/config.lua
@@ -192,9 +193,9 @@ M.lspBindings = function(bufNr, clientName, formatting, rangeFormatting)
 
   nnoremap(']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', 'silent', { buffer = bufNr}, 'Next diagnostics')
   nnoremap('[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', 'silent', { buffer = bufNr}, 'Previous diagnostics')
-  
-  nnoremap('gd', '<cmd>lua require("telescope.builtin").lsp_definition()<cr>', 'silent', { buffer = bufNr}, 'Definition')
-  nnoremap('gD', '<cmd>lua vim.lsp.diagnostic.declaration()<cr>', 'silent', { buffer = bufNr}, 'Declaration')
+
+  nnoremap('gd', '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>', 'silent', { buffer = bufNr}, 'Definition')
+  nnoremap('gD', '<cmd>lua vim.lsp.diagnostic.declarations()<cr>', 'silent', { buffer = bufNr}, 'Declaration')
   nnoremap('gi', '<cmd>lua vim.lsp.diagnostic.implementation()<cr>', 'silent', { buffer = bufNr}, 'Implementation')
   nnoremap('gr', '<cmd>lua vim.lsp.diagnostic.references()<cr>', 'silent', { buffer = bufNr}, 'References')
 
@@ -209,16 +210,16 @@ M.lspBindings = function(bufNr, clientName, formatting, rangeFormatting)
 	nnoremap('<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>', 'silent', { buffer = bufNr}, 'Remove workspace folder')
 	nnoremap('<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<cr>', 'silent', { buffer = bufNr}, 'List workspace folder')
 
-  nnoremap('<leader>cr', '<cmd>lua require("telescope.builtin").lsp_references()<cr>', 'silent', { buffer = bufNr }, 'References') 
-  nnoremap('<leader>cs', '<cmd>lua require("telescope.builtin").lsp_document_symbols()<cr>', 'silent', { buffer = bufNr }, 'Document symbols') 
-  nnoremap('<leader>cS', '<cmd>lua require("telescope.builtin").lsp_workspace_symbols()<cr>', 'silent', { buffer = bufNr }, 'Workspace symbols') 
-  nnoremap('<leader>ca', '<cmd>lua require("telescope.builtin").lsp_code_actions()<cr>', 'silent', { buffer = bufNr }, 'Code actions') 
+  nnoremap('<leader>cr', '<cmd>lua require("telescope.builtin").lsp_references()<cr>', 'silent', { buffer = bufNr }, 'References')
+  nnoremap('<leader>cs', '<cmd>lua require("telescope.builtin").lsp_document_symbols()<cr>', 'silent', { buffer = bufNr }, 'Document symbols')
+  nnoremap('<leader>cS', '<cmd>lua require("telescope.builtin").lsp_workspace_symbols()<cr>', 'silent', { buffer = bufNr }, 'Workspace symbols')
+  nnoremap('<leader>ca', '<cmd>lua require("telescope.builtin").lsp_code_actions()<cr>', 'silent', { buffer = bufNr }, 'Code actions')
   nnoremap('<leader>cA', '<cmd>lua require("lspsaga.codeaction").code_action()<cr>', 'silent', { buffer = bufNr }, 'Code actions [lspsaga]')
-  nnoremap('<leader>cd', '<cmd>lua require("telescope.builtin").lsp_document_diagnostics()<cr>', 'silent', { buffer = bufNr }, 'Document diagnostic') 
-  nnoremap('<leader>cD', '<cmd>lua require("telescope.builtin").lsp_workspace_diagnostics()<cr>', 'silent', { buffer = bufNr }, 'Workspace diagnostic') 
+  nnoremap('<leader>cd', '<cmd>lua require("telescope.builtin").lsp_document_diagnostics()<cr>', 'silent', { buffer = bufNr }, 'Document diagnostic')
+  nnoremap('<leader>cD', '<cmd>lua require("telescope.builtin").lsp_workspace_diagnostics()<cr>', 'silent', { buffer = bufNr }, 'Workspace diagnostic')
   nnoremap('<leader>cf', '<cmd>lua require("lspsaga.provider").lsp_finder()<cr>', 'silent', { buffer = bufNr }, 'Def/Ref finder [lspsaga]')
 
-  vnoremap('<leader>ca', '<cmd>lua require("telescope.builtin").lsp_range_code_actions()<cr>', 'silent', { buffer = bufNr }, 'Code actions') 
+  vnoremap('<leader>ca', '<cmd>lua require("telescope.builtin").lsp_range_code_actions()<cr>', 'silent', { buffer = bufNr }, 'Code actions')
   vnoremap('<leader>cA', '<cmd>lua require("lspsaga.codeaction").range_code_action()<cr>', 'silent', { buffer = bufNr }, 'Code actions [lspsaga]')
 
 	if formatting then
@@ -230,8 +231,8 @@ M.lspBindings = function(bufNr, clientName, formatting, rangeFormatting)
 	end
 
 	if clientName == 'rls' then
-    nnoremap('<leader>cx', '<cmd>lua require("bindings").openFloatTerm("cargo run")<cr>', 'silent', { buffer = bufNr }, 'Run') 
-    nnoremap('<leader>cb', '<cmd>lua require("bindings").openFloatTerm("cargo build")<cr>', 'silent', { buffer = bufNr }, 'Build') 
+    nnoremap('<leader>cx', '<cmd>lua require("bindings").openFloatTerm("cargo run")<cr>', 'silent', { buffer = bufNr }, 'Run')
+    nnoremap('<leader>cb', '<cmd>lua require("bindings").openFloatTerm("cargo build")<cr>', 'silent', { buffer = bufNr }, 'Build')
   end
 
   -- stylua: ignore end
@@ -281,14 +282,14 @@ M.openFloatTerm = function(command, autoclose, border_style)
 
   -- local cBuf = vim.api.nvim_get_current_buf()
   -- local cWin = vim.api.nvim_get_current_win()
-  local tBuf = term.openFloatTerm(cmd, bst)
-  tnoremap('<C-q>', '<C-><C-n><cmd>lua require("utils.term").closeFloatTerm()<cr>', 'silent', { buffer = tBuf })
-  nnoremap('<C-q>', '<C-><C-n><cmd>lua require("utils.term").closeFloatTerm()<cr>', 'silent', { buffer = tBuf })
+  local tBuf = utils.openFloatTerm(cmd, bst)
+  tnoremap('<C-q>', '<C-><C-n><cmd>lua require("utils").closeFloatTerm()<cr>', 'silent', { buffer = tBuf })
+  nnoremap('<C-q>', '<C-><C-n><cmd>lua require("utils").closeFloatTerm()<cr>', 'silent', { buffer = tBuf })
 
   -- add autocmd to auto-close the floating window if the shell (the command) exits
   -- ToDo: statusline needs a redraw ore something
   if acl then
-    vim.cmd([[au TermClose * ++once :lua require('utils.term').closeFloatTerm()]])
+    vim.cmd([[au TermClose * ++once :lua require('utils').closeFloatTerm()]])
   end
 end
 
