@@ -1,6 +1,5 @@
 local cmp = require('cmp')
 local luasnip = require('luasnip')
-local lspkind = require('lspkind')
 
 cmp.setup({
   snippet = {
@@ -30,7 +29,7 @@ cmp.setup({
   -- You should specify your *installed* sources.
   sources = {
     { name = 'nvim_lua' },
-    { name = 'nvim_lsp', priority = 9001 },
+    { name = 'nvim_lsp', priority = 10 },
     { name = 'path' },
     { name = 'luasnip' },
     { name = 'buffer', priority = 2, keyword_length = 5, max_item_count = 10 },

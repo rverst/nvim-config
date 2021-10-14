@@ -37,8 +37,9 @@ Config = {
       },
       telemetry = { enable = false },
       completion = {
-        keywordSnippets = 'Disable',
+        keywordSnippets = 'Replace',
         showWord = 'Disable',
+        workspaceWord = false,
       },
     },
   },
