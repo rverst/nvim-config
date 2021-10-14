@@ -1,5 +1,4 @@
 local utils = require('utils')
-local fn = require('utils.fn')
 
 -- highlight yank
 utils.augrp('ag_hl_yank', [[TextYankPost * silent! lua vim.highlight.on_yank {on_visual = false, timeout=150}]])

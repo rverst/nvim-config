@@ -43,11 +43,11 @@ vnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>gv
 
 lua << EOF
 
-local fn = require('utils.fn')
+local utils = require('utils')
 local c = vim.g.colors
-fn.highlight('SpellBad',   nil, nil, 'undercurl', c.red_error)
-fn.highlight('SpellCap',   nil, nil, 'undercurl', c.orange)
-fn.highlight('SpellLocal', nil, nil, 'undercurl', c.blue)
-fn.highlight('SpellRare',  nil, nil, 'undercurl', c.magenta)
+utils.highlight('SpellBad',   nil, nil, 'undercurl', c.red_error)
+utils.highlight('SpellCap',   nil, nil, 'undercurl', c.orange)
+utils.highlight('SpellLocal', nil, nil, 'undercurl', c.blue)
+utils.highlight('SpellRare',  nil, nil, 'undercurl', c.magenta)
 
 EOF
