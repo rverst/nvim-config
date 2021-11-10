@@ -22,11 +22,16 @@ utils.augrp('ag_tabstop', [[Bufenter * :set tabstop=2]])
 -- check if the file was changed outside nvim
 utils.augrp('ag_check_edit', [[FocusGained,Bufenter * :checktime]])
 
--- hightlight ToDo:, BUG!, Info:, info! fixMe: etc.
+-- highlight ToDo:, BUG!, Info:, info! fixMe: etc.
 -- but we don't want to highlight things like informative or bugtracker
 utils.augrp('ag_hl_todo', {
   [[WinEnter,VimEnter * :silent! call matchadd('Todo', '\<\([Tt][Oo][Dd][Oo]\|[Ii][Nn][Ff][Oo]\)\([?:!]\|\>\)', -1)]],
   [[WinEnter,VimEnter * :silent! call matchadd('Fixme', '\<\([Ff][Ii][Xx][Mm][Ee]\|[Bb][Uu][Gg]\)\([?:!]\|\>\)', -1)]],
+})
+
+-- syntax highlight for some exotic file types
+utils.augrp('ag_hl_custom', {
+  [[BufEnter *.vcxproj,*.vcproj :set syntax=xml]],
 })
 
 -- automatic file formatting
