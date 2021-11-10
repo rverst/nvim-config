@@ -97,6 +97,7 @@ nnoremap('<leader>fO', '<cmd>lua require("telescope.builtin").vim_options()<cr>'
 nnoremap('<leader>fe', '<cmd>lua require("telescope.builtin").symbols()<cr>', 'Search symbols')
 nnoremap('<leader>fs', '<cmd>Telescope sessions<cr>', 'Find session')
 nnoremap('<leader>fn', '<cmd>enew<cr>', 'New file')
+nnoremap('<leader>fy', '<cmd>lua require("telescope").extensions.neoclip.default()<cr>', 'Neoclip')
 
 m.nname('<leader>d', 'Debug')
 nnoremap('<leader>db', '<cmd>lua require("dap").toggle_breakpoint()<cr>"', 'Toggle breakpoint')
