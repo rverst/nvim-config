@@ -6,10 +6,10 @@ end
 local g = vim.g
 
 vim.o.termguicolors = true
-g.nvim_tree_ignore = { '.git', 'node_modules', '.cache', 'vendor' } -- empty by default
-g.nvim_tree_auto_ignore_ft = { 'startify', 'dashboard' } -- empty by default, don't auto open tree on specific filetypes.
+--g.nvim_tree_ignore = { '.git', 'node_modules', '.cache', 'vendor' } -- empty by default
+--g.nvim_tree_auto_ignore_ft = { 'startify', 'dashboard' } -- empty by default, don't auto open tree on specific filetypes.
 g.nvim_tree_indent_markers = 1 -- 0 by default, this option shows indent markers when folders are open
-g.nvim_tree_hide_dotfiles = 0 -- 0 by default, this option hides files and folders starting with a dot `.`
+--g.nvim_tree_hide_dotfiles = 0 -- 0 by default, this option hides files and folders starting with a dot `.`
 g.nvim_tree_git_hl = 0 -- 0 by default, this option hides files and folders starting with a dot `.`
 g.nvim_tree_highlight_opened_files = 1 -- 0 by default, will enable folder and file icon highlight for opened files/directories.
 g.nvim_tree_root_folder_modifier = ':~' -- This is the default. See :help filename-modifiers for more options
@@ -83,7 +83,7 @@ t.setup({
   -- open the tree when running this setup function (default: false)
   open_on_setup = false,
   -- will not open on setup if the filetype is in this list (default: {})
-  ignore_ft_on_setup = {},
+	ignore_ft_on_setup = { 'startify', 'dashboard' },
   update_to_buf_dir = {
     enable = true,
     auto_open = true,

@@ -85,8 +85,16 @@ packer.startup({
     })
 
     use({
-      'neovim/nvim-lspconfig',
-      --       requires = {'alexaandru/nvim-lspupdate'},
+      'AckslD/nvim-neoclip.lua',
+      config = function()
+        require('neoclip').setup()
+      end,
+    })
+
+    use({
+      'lspcontainers/lspcontainers.nvim',
+      --'/home/rverst/dev/lspcontainers.nvim/',
+      requires = { 'neovim/nvim-lspconfig' },
       config = function()
         require('lsp')
       end,
