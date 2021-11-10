@@ -207,8 +207,8 @@ end
 
 local ok, t = pcall(require, 'utils.term')
 if ok then
-  table.insert(M, t.openFloatTerm)
-  table.insert(M, t.closeFloatTerm)
+  M['openFloatTerm'] = t.openFloatTerm
+  M['closeFloatTerm'] = t.closeFloatTerm
 end
 
 return M
