@@ -1,18 +1,35 @@
 local utils = require('utils')
+local lspconfig = require('lspconfig')
+local containers = require('lspcontainers')
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    'documentation',
-    'detail',
-    'additionalTextEdits',
-  },
-}
+local onAttach = require('lsp.config').OnAttach
 
 local servers = {
-  sumneko_lua = require('lsp.sumneko_lua'),
+  sumneko_lua = {
+    cmd = containers.command('sumneko_lua'),
+    on_new_condig = function(new_config, new_root_dir)
+      new_config.cmd = containers.command('sumneko_lua', { root_dir = new_root_dir })
+    end,
+    settings = {
+      Lua = {
+        runtime = { version = 'LuaJIT', path = vim.split(package.path, ';') },
+        diagnostics = { globals = { 'vim' } },
+        workspace = {
+          library = {
+            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+            [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+          },
+        },
+        telemetry = { enable = false },
+        completion = {
+          keywordSnippets = 'Replace',
+          showWord = 'Disable',
+          workspaceWord = false,
+        },
+      },
+    },
+    on_attach = onAttach,
+  },
   gopls = {
     settings = {
       gopls = {
@@ -38,6 +55,17 @@ local servers = {
   yamlls = {},
 }
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits',
+  },
+}
+
 if not utils.exists(rv.lspPath) then
   local cmd
   if rv.isWindows then
@@ -50,7 +78,6 @@ if not utils.exists(rv.lspPath) then
   end
 end
 
-local lspconfig = require('lspconfig')
 for name, opts in pairs(servers) do
   local client = lspconfig[name]
   client.setup({
