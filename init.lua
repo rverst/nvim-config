@@ -12,16 +12,18 @@
 --]]
 
 vim.g.start_time = vim.fn.reltime()
+require('global')
+
 vim.g.mapleader = ' '
 
-if vim.g.shell == nil or vim.g.shell == 'fish' then
-  vim.g.shell = 'sh'
+if not rv.isWindows then
+  if vim.g.shell == nil or vim.g.shell == 'fish' then
+    vim.g.shell = 'sh'
+  end
 end
 
 -- disable buildin plugins
 vim.g.did_load_filetypes = 1 -- handeled by `nathom/filetype.nvim`
-
-require('global')
 
 local utils = require('utils')
 
