@@ -64,6 +64,14 @@ packer.startup({
     })
 
     use({
+      'stevearc/dressing.nvim',
+      requires = {'nvim-telescope/telescope.nvim'},
+      config = function()
+        require('plugins.dressing')
+      end,
+     })
+
+    use({
       'nvim-treesitter/nvim-treesitter',
       --event = 'BufRead',
       after = 'telescope.nvim',

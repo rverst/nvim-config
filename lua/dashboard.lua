@@ -32,11 +32,11 @@ g.dashboard_custom_header = {
 g.dashboard_custom_section = {
   ['1'] = {
     description = { '  Load Last Session         SPC s l' },
-    command = 'LoadSession!',
+    command = 'SessionManager! load_last_session',
   },
   ['2'] = {
     description = { '  Find Sessions             SPC s f' },
-    command = 'Telescope sessions',
+    command = 'SessionManager! load_session',
   },
   ['3'] = {
     description = { '  Find File                 SPC f f' },

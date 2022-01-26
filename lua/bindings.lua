@@ -153,9 +153,10 @@ nnoremap('<leader>mi', '<cmd>TSHighlightCapturesUnderCursor<cr>', 'Highlight cap
 nnoremap('<leader>mp', '<cmd>TSPlaygroundToggle<cr>', 'Toggle treesitter playgound')
 
 m.nname('<leader>s', 'Session')
-nnoremap('<leader>ss', '<cmd>SaveSession<cr>', 'Save session')
-nnoremap('<leader>sl', '<cmd>LoadSession<cr>', 'Load laset session')
-nnoremap('<leader>sf', '<cmd>Telescope sessions<cr>', 'Find session')
+nnoremap('<leader>ss', '<cmd>SessionManager save_current_session<cr>', 'Save session')
+nnoremap('<leader>sl', '<cmd>SessionManager load_last_session<cr>', 'Load latest session')
+nnoremap('<leader>sf', '<cmd>SessionManager load_session<cr>', 'Find session')
+nnoremap('<leader>sd', '<cmd>SessionManager delete_session<cr>', 'Delete session')
 
 m.nname('<leader>b', 'Bufferline')
 nnoremap('<leader>b1','<cmd>BufferGoto 1<cr>', 'Buffer 1' )
