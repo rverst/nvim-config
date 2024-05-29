@@ -1,42 +1,37 @@
---[[
+-- init.lua
+-- This is the entry point of the configuration.
+--
 
- my neovim lua config
- many ideas and snippets shamelessly borrowed from (in alphabetical order):
-
- - Camilo Orrego (https://github.com/baldore)
- - Luke Smith (https://github.com/LukeSmithxyz)
- - siduck76 (https://github.com/siduck76/neovim-dots)
- - ThePrimeagen (https://github.com/awesome-streamers/awesome-streamerrc/blob/master/ThePrimeagen)
- - TJ DeVries (https://github.com/tjdevries)
-
---]]
-
-vim.g.start_time = vim.fn.reltime()
-require('global')
-
+-- Set leader and localleader
 vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
-if not rv.isWindows then
-  if vim.g.shell == nil or vim.g.shell == 'fish' then
-    vim.g.shell = 'sh'
-  end
+-- expect a nerd font to be installed
+vim.g.have_nerd_font = true
+
+-- Disable some buildin plugins
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- Install `lazy.nvim` plugin manager
+-- See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
+  vim.fn.system({ 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath })
 end
 
--- disable buildin plugins
-vim.g.did_load_filetypes = 1 -- handeled by `nathom/filetype.nvim`
+-- Add the plugin to the runtimepath
+---@diagnostic disable-next-line: undefined-field
+vim.opt.rtp:prepend(lazypath)
 
-local utils = require('utils')
+  -- Set up lazy and load the plugins from ./lua/plugins/...
+  -- Config for plugins might live in ./lua/rv/config/...
+  -- for easy reloading of the configuration (source %)
+require('lazy').setup(
+  { import = 'rv.plugins' },
+  { change_detection = { notify = false } }
+)
 
--- set some color variables, the actual colorscheme is loaded later
-require('colors')
-require('settings')
-
--- load the plugin manager
-require('plugins')
-
-require('colorscheme')
-require('autocmds')
-
-require('dashboard')
-
-utils.clearUpdate()
+-- The line beneath this is called `modeline`. See `:help modeline`
+-- vim: ts=2 sts=2 sw=2 et
