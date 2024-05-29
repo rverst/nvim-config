@@ -1,9 +1,0 @@
-update
-.netrwhist
-
-[Ss]ession.*
-/spell/*
-!/spell/*.add
-
-plugin/packer_compiled.vim
-plugin/packer_compiled.lua
