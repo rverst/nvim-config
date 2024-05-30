@@ -21,6 +21,7 @@ return {
       javascript = { { 'prettierd', 'prettier' } },
       shell = { 'shfmt' },
       sh = { 'shfmt' },
+      zsh = { 'shfmt' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
       --
