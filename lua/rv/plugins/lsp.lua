@@ -18,7 +18,9 @@ local plugin = {
     })
 
     local capabilities = nil
-    if pcall(require, 'cmp_nvim_lsp') then capabilities = require('cmp_nvim_lsp').default_capabilities() end
+    if pcall(require, 'cmp_nvim_lsp') then
+      capabilities = require('cmp_nvim_lsp').default_capabilities()
+    end
 
     local lspconfig = require('lspconfig')
 
@@ -70,6 +72,7 @@ local plugin = {
       templ = true,
       cssls = true,
       tsserver = true,
+      bufls = true,
 
       jsonls = {
         settings = {
@@ -114,7 +117,9 @@ local plugin = {
     require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 
     for name, config in pairs(servers) do
-      if config == true then config = {} end
+      if config == true then
+        config = {}
+      end
       config = vim.tbl_deep_extend('force', {}, {
         capabilities = capabilities,
       }, config)
@@ -149,7 +154,9 @@ local plugin = {
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
         local filetype = vim.bo[bufnr].filetype
-        if disable_semantic_tokens[filetype] then client.server_capabilities.semanticTokensProvider = nil end
+        if disable_semantic_tokens[filetype] then
+          client.server_capabilities.semanticTokensProvider = nil
+        end
 
         if client and client.server_capabilities.documentHighlightProvider then
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
