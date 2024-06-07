@@ -1,5 +1,11 @@
+-- https://github.com/mfussenegger/nvim-dap
+--
+-- nvim-dap is a Debug Adapter Protocol client implementation for Neovim
+
 return {
   'mfussenegger/nvim-dap',
+  enabled = true,
+  event = { 'BufReadPost', 'BufNewFile' },
   dependencies = {
     'rcarriga/nvim-dap-ui',
     'nvim-neotest/nvim-nio',

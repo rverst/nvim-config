@@ -2,7 +2,9 @@
 
 return {
   'nvim-telescope/telescope.nvim',
-  event = 'VimEnter',
+  enabled = true,
+  event = { 'VeryLazy' },
+  cmd = { 'Telescope' },
   dependencies = {
     { 'nvim-lua/plenary.nvim' },
     {
@@ -12,15 +14,8 @@ return {
         return vim.fn.executable('make') == 1
       end,
     },
-    -- {
-    --   'nvim-telescope/telescope-smart-history.nvim',
-    --   dependencies = {
-    --     'kkharji/sqlite.lua',
-    --   },
-    -- },
     { 'nvim-telescope/telescope-ui-select.nvim' },
     { 'nvim-telescope/telescope-symbols.nvim' },
-    { 'nvim-telescope/telescope-frecency.nvim' },
     { 'nvim-tree/nvim-web-devicons' },
     { 'barrett-ruth/telescope-http.nvim' },
   },
@@ -29,9 +24,6 @@ return {
       extensions = {
         wrap_results = true,
         fzf = {},
-        history = {
-          path = vim.fn.stdpath('data') .. '/telescope_history.sqlite3',
-        },
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
         },
@@ -40,9 +32,7 @@ return {
 
     -- Enable telescope extensions, if they are installed
     pcall(require('telescope').load_extension, 'fzf')
-    -- pcall(require('telescope').load_extension, 'smart_history')
     pcall(require('telescope').load_extension, 'ui-select')
-    pcall(require('telescope').load_extension, 'frecency')
     pcall(require('telescope').load_extension, 'http')
 
     -- See `:help telescope.builtin`

@@ -1,5 +1,11 @@
+-- https://github.com/gbprod/yanky.nvim
+--
+-- The aim of yanky.nvim is to improve yank and put functionalities for Neovim
+
 return {
   'gbprod/yanky.nvim',
+  enabled = true,
+  event = 'VimEnter',
   dependencies = {
     'kkharji/sqlite.lua',
   },

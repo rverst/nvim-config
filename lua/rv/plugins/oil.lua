@@ -4,6 +4,8 @@
 return {
   {
     'stevearc/oil.nvim',
+    enabled = true,
+    cmd = 'Oil',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {
       columns = {

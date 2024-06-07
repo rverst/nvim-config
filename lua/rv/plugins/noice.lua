@@ -1,11 +1,16 @@
-local plugin = {
+-- https://github.com/folke/noice.nvim
+--
+-- Noice (Nice, Noise, Notice)
+
+return {
   'folke/noice.nvim',
+  enabled = true,
+  event = 'VimEnter',
   dependencies = {
     'MunifTanjim/nui.nvim',
     'rcarriga/nvim-notify',
     'nvim-telescope/telescope.nvim',
   },
-  event = 'VeryLazy',
   opts = {
     lsp = {
       -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -39,5 +44,3 @@ local plugin = {
     require('telescope').load_extension('noice')
   end,
 }
-
-return plugin

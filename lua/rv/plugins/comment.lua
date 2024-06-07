@@ -1,10 +1,10 @@
 -- https://github.com/numToStr/Comment.nvim
+--
 -- "gc" to comment visual regions/lines, "gb" for block comments...
 
-local plugin = {
+return {
   'numToStr/Comment.nvim',
-  lazy = false,
+  enabled = true,
+  event = { 'BufReadPre', 'BufNewFile' },
   opts = {},
 }
-
-return plugin

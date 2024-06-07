@@ -1,5 +1,12 @@
-local plugin = {
+-- https://github.com/neovim/nvim-lspconfig
+--
+-- Quickstart configs for Nvim LSP
+
+return {
   'neovim/nvim-lspconfig',
+  enabled = true,
+  event = { 'BufReadPre', 'BufNewFile' },
+  cmd = 'Mason',
   dependencies = {
     'folke/neodev.nvim',
     'williamboman/mason.nvim',
@@ -173,5 +180,3 @@ local plugin = {
     })
   end,
 }
-
-return plugin

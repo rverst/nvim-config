@@ -1,10 +1,12 @@
 -- https://github.com/zbirenbaum/copilot.lua
+--
 -- This plugin is the pure lua replacement for github/copilot.vim.
 
 return {
   'zbirenbaum/copilot.lua',
   cmd = 'Copilot',
-  event = 'InsertEnter',
+  enabled = true,
+  event = { 'InsertEnter' },
   opts = {
     enabled = true,
     suggestion = {

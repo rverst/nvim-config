@@ -1,5 +1,11 @@
-local plugin = { 
+-- https://github.com/lewis6991/gitsigns.nvim
+--
+-- Super fast git decorations implemented purely in Lua
+
+return {
   'lewis6991/gitsigns.nvim',
+  enabled = true,
+  event = { 'BufReadPre', 'BufNewFile' },
   opts = {
     signs = {
       add = { text = '+' },
@@ -10,5 +16,3 @@ local plugin = {
     },
   },
 }
-
-return plugin

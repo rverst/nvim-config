@@ -1,5 +1,14 @@
-local plugin = {
+-- https://github.com/nvim-treesitter/nvim-treesitter
+--
+-- The goal of nvim-treesitter is both to provide a simple
+-- and easy way to use the interface for tree-sitter in Neovim
+-- and to provide some basic functionality such as highlighting based on it
+
+return {
   'nvim-treesitter/nvim-treesitter',
+  enabled = true,
+  event = { 'BufReadPre', 'BufNewFile' },
+  cmd = { 'TSInstallInfo', 'TSInstall' },
   build = ':TSUpdate',
   config = function()
     -- [[ Configure Treesitter  See `:help nvim-treesitter`
@@ -33,5 +42,3 @@ local plugin = {
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   end,
 }
-
-return plugin

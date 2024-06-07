@@ -1,8 +1,11 @@
 -- https://github.com/stevearc/conform.nvim
+--
 -- Lightweight yet powerful formatter plugin for Neovim
 
 return {
   'stevearc/conform.nvim',
+  enabled = true,
+  event = { 'BufReadPre', 'BufNewFile' },
   opts = {
     notify_on_error = false,
     format_on_save = function(bufnr)

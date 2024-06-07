@@ -5,6 +5,8 @@
 
 local plugin = {
   'wintermute-cell/gitignore.nvim',
+  enabled = true,
+  event = { 'BufReadPre', 'BufNewFile' },
   config = function()
     local gitignore = require('gitignore')
 

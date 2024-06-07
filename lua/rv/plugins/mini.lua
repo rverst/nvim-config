@@ -1,5 +1,12 @@
-local plugin = {
+-- https://github.com/echasnovski/mini.nvim
+--
+-- Library of 40+ independent Lua modules improving overall Neovim
+-- (version 0.8 and higher) experience with minimal effort.
+
+return {
   'echasnovski/mini.nvim',
+  enabled = true,
+  event = { 'BufReadPre', 'BufNewFile' },
   config = function()
     -- Better Around/Inside textobjects
     --
@@ -17,5 +24,3 @@ local plugin = {
     require('mini.surround').setup()
   end,
 }
-
-return plugin

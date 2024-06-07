@@ -6,7 +6,7 @@ scheme['catppuccin'] = {
   priority = 1000,
   config = function()
     require('catppuccin').setup({
-      flavour = 'latte',
+      flavour = 'mocha',
     })
 
     vim.cmd.colorscheme('catppuccin')
@@ -42,4 +42,4 @@ scheme['tokionight'] = {
   end,
 }
 
-return scheme['everforest']
+return scheme['catppuccin']

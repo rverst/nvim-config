@@ -1,12 +1,13 @@
-local plugin = {
+return {
   'nvim-lualine/lualine.nvim',
+  enabled = true,
+  event = { 'VimEnter' },
   dependencies = {
     'nvim-tree/nvim-web-devicons',
     { 'letieu/harpoon-lualine', dependencies = {
       { 'ThePrimeagen/harpoon', branch = 'harpoon2' },
     } },
   },
-  event = 'VeryLazy',
   init = function()
     --   vim.g.lualine_laststatus = vim.o.laststatus
     --   if vim.fn.argc(-1) > 0 then
@@ -21,5 +22,3 @@ local plugin = {
     require('rv.config.lualine')
   end,
 }
-
-return plugin

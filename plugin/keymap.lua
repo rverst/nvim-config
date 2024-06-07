@@ -4,6 +4,12 @@ local utils = require('rv.utils')
 -- Clear search highlights by pressing <ESC> in normal mode
 set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- Quick intdenting or outdenting
+set('n', '<TAB>', '>>', { desc = 'Indent line' })
+set('n', '<S-TAB>', '<<', { desc = 'Outdent line' })
+set('v', '<TAB>', '<S->>gv', { desc = 'Indent selection' })
+set('v', '<S-TAB>', '<S-<>gv', { desc = 'Outdent selection' })
+
 -- Shortcuts to source a line or the entire file
 set('n', '<leader>X', '<cmd>.lua<CR>', { desc = 'Execute the current line' })
 set('n', '<leader>x', function()

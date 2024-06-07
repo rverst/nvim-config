@@ -1,5 +1,11 @@
-local plugin = {
+-- https://github.com/onsails/diaglist.nvim
+--
+-- Live-updating Neovim LSP diagnostics in quickfix and loclist
+
+return {
   'onsails/diaglist.nvim',
+  enabled = true,
+  event = { 'BufReadPre', 'BufNewFile' },
   config = function()
     local diaglist = require('diaglist')
 
@@ -12,5 +18,3 @@ local plugin = {
     -- vim.keymap.set('n', '<leader>db', diaglist.open_buffer_diagnostics(), { desc = 'LSP: [B]uffer diagnostics' })
   end,
 }
-
-return plugin

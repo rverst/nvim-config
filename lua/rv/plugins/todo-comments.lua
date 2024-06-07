@@ -10,6 +10,8 @@
 
 local plugin = {
   'folke/todo-comments.nvim',
+  enabled = true,
+  event = { 'BufReadPre', 'BufNewFile' },
   dependencies = { 'nvim-lua/plenary.nvim' },
   config = function()
     local todo = require('todo-comments')

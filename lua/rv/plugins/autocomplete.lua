@@ -1,6 +1,12 @@
-local plugin = {
+-- https://github.com/hrsh7th/nvim-cmp
+--
+-- A completion engine plugin for neovim written in Lua. Completion sources
+-- are installed from external repositories and "sourced".
+
+return {
   'hrsh7th/nvim-cmp',
-  lazy = false,
+  enabled = true,
+  event = { 'BufReadPre', 'BufNewFile' },
   priority = 100,
   dependencies = {
     'hrsh7th/cmp-nvim-lsp',
@@ -143,5 +149,3 @@ local plugin = {
     })
   end,
 }
-
-return plugin

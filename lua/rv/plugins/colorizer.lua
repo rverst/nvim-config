@@ -5,8 +5,10 @@
 --
 -- This plugin colorizes color codes in files, e.g. #c75646, #8eb33b, #4e90a7
 
-local plugin = {
+return {
   'norcalli/nvim-colorizer.lua',
+  enabled = true,
+  cmd = { 'ColorizerToggle', 'ColorizerAttachToBuffer' },
   config = function()
     require('colorizer').setup({
       filetypes = {
@@ -16,10 +18,8 @@ local plugin = {
         'html',
       },
     })
-
+  end,
+  init = function()
     vim.keymap.set('n', '<leader>uc', ':ColorizerToggle<cr>', { desc = 'Toggle Colorizer', silent = true })
   end,
 }
-
-return plugin
-

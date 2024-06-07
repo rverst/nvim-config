@@ -3,6 +3,8 @@
 return {
   'ThePrimeagen/harpoon',
   branch = 'harpoon2',
+  enabled = true,
+  event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
     'nvim-telescope/telescope.nvim',
   },
