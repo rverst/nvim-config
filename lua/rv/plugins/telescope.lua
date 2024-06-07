@@ -37,8 +37,7 @@ return {
 
     -- See `:help telescope.builtin`
     local builtin = require('telescope.builtin')
-    vim.keymap.set('n', '<leader>fF', builtin.find_files, { desc = 'Find Files' })
-    vim.keymap.set('n', '<leader>ff', '<cmd>Telescope frecency workspace=CWD<cr>', { desc = 'Find Files (frecency)' })
+    vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Find Files' })
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Find Help' })
     vim.keymap.set('n', '<leader>fi', builtin.symbols, { desc = 'Find Icons' })
     vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Find Keymaps' })

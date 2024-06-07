@@ -15,6 +15,17 @@ return {
     panel = {
       enabled = false,
     },
+    filetypes = {
+      yaml = true,
+      markdown = true,
+      help = true,
+      gitcommit = false,
+      gitrebase = false,
+      hgcommit = false,
+      svn = false,
+      cvs = false,
+      ['.'] = false,
+    },
   },
   init = function()
     vim.g.copilot_enabled = true
