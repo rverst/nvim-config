@@ -57,11 +57,11 @@ return {
 
     dashboard.section.buttons.val = {
       dashboard.button('e', '  > New file', ':ene <BAR> startinsert <CR>'),
-      dashboard.button('f', '  > Find file', ':Telescope find_files<CR>'),
+      dashboard.button('f', '  > Find file', ':Telescope find_files<CR>'),
       dashboard.button('r', '  > Recent', ':Telescope oldfiles<CR>'),
       dashboard.button('s', '  > Settings', ':e $MYVIMRC | :cd %:p:h | Neotree<CR> | wincmd l'),
-      dashboard.button('l', '  > Lazy', ':Lazy update<CR>'),
-      dashboard.button('q', '  > Quit NVIM', ':qa<CR>'),
+      dashboard.button('l', '󰒲  > Lazy', ':Lazy update<CR>'),
+      dashboard.button('q', '⏻  > Quit NVIM', ':qa<CR>'),
     }
 
     vim.api.nvim_create_autocmd('User', {
