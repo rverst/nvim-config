@@ -16,9 +16,7 @@ return {
     'onsails/lspkind.nvim',
     'JMarkin/cmp-diag-codes',
     'SergioRibera/cmp-dotenv',
-
     'saadparwaiz1/cmp_luasnip',
-
     'zbirenbaum/copilot-cmp',
     {
       'L3MON4D3/LuaSnip',
@@ -59,6 +57,7 @@ return {
         },
       },
       formatting = {
+        expandable_indicator = true,
         fields = { 'kind', 'abbr', 'menu' },
         format = function(entry, vim_item)
           -- local kind_icons = {
