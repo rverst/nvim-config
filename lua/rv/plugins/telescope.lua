@@ -39,6 +39,7 @@ return {
     local builtin = require('telescope.builtin')
     vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Find Files' })
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Find Help' })
+    vim.keymap.set('n', '<leader>fH', builtin.highlights, { desc = 'Find Help' })
     vim.keymap.set('n', '<leader>fi', builtin.symbols, { desc = 'Find Icons' })
     vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Find Keymaps' })
     vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = 'Find Select Telescope' })

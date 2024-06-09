@@ -8,9 +8,6 @@ return {
   config = function()
     local alpha = require('alpha')
 
-    local v = vim.version()
-    local version = '  v' .. v.major .. '.' .. v.minor .. '.' .. v.patch
-
     vim.api.nvim_set_hl(0, 'AlphaNeovimLogoBlue', { fg = '#7EABF9' })
     vim.api.nvim_set_hl(0, 'AlphaNeovimLogoGreen', { fg = '#9CDF97' })
     vim.api.nvim_set_hl(0, 'AlphaNeovimLogoGreenFBlueB', { fg = '#9CDF97', bg = '#7EABF9' })
@@ -32,7 +29,7 @@ return {
       [[████      ████]],
       [[ ███       ███ ]],
       [[                  ]],
-      '      ' .. version,
+      [[]],
     }
     dashboard.section.header.val = logo
 
@@ -51,12 +48,10 @@ return {
     { { "AlphaNeovimLogoBlue", 0, 13 }, { "AlphaNeovimLogoGreen", 20, 36 },       { "AlphaNeovimLogoGreenFBlueB", 35, 37 }, { "AlphaNeovimLogoBlue", 37, 49 }, },
     { { "AlphaNeovimLogoBlue", 0, 13 }, { "AlphaNeovimLogoGreen", 21, 37 },       { "AlphaNeovimLogoGreenFBlueB", 36, 37 }, { "AlphaNeovimLogoBlue", 37, 49 }, },
     { { "AlphaNeovimLogoBlue", 1, 13 }, { "AlphaNeovimLogoGreen", 20, 35 },       { "AlphaNeovimLogoBlue", 37, 48 }, },
-    {},
-    { { "AlphaNeovimLogoGreen", 0, 9 }, { "AlphaNeovimLogoBlue", 9, 18 }, },
   }
 
     dashboard.section.buttons.val = {
-      dashboard.button('e', '  > New file', ':ene <BAR> startinsert <CR>'),
+      dashboard.button('n', '  > New file', ':ene<CR>'),
       dashboard.button('f', '  > Find file', ':Telescope find_files<CR>'),
       dashboard.button('r', '  > Recent', ':Telescope oldfiles<CR>'),
       dashboard.button('s', '  > Settings', ':e $MYVIMRC | :cd %:p:h | Neotree<CR> | wincmd l'),
@@ -67,6 +62,8 @@ return {
     vim.api.nvim_create_autocmd('User', {
       pattern = 'LazyVimStarted',
       callback = function()
+        local v = vim.version()
+        local version = v.major .. '.' .. v.minor .. '.' .. v.patch
         local stats = require('lazy').stats()
         local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
         dashboard.section.footer.val = {
@@ -74,19 +71,35 @@ return {
           '',
           '',
           '',
-          '',
-          '⚡ Neovim loaded ' .. stats.count .. ' plugins in ' .. ms .. 'ms',
+          ' v' .. version .. ' loaded ' .. stats.count .. ' plugins in ' .. ms .. 'ms',
+        }
+
+        local statsOffset = 19
+        local statsLen = string.len(stats.count) + statsOffset
+        local timeOffset = statsLen + 12
+        local timeLen = string.len(ms) + timeOffset
+        dashboard.section.footer.opts.hl = {
+          { { '@comment', 0, 80 } },
+          { { '@comment', 0, 80 } },
+          { { '@comment', 0, 80 } },
+          { { '@comment', 0, 80 } },
+          {
+            { 'AlphaNeovimLogoGreen', 0, 1 },
+            { 'AlphaNeovimLogoBlue', 1, 11 },
+            { '@comment', 11, statsOffset },
+            { 'Normal', statsOffset, statsLen },
+            { '@comment', statsLen, timeOffset },
+            { 'Normal', timeOffset, timeLen },
+            { '@comment', timeLen, timeLen + 2 },
+          },
         }
         pcall(vim.cmd.AlphaRedraw)
       end,
     })
 
-    dashboard.section.footer.val = {}
-
-    dashboard.section.footer.opts.hl = 'Type'
-    dashboard.section.buttons.opts.hl = 'Keyword'
-
+    dashboard.section.footer.opts.hl = '@comment'
     dashboard.opts.opts.noautocmd = true
+
     alpha.setup(dashboard.opts)
   end,
 }
