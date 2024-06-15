@@ -30,6 +30,11 @@ opt.shada = { "'10", '<0', 's10', 'h' }
 -- Keep signcolumn on by default
 opt.signcolumn = 'yes'
 
+opt.tabstop = 4
+opt.softtabstop = 4
+opt.shiftwidth = 4
+opt.expandtab = true
+
 -- Decrease update time
 opt.updatetime = 250
 opt.timeoutlen = 300
@@ -42,7 +47,7 @@ opt.splitbelow = true
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 opt.list = true
-opt.listchars = { tab = '» ', trail = '·', nbsp = '␣', precedes = '←', extends = '→' }
+opt.listchars = { tab = '› ', trail = '·', nbsp = '␣', precedes = '←', extends = '→' }
 
 -- Preview substitutions live, as you type!
 opt.inccommand = 'split'
@@ -67,3 +72,24 @@ opt.textwidth = 120
 
 -- Use global statusline
 opt.laststatus = 3
+
+-- Diagnostic configuration
+vim.diagnostic.config({
+  virtual_text = {
+    spacing = 10,
+    prefix = '◌',
+  },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '',
+      [vim.diagnostic.severity.WARN] = '⚠️',
+      [vim.diagnostic.severity.HINT] = '󰛩',
+      [vim.diagnostic.severity.INFO] = '',
+    },
+    linehl = {},
+    numhl = {
+      [vim.diagnostic.severity.WARN] = 'WarningMsg',
+      [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+    },
+  },
+})
