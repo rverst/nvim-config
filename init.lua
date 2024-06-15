@@ -25,13 +25,10 @@ end
 ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
-  -- Set up lazy and load the plugins from ./lua/plugins/...
-  -- Config for plugins might live in ./lua/rv/config/...
-  -- for easy reloading of the configuration (source %)
-require('lazy').setup(
-  { import = 'rv.plugins' },
-  { change_detection = { notify = false } }
-)
+-- Set up lazy and load the plugins from ./lua/plugins/...
+-- Config for plugins might live in ./lua/rv/config/...
+-- for easy reloading of the configuration (source %)
+require('lazy').setup({ import = 'rv.plugins' }, { change_detection = { notify = false } })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
