@@ -6,7 +6,7 @@ require('nightfox').setup({
     styles = {
       comments = 'italic',
       conditionals = 'italic',
-      -- constants
+      constants = 'italic',
       -- functions
       -- keywords
       -- numbers
@@ -19,11 +19,11 @@ require('nightfox').setup({
   },
   palettes = {
     nightfox = {
-      bg0 = '#1d2021',
-      bg1 = '#282828',
-      bg2 = '#3c3836',
-      bg3 = '#505c54',
-      fg = '#f7f7f7',
+      bg0 = '#151515',
+      bg1 = '#181818',
+      bg2 = '#252525',
+      bg3 = '#303030',
+      fg = '#d3d3d3',
       red = '#c75646',
       red2 = '#cc241d',
       green = '#8eb33b',
@@ -42,28 +42,28 @@ require('nightfox').setup({
     nightfox = {
       syntax = {
         bracket = 'fg', -- Brackets and Punctuation
-        --builtin0     -- Builtin variable
-        --builtin1 = 'blue.bright', -- Builtin type
-        --builtin2     -- Builtin const
+        builtin0 = 'red2', -- Builtin variable
+        builtin1 = 'yellow', -- Builtin type
+        builtin2 = 'blue.bright', -- Builtin const
         --comment      -- Comment
         conditional = 'red', -- Conditional and loop
-        const = 'magenta', -- Constants, imports and booleans
+        const = 'red', -- Constants, imports and booleans
         --dep          -- Deprecated
-        --field        -- Field
-        func = 'blue.bright', -- Functions and Titles
-        --ident        -- Identifiers
+        field = 'red', -- Field
+        func = 'fg', -- Functions and Titles
+        ident = 'yellow', -- Identifiers
         keyword = 'red', -- Keywords
         number = 'purple', -- Numbers
         operator = 'fg', -- Operators
-        --preproc      -- PreProc
+        preproc = 'red',
         regex = 'yellow', -- Regex
         statement = 'pink', -- Statements
-        string = 'aqua', -- Strings
+        string = 'green', -- Strings
         type = 'orange', -- Types
         variable = 'fg', -- Variables
       },
       git = {
-        add = 'green.dim',
+        add = 'green',
         changed = 'blue.dim',
       },
       diag = {
@@ -81,6 +81,8 @@ require('nightfox').setup({
   groups = {
     all = {
       NeoTreeGitUntracked = { fg = 'palette.orange' },
+      ['@module'] = { fg = 'palette.fg' },
+      ['@variable.member'] = { fg = 'palette.blue' },
     },
   },
 })
