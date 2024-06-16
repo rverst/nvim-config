@@ -55,7 +55,7 @@ return {
         winblend = 30,
         previewer = false,
       }))
-    end, { desc = '[ ] Find existing buffers' })
+    end, { desc = 'Find existing buffers' })
 
     vim.keymap.set('n', '<leader>fn', function()
       builtin.find_files({ cwd = vim.fn.stdpath('config') })

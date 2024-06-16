@@ -10,8 +10,8 @@ vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 
 -- Disable some buildin plugins
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 
 -- Install `lazy.nvim` plugin manager
 -- See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -29,6 +29,3 @@ vim.opt.rtp:prepend(lazypath)
 -- Config for plugins might live in ./lua/rv/config/...
 -- for easy reloading of the configuration (source %)
 require('lazy').setup({ import = 'rv.plugins' }, { change_detection = { notify = false } })
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et

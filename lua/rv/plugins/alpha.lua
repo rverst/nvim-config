@@ -54,7 +54,8 @@ return {
       dashboard.button('n', '  > New file', ':ene<CR>'),
       dashboard.button('f', '  > Find file', ':Telescope find_files<CR>'),
       dashboard.button('r', '  > Recent', ':Telescope oldfiles<CR>'),
-      dashboard.button('s', '  > Settings', ':e $MYVIMRC | :cd %:p:h | Neotree<CR> | wincmd l'),
+      dashboard.button('s', '  > Sessions', ':SessionManager load_session<CR>'),
+      dashboard.button('c', '  > Config', ':e $MYVIMRC | :cd %:p:h | Neotree<CR> | wincmd l'),
       dashboard.button('l', '󰒲  > Lazy', ':Lazy update<CR>'),
       dashboard.button('q', '⏻  > Quit NVIM', ':qa<CR>'),
     }
