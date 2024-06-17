@@ -15,7 +15,7 @@ return {
 
       return {
         timeout_ms = 500,
-        lsp_fallback = true,
+        lsp_format = 'fallback',
       }
     end,
     formatters_by_ft = {
@@ -25,6 +25,7 @@ return {
       shell = { 'shfmt' },
       sh = { 'shfmt' },
       zsh = { 'shfmt' },
+
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
       --
