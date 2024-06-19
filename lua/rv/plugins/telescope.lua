@@ -17,7 +17,6 @@ return {
     { 'nvim-telescope/telescope-ui-select.nvim' },
     { 'nvim-telescope/telescope-symbols.nvim' },
     { 'nvim-tree/nvim-web-devicons' },
-    { 'barrett-ruth/telescope-http.nvim' },
   },
   config = function()
     require('telescope').setup({

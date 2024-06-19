@@ -8,21 +8,19 @@ return {
   event = { 'BufReadPre', 'BufNewFile' },
   cmd = 'Mason',
   dependencies = {
-    'folke/neodev.nvim',
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     { 'j-hui/fidget.nvim', opts = {} },
     'stevearc/conform.nvim',
     'b0o/SchemaStore.nvim',
+    'folke/neodev.nvim',
   },
   config = function()
-    require('neodev').setup({
-      -- library = {
-      --   plugins = { "nvim-dap-ui" },
-      --   types = true,
-      -- },
-    })
+    require('mason').setup()
+    require('mason-lspconfig').setup()
+
+    require('neodev').setup()
 
     local capabilities = nil
     if pcall(require, 'cmp_nvim_lsp') then
@@ -31,8 +29,49 @@ return {
 
     local lspconfig = require('lspconfig')
 
+    local border = {
+      { ' ', 'FloatBorder' },
+      { ' ', 'FloatBorder' },
+      { ' ', 'FloatBorder' },
+      { ' ', 'FloatBorder' },
+      { ' ', 'FloatBorder' },
+      { ' ', 'FloatBorder' },
+      { ' ', 'FloatBorder' },
+      { ' ', 'FloatBorder' },
+    }
+    local handlers = {
+      ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+      ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+    }
+    vim.diagnostic.config({
+      virtual_text = {
+        source = 'always', -- Or "if_many"
+      },
+      float = {
+        source = 'always', -- Or "if_many"
+      },
+    })
+
     local servers = {
-      bashls = true,
+      lua_ls = {
+        handlers = handlers,
+        settings = {
+          Lua = {
+            runtime = { version = 'LuaJIT' },
+            workspace = {
+              checkThirdParty = false,
+              library = {
+                '${3rd}/luv/library',
+                unpack(vim.api.nvim_get_runtime_file('', true)),
+              },
+            },
+            completion = {
+              callSnippet = 'Replace',
+            },
+            -- diagnostics = { disable = { 'missing-fields' } },
+          },
+        },
+      },
       gopls = {
         settings = {
           gopls = {
@@ -48,39 +87,12 @@ return {
           },
         },
       },
-      lua_ls = {
-        -- cmd = {...},
-        -- filetypes { ...},
-        -- capabilities = {},
-        settings = {
-          Lua = {
-            runtime = { version = 'LuaJIT' },
-            workspace = {
-              checkThirdParty = false,
-              -- Tells lua_ls where to find all the Lua files that you have loaded
-              -- for your neovim configuration.
-              library = {
-                '${3rd}/luv/library',
-                unpack(vim.api.nvim_get_runtime_file('', true)),
-              },
-              -- If lua_ls is really slow on your computer, you can try this instead:
-              -- library = { vim.env.VIMRUNTIME },
-            },
-            completion = {
-              callSnippet = 'Replace',
-            },
-            -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-            -- diagnostics = { disable = { 'missing-fields' } },
-          },
-        },
-      },
-      rust_analyzer = true,
-      svelte = true,
-      templ = true,
-      cssls = true,
-      tsserver = true,
-      bufls = true,
-
+      bashls = {},
+      svelte = {},
+      templ = {},
+      cssls = {},
+      tsserver = {},
+      bufls = {},
       jsonls = {
         settings = {
           json = {
@@ -89,7 +101,6 @@ return {
           },
         },
       },
-
       yamlls = {
         settings = {
           yaml = {
@@ -103,30 +114,7 @@ return {
       },
     }
 
-    local servers_to_install = vim.tbl_filter(function(key)
-      local t = servers[key]
-      if type(t) == 'table' then
-        return not t.manual_install
-      else
-        return t
-      end
-    end, vim.tbl_keys(servers))
-
-    require('mason').setup()
-    local ensure_installed = {
-      'stylua',
-      'lua_ls',
-      'delve',
-      -- "tailwind-language-server",
-    }
-
-    vim.list_extend(ensure_installed, servers_to_install)
-    require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
-
     for name, config in pairs(servers) do
-      if config == true then
-        config = {}
-      end
       config = vim.tbl_deep_extend('force', {}, {
         capabilities = capabilities,
       }, config)
@@ -134,12 +122,35 @@ return {
       lspconfig[name].setup(config)
     end
 
+    local signName = 'LspCAS'
+    local signGroup = 'LspCASGrp'
+    vim.fn.sign_define(signName, { text = '󰛩', texthl = 'LspDiagnosticsSignHint' })
+
+    local function code_action_listener()
+      vim.fn.sign_unplace(signGroup)
+      local context = { diagnostics = vim.lsp.diagnostic.get_line_diagnostics() }
+      local params = vim.lsp.util.make_range_params()
+      params.context = context
+      vim.lsp.buf_request(0, 'textDocument/codeAction', params, function(_, result, _, _)
+        if result == nil then
+          return
+        end
+        local line = vim.api.nvim_win_get_cursor(0)[1]
+        vim.fn.sign_place(0, signGroup, signName, '', { lnum = line, priority = 1000 })
+      end)
+    end
+
+    vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+      group = vim.api.nvim_create_augroup('code_action_sign', { clear = true }),
+      callback = code_action_listener,
+    })
+
     local disable_semantic_tokens = {
       lua = true,
     }
 
     vim.api.nvim_create_autocmd('LspAttach', {
-      group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+      group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
       callback = function(args)
         local bufnr = args.buf
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id), 'must have valid client')
