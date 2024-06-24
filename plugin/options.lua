@@ -30,10 +30,6 @@ opt.shada = { "'10", '<0', 's10', 'h' }
 -- Keep signcolumn on by default
 opt.signcolumn = 'yes'
 
-opt.tabstop = 8
-opt.softtabstop = 4
-opt.shiftwidth = 4
-
 -- Decrease update time
 opt.updatetime = 250
 opt.timeoutlen = 300

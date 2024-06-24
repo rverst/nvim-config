@@ -140,11 +140,6 @@ return {
       end)
     end
 
-    vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-      group = vim.api.nvim_create_augroup('code_action_sign', { clear = true }),
-      callback = code_action_listener,
-    })
-
     local disable_semantic_tokens = {
       lua = true,
     }
@@ -185,6 +180,13 @@ return {
           vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
             buffer = args.buf,
             callback = vim.lsp.buf.clear_references,
+          })
+        end
+
+        if client and client.server_capabilities.codeActionProvider then
+          vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+            buffer = args.buf,
+            callback = code_action_listener,
           })
         end
       end,
