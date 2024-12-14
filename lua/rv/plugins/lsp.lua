@@ -91,8 +91,8 @@ return {
       svelte = {},
       templ = {},
       cssls = {},
-      tsserver = {},
-      bufls = {},
+      ts_ls = {},
+      buf_ls = {},
       jsonls = {
         settings = {
           json = {
