@@ -33,5 +33,3 @@ vim.opt.rtp:prepend(lazypath)
 -- Config for plugins might live in ./lua/rv/config/...
 -- for easy reloading of the configuration (source %)
 require('lazy').setup({ import = 'rv.plugins' }, { change_detection = { notify = false } })
-
-vim.cmd('colorscheme tokyonight-moon')

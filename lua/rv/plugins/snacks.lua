@@ -6,7 +6,7 @@
 return {
   'folke/snacks.nvim',
   enabled = true,
-  priority = 1000,
+  priority = 9001,
   lazy = false,
   opts = {
     animate = { enabled = true },
