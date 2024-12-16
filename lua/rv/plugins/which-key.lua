@@ -7,7 +7,7 @@ return {
   enabled = true,
   event = 'VeryLazy',
   opts = {
-    preset = 'modern',
+    preset = 'helix',
   },
   keys = {
     {

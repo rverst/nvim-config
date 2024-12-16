@@ -1,18 +1,20 @@
 local set = vim.keymap.set
 local utils = require('rv.utils')
-local wk = require('which-key')
 
-wk.add({
-  { '<leader>c', group = '[C]ode', icon = '' },
-  { '<leader>d', group = '[D]ocument', icon = '' },
-  { '<leader>f', group = '[F]ind', icon = '󰍉' },
-  { '<leader>g', group = '[G]it', icon = '󰊢' },
-  { '<leader>h', group = '[H]arpoon', icon = '⇀' },
-  { '<leader>o', group = '[O]pen' },
-  { '<leader>r', group = '[R]ename' },
-  { '<leader>u', group = '[U]tils' },
-  { '<leader>w', group = '[W]orkspace' },
-})
+if not vim.g.vscode then
+  local wk = require('which-key')
+  wk.add({
+    { '<leader>c', group = '[C]ode', icon = '' },
+    { '<leader>d', group = '[D]ocument', icon = '' },
+    { '<leader>f', group = '[F]ind', icon = '󰍉' },
+    { '<leader>g', group = '[G]it', icon = '󰊢' },
+    { '<leader>h', group = '[H]arpoon', icon = '⇀' },
+    { '<leader>o', group = '[O]pen' },
+    { '<leader>r', group = '[R]ename' },
+    { '<leader>u', group = '[U]tils' },
+    { '<leader>w', group = '[W]orkspace' },
+  })
+end
 
 -- Clear search highlights by pressing <ESC> in normal mode
 set('n', '<Esc>', '<cmd>nohlsearch<CR>')

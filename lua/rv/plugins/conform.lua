@@ -53,10 +53,10 @@ return {
       desc = 'Re-enable autoformat-on-save',
     })
 
-    vim.keymap.set('n', '<leader>ua', function()
-      vim.g.disable_autoformat = not vim.g.disable_autoformat
-      vim.notify('Autoformat on save is ' .. (vim.g.disable_autoformat and 'disabled' or 'enabled'))
-    end, { desc = 'Toggle Autoformat on save', silent = true })
+    -- vim.keymap.set('n', '<leader>ua', function()
+    --   vim.g.disable_autoformat = not vim.g.disable_autoformat
+    --   vim.notify('Autoformat on save is ' .. (vim.g.disable_autoformat and 'disabled' or 'enabled'))
+    -- end, { desc = 'Toggle Autoformat on save', silent = true })
 
     vim.keymap.set('n', '<leader>cf', function()
       require('conform').format({

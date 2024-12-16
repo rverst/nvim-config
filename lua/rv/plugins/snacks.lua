@@ -20,13 +20,19 @@ return {
         { section = 'startup' },
       },
     },
+    debug = { enabled = true },
     git = { enabled = true },
     gitbrowse = { enabled = true },
     indent = { enabled = true },
     input = { enabled = true },
+    notifier = {
+      margin = { top = 1, right = 1, bottom = 0}
+    },
+    notify = { enabled = true },
     lazygit = { enabled = true },
     profiler = { enabled = true },
     quickfile = { enabled = true },
+    scope = { enabled = true },
     scroll = { enabled = true },
     statuscolumn = { enabled = true },
     toggle = { enabled = true },
@@ -82,6 +88,7 @@ return {
           Snacks.debug.backtrace()
         end
         vim.print = _G.dd -- Override print to use snacks for `:=` command
+        
 
         -- Create some toggle mappings
         Snacks.toggle.option('spell', { name = 'Spelling' }):map('<leader>us')
@@ -97,6 +104,56 @@ return {
         Snacks.toggle.inlay_hints():map('<leader>uh')
         Snacks.toggle.indent():map('<leader>ug')
         Snacks.toggle.dim():map('<leader>uD')
+
+        Snacks.toggle.new({
+          id = "colorizer",
+          name = "Colorizer",
+          get = function()
+            if pcall(function() require('colorizer').get_buffer_options(0) end) then
+              return true
+            else
+              return false
+          end
+          end,
+          set = function(state)
+            if state then
+              vim.cmd("ColorizerAttachToBuffer")
+            else
+              vim.cmd("ColorizerDetachFromBuffer")
+            end
+          end,
+        }):map('<leader>uc')
+
+        -- Copilot initially enabled
+        vim.g.copilot_enabled = true
+        Snacks.toggle.new({
+          id = "copilot",
+          name = "Copilot",
+          get = function()
+            local clients = vim.lsp.get_clients({ name = 'copilot' })
+            return #clients > 0
+          end,
+          set = function(state)
+            vim.g.copilot_enabled = state
+            if state then
+              vim.cmd('Copilot enable')
+            else
+              vim.cmd('Copilot disable')
+            end
+          end,
+        }):map('<leader>up')
+
+        Snacks.toggle.new({
+          id = "autoformat_on_save",
+          name = "Autoformat on Save",
+          get = function()
+            return not vim.g.disable_autoformat
+          end,
+          set = function(state)
+            vim.g.disable_autoformat = not state
+          end,
+        }):map('<leader>ua')
+
       end,
     })
   end,

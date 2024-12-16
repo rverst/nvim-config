@@ -19,7 +19,4 @@ return {
       },
     })
   end,
-  init = function()
-    vim.keymap.set('n', '<leader>uc', ':ColorizerToggle<cr>', { desc = 'Toggle Colorizer', silent = true })
-  end,
 }
