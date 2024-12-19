@@ -14,12 +14,20 @@ return {
     { 'j-hui/fidget.nvim', opts = {} },
     'stevearc/conform.nvim',
     'b0o/SchemaStore.nvim',
-    'folke/neodev.nvim',
+    {
+      'folke/lazydev.nvim',
+      ft = 'lua',
+      opts = {
+        library = {
+          path = '${3rd}/luv/library',
+          words = { 'vim%.uv' },
+        },
+      },
+    },
   },
   config = function()
     require('mason').setup()
     require('mason-lspconfig').setup()
-    require('neodev').setup()
 
     local lspconfig = require('lspconfig')
 

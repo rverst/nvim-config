@@ -23,7 +23,7 @@ return {
         auto_show = true,
       },
       ghost_text = {
-        enabled = true,
+        enabled = false,
       },
     },
 
@@ -49,9 +49,14 @@ return {
             return items
           end,
         },
+        lsp = { fallback_for = { 'lazydev' } },
+        lazydev = {
+          name = 'LazyDev',
+          module = 'lazydev.integrations.blink',
+        },
       },
       completion = {
-        enabled_providers = { 'lsp', 'path', 'snippets', 'buffer', 'copilot' },
+        enabled_providers = { 'lsp', 'path', 'snippets', 'buffer', 'copilot', 'lazydev' },
       },
     },
 
