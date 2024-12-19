@@ -19,13 +19,7 @@ return {
   config = function()
     require('mason').setup()
     require('mason-lspconfig').setup()
-
     require('neodev').setup()
-
-    local capabilities = nil
-    if pcall(require, 'cmp_nvim_lsp') then
-      capabilities = require('cmp_nvim_lsp').default_capabilities()
-    end
 
     local lspconfig = require('lspconfig')
 
@@ -115,10 +109,10 @@ return {
     }
 
     for name, config in pairs(servers) do
-      config = vim.tbl_deep_extend('force', {}, {
-        capabilities = capabilities,
-      }, config)
-
+      local ok, cmp = pcall(require, 'blink.cmp')
+      if ok then
+        config.capabilities = cmp.get_lsp_capabilities(config.capabilities)
+      end
       lspconfig[name].setup(config)
     end
 

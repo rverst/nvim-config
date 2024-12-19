@@ -27,6 +27,7 @@ return {
       ['.'] = false,
     },
   },
+  -- Moved to snacks.lua
   -- init = function()
   --   vim.g.copilot_enabled = true
   --

@@ -5,7 +5,7 @@
 
 return {
   'hrsh7th/nvim-cmp',
-  enabled = true,
+  enabled = false,
   event = { 'BufReadPre', 'BufNewFile' },
   priority = 100,
   dependencies = {
