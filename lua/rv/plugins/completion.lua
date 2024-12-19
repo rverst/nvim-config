@@ -9,12 +9,29 @@ return {
   enabled = true,
   version = 'v0.*',
   opts = {
+
     keymap = {
       preset = 'default',
+      ['<C-Space>'] = { 'show', 'show_documentation', 'hide_documentation' },
       ['<Up>'] = { 'select_prev', 'fallback' },
       ['<Down>'] = { 'select_next', 'fallback' },
       ['<C-a>'] = { 'select_and_accept', 'fallback' },
     },
+
+    completion = {
+      documentation = {
+        auto_show = true,
+      },
+      ghost_text = {
+        enabled = true,
+      },
+    },
+
+    -- expretimental
+    signature = {
+      enabled = true,
+    },
+
     sources = {
       providers = {
         copilot = {
@@ -37,9 +54,7 @@ return {
         enabled_providers = { 'lsp', 'path', 'snippets', 'buffer', 'copilot' },
       },
     },
-    signature = {
-      enabled = true,
-    },
+
     appearance = {
       use_nvim_cmp_as_default = true,
       nerd_font_variant = 'mono',
@@ -78,4 +93,5 @@ return {
       },
     },
   },
+  opts_extend = { 'sources.completion.enabled_providers' },
 }
