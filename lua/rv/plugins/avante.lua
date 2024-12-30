@@ -10,7 +10,9 @@ return {
   opts = {
     provider = 'claude',
     auto_suggestions_provider = 'copilot',
-    file_selector = 'fzf',
+    file_selector = {
+      provider = 'fzf',
+    },
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
   build = 'make',
@@ -21,6 +23,7 @@ return {
     'MunifTanjim/nui.nvim',
     'nvim-tree/nvim-web-devicons',
     'zbirenbaum/copilot.lua',
+    { 'ibhagwan/fzf-lua', opts = {} },
     {
       -- support for image pasting
       'HakonHarnes/img-clip.nvim',
