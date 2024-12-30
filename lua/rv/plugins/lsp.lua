@@ -10,7 +10,6 @@ return {
   dependencies = {
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
-    'WhoIsSethDaniel/mason-tool-installer.nvim',
     { 'j-hui/fidget.nvim', opts = {} },
     'stevearc/conform.nvim',
     'b0o/SchemaStore.nvim',
@@ -27,7 +26,10 @@ return {
   },
   config = function()
     require('mason').setup()
-    require('mason-lspconfig').setup()
+    require('mason-lspconfig').setup({
+      ensure_installed = {},
+      automatic_installation = true,
+    })
 
     local lspconfig = require('lspconfig')
 
@@ -89,6 +91,7 @@ return {
           },
         },
       },
+      golangci_lint_ls = {},
       bashls = {},
       svelte = {},
       templ = {},

@@ -3,6 +3,7 @@
 return {
   'saghen/blink.cmp',
   dependencies = {
+    'saghen/blink.compat',
     'zbirenbaum/copilot.lua',
     'giuxtaposition/blink-cmp-copilot',
   },
@@ -33,11 +34,22 @@ return {
     },
 
     sources = {
+      default = {
+        'lsp',
+        'path',
+        'snippets',
+        'buffer',
+        'copilot',
+        'lazydev',
+        'avante_commands',
+        'avante_mentions',
+        'avante_files',
+      },
       providers = {
         copilot = {
           name = 'copilot',
           module = 'blink-cmp-copilot',
-          score_offset = 100,
+          score_offset = 80,
           async = true,
           transform_items = function(_, items)
             local CompletionItemKind = require('blink.cmp.types').CompletionItemKind
@@ -49,14 +61,29 @@ return {
             return items
           end,
         },
-        lsp = { fallback_for = { 'lazydev' } },
         lazydev = {
           name = 'LazyDev',
           module = 'lazydev.integrations.blink',
+          fallbacks = { 'lsp' },
         },
-      },
-      completion = {
-        enabled_providers = { 'lsp', 'path', 'snippets', 'buffer', 'copilot', 'lazydev' },
+        avante_commands = {
+          name = 'avante_commands',
+          module = 'blink.compat.source',
+          score_offset = 90,
+          opts = {},
+        },
+        avante_files = {
+          name = 'avante_files',
+          module = 'blink.compat.source',
+          score_offset = 100,
+          opts = {},
+        },
+        avante_mentions = {
+          name = 'avante_mentions',
+          module = 'blink.compat.source',
+          score_offset = 1000,
+          opts = {},
+        },
       },
     },
 
