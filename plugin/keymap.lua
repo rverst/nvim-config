@@ -4,14 +4,15 @@ local utils = require('rv.utils')
 if not vim.g.vscode then
   local wk = require('which-key')
   wk.add({
+    { '<leader>a', group = '[A]vante', icon = '󱜹' },
+    { '<leader>b', group = '[B]uffer', icon = '﬘' },
     { '<leader>c', group = '[C]ode', icon = '' },
-    { '<leader>d', group = '[D]ocument', icon = '' },
+    { '<leader>d', group = '[D]ocument', icon = '󰧮' },
     { '<leader>f', group = '[F]ind', icon = '󰍉' },
-    { '<leader>g', group = '[G]it', icon = '󰊢' },
+    { '<leader>g', group = '[G]it', icon = '' },
     { '<leader>h', group = '[H]arpoon', icon = '⇀' },
     { '<leader>o', group = '[O]pen' },
-    { '<leader>r', group = '[R]ename' },
-    { '<leader>u', group = '[U]tils' },
+    { '<leader>u', group = '[U]tils', icon = '' },
     { '<leader>w', group = '[W]orkspace' },
   })
 end
