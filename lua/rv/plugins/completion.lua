@@ -3,9 +3,10 @@
 return {
   'saghen/blink.cmp',
   dependencies = {
-    'saghen/blink.compat',
+    { 'saghen/blink.compat', version = '*', lazy = true, opts = {} },
     'zbirenbaum/copilot.lua',
     'giuxtaposition/blink-cmp-copilot',
+    'moyiz/blink-emoji.nvim',
   },
   enabled = true,
   version = 'v0.*',
@@ -43,7 +44,8 @@ return {
         'lazydev',
         'avante_commands',
         'avante_mentions',
-        'avante_files',
+        -- 'avante_files',
+        'emoji',
       },
       providers = {
         copilot = {
@@ -72,17 +74,22 @@ return {
           score_offset = 90,
           opts = {},
         },
-        avante_files = {
-          name = 'avante_files',
-          module = 'blink.compat.source',
-          score_offset = 100,
-          opts = {},
-        },
+        -- avante_files = {
+        --   name = 'avante_files',
+        --   module = 'blink.compat.source',
+        --   score_offset = 100,
+        --   opts = {},
+        -- },
         avante_mentions = {
           name = 'avante_mentions',
           module = 'blink.compat.source',
           score_offset = 1000,
           opts = {},
+        },
+        emoji = {
+          module = 'blink-emoji',
+          name = 'Emoji',
+          score_offset = 85,
         },
       },
     },
