@@ -106,6 +106,7 @@ return {
           },
         },
       },
+      vacuum = {},
       yamlls = {
         settings = {
           yaml = {
