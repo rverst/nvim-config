@@ -57,6 +57,33 @@ return {
     })
 
     local servers = {
+      bashls = {},
+      buf_ls = {},
+      cssls = {},
+      gopls = {
+        settings = {
+          gopls = {
+            hints = {
+              assignVariableTypes = true,
+              compositeLiteralFields = true,
+              compositeLiteralTypes = true,
+              constantValues = true,
+              functionTypeParameters = true,
+              parameterNames = true,
+              rangeVariableTypes = true,
+            },
+          },
+        },
+      },
+      golangci_lint_ls = {},
+      jsonls = {
+        settings = {
+          json = {
+            schemas = require('schemastore').json.schemas(),
+            validate = { enable = true },
+          },
+        },
+      },
       lua_ls = {
         handlers = handlers,
         settings = {
@@ -76,36 +103,10 @@ return {
           },
         },
       },
-      gopls = {
-        settings = {
-          gopls = {
-            hints = {
-              assignVariableTypes = true,
-              compositeLiteralFields = true,
-              compositeLiteralTypes = true,
-              constantValues = true,
-              functionTypeParameters = true,
-              parameterNames = true,
-              rangeVariableTypes = true,
-            },
-          },
-        },
-      },
-      golangci_lint_ls = {},
-      bashls = {},
+      pylsp = {},
       svelte = {},
       templ = {},
-      cssls = {},
       ts_ls = {},
-      buf_ls = {},
-      jsonls = {
-        settings = {
-          json = {
-            schemas = require('schemastore').json.schemas(),
-            validate = { enable = true },
-          },
-        },
-      },
       vacuum = {},
       yamlls = {
         settings = {
