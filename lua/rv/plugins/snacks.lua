@@ -3,6 +3,10 @@
 -- A collection of small QoL plugins for Neovim.
 
 -- stylua: ignore
+
+local v = vim.version()
+local version = string.format('v%d.%d.%d', v.major, v.minor, v.patch)
+
 return {
   'folke/snacks.nvim',
   enabled = true,
@@ -12,11 +16,34 @@ return {
     animate = { enabled = true },
     bigfile = { enabled = true },
     dashboard = {
+      preset = {
+        header = [[
+███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
+████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
+██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
+██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
+██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
+╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
+                                           ]] .. version,
+      },
       sections = {
         { section = 'header' },
         { icon = ' ', title = 'Keymaps', section = 'keys', indent = 2, padding = 1 },
         { icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
         { icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
+        {
+          icon = ' ',
+          title = 'Git Status',
+          section = 'terminal',
+          enabled = function()
+            return Snacks.git.get_root() ~= nil
+          end,
+          cmd = 'git status --short --branch --renames',
+          height = 5,
+          padding = 1,
+          ttl = 5 * 60,
+          indent = 3,
+        },
         { section = 'startup' },
       },
     },
@@ -26,7 +53,7 @@ return {
     indent = { enabled = true },
     input = { enabled = true },
     notifier = {
-      margin = { top = 1, right = 1, bottom = 0}
+      margin = { top = 1, right = 1, bottom = 0 },
     },
     notify = { enabled = true },
     lazygit = { enabled = true },
@@ -40,41 +67,145 @@ return {
     zen = { enabled = true },
   },
   keys = {
-    { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
-    { "<leader>Z",  function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
-    { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
-    { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
-    { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
-    { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
-    { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
-    { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse" },
-    { "<leader>gb", function() Snacks.git.blame_line() end, desc = "Git Blame Line" },
-    { "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Lazygit Current File History" },
-    { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
-    { "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit Log (cwd)" },
-    { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
-    { "<c-/>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
-    { "<c-_>",      function() Snacks.terminal() end, desc = "which_key_ignore" },
-    { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
-    { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
     {
-      "<leader>N",
-      desc = "Neovim News",
+      '<leader>z',
+      function()
+        Snacks.zen()
+      end,
+      desc = 'Toggle Zen Mode',
+    },
+    {
+      '<leader>Z',
+      function()
+        Snacks.zen.zoom()
+      end,
+      desc = 'Toggle Zoom',
+    },
+    {
+      '<leader>.',
+      function()
+        Snacks.scratch()
+      end,
+      desc = 'Toggle Scratch Buffer',
+    },
+    {
+      '<leader>S',
+      function()
+        Snacks.scratch.select()
+      end,
+      desc = 'Select Scratch Buffer',
+    },
+    {
+      '<leader>n',
+      function()
+        Snacks.notifier.show_history()
+      end,
+      desc = 'Notification History',
+    },
+    {
+      '<leader>bd',
+      function()
+        Snacks.bufdelete()
+      end,
+      desc = 'Delete Buffer',
+    },
+    {
+      '<leader>cR',
+      function()
+        Snacks.rename.rename_file()
+      end,
+      desc = 'Rename File',
+    },
+    {
+      '<leader>gB',
+      function()
+        Snacks.gitbrowse()
+      end,
+      desc = 'Git Browse',
+    },
+    {
+      '<leader>gb',
+      function()
+        Snacks.git.blame_line()
+      end,
+      desc = 'Git Blame Line',
+    },
+    {
+      '<leader>gf',
+      function()
+        Snacks.lazygit.log_file()
+      end,
+      desc = 'Lazygit Current File History',
+    },
+    {
+      '<leader>gg',
+      function()
+        Snacks.lazygit()
+      end,
+      desc = 'Lazygit',
+    },
+    {
+      '<leader>gl',
+      function()
+        Snacks.lazygit.log()
+      end,
+      desc = 'Lazygit Log (cwd)',
+    },
+    {
+      '<leader>un',
+      function()
+        Snacks.notifier.hide()
+      end,
+      desc = 'Dismiss All Notifications',
+    },
+    {
+      '<c-/>',
+      function()
+        Snacks.terminal()
+      end,
+      desc = 'Toggle Terminal',
+    },
+    {
+      '<c-_>',
+      function()
+        Snacks.terminal()
+      end,
+      desc = 'which_key_ignore',
+    },
+    {
+      ']]',
+      function()
+        Snacks.words.jump(vim.v.count1)
+      end,
+      desc = 'Next Reference',
+      mode = { 'n', 't' },
+    },
+    {
+      '[[',
+      function()
+        Snacks.words.jump(-vim.v.count1)
+      end,
+      desc = 'Prev Reference',
+      mode = { 'n', 't' },
+    },
+    {
+      '<leader>N',
+      desc = 'Neovim News',
       function()
         Snacks.win({
-          file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
+          file = vim.api.nvim_get_runtime_file('doc/news.txt', false)[1],
           width = 0.8,
           height = 0.6,
           wo = {
             spell = false,
             wrap = false,
-            signcolumn = "yes",
-            statuscolumn = " ",
+            signcolumn = 'yes',
+            statuscolumn = ' ',
             conceallevel = 3,
           },
         })
       end,
-    }
+    },
   },
   init = function()
     vim.api.nvim_create_autocmd('User', {
@@ -106,55 +237,62 @@ return {
         Snacks.toggle.indent():map('<leader>ug')
         Snacks.toggle.dim():map('<leader>uD')
 
-        Snacks.toggle.new({
-          id = "colorizer",
-          name = "Colorizer",
-          get = function()
-            if pcall(function() require('colorizer').get_buffer_options(0) end) then
-              return true
-            else
-              return false
-          end
-          end,
-          set = function(state)
-            if state then
-              vim.cmd("ColorizerAttachToBuffer")
-            else
-              vim.cmd("ColorizerDetachFromBuffer")
-            end
-          end,
-        }):map('<leader>uc')
+        Snacks.toggle
+          .new({
+            id = 'colorizer',
+            name = 'Colorizer',
+            get = function()
+              if pcall(function()
+                require('colorizer').get_buffer_options(0)
+              end) then
+                return true
+              else
+                return false
+              end
+            end,
+            set = function(state)
+              if state then
+                vim.cmd('ColorizerAttachToBuffer')
+              else
+                vim.cmd('ColorizerDetachFromBuffer')
+              end
+            end,
+          })
+          :map('<leader>uc')
 
         -- Copilot initially enabled
         vim.g.copilot_enabled = true
-        Snacks.toggle.new({
-          id = "copilot",
-          name = "Copilot",
-          get = function()
-            local clients = vim.lsp.get_clients({ name = 'copilot' })
-            return #clients > 0
-          end,
-          set = function(state)
-            vim.g.copilot_enabled = state
-            if state then
-              vim.cmd('Copilot enable')
-            else
-              vim.cmd('Copilot disable')
-            end
-          end,
-        }):map('<leader>up')
+        Snacks.toggle
+          .new({
+            id = 'copilot',
+            name = 'Copilot',
+            get = function()
+              local clients = vim.lsp.get_clients({ name = 'copilot' })
+              return #clients > 0
+            end,
+            set = function(state)
+              vim.g.copilot_enabled = state
+              if state then
+                vim.cmd('Copilot enable')
+              else
+                vim.cmd('Copilot disable')
+              end
+            end,
+          })
+          :map('<leader>up')
 
-        Snacks.toggle.new({
-          id = "autoformat_on_save",
-          name = "Autoformat on Save",
-          get = function()
-            return not vim.g.disable_autoformat
-          end,
-          set = function(state)
-            vim.g.disable_autoformat = not state
-          end,
-        }):map('<leader>ua')
-
+        Snacks.toggle
+          .new({
+            id = 'autoformat_on_save',
+            name = 'Autoformat on Save',
+            get = function()
+              return not vim.g.disable_autoformat
+            end,
+            set = function(state)
+              vim.g.disable_autoformat = not state
+            end,
+          })
+          :map('<leader>ua')
       end,
     })
   end,
