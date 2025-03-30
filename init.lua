@@ -1,5 +1,6 @@
 -- init.lua
 -- This is the entry point of the configuration.
+-- Most of the configuration is done via runtimepath loading of lua files.
 --
 
 -- Set leader and localleader
@@ -12,10 +13,6 @@ vim.g.have_nerd_font = true
 -- Disable some buildin plugins
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
-
-if vim.g.vscode then
-  return
-end
 
 -- Install `lazy.nvim` plugin manager
 -- See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info

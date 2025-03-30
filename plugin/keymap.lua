@@ -2,7 +2,8 @@ local set = vim.keymap.set
 local utils = require('rv.utils')
 
 if not vim.g.vscode then
-  local wk = require('which-key')
+  local ok, wk = pcall(require, 'which-key')
+  if ok then
   wk.add({
     { '<leader>a', group = '[A]vante', icon = '󱜹' },
     { '<leader>b', group = '[B]uffer', icon = '﬘' },
@@ -15,6 +16,7 @@ if not vim.g.vscode then
     { '<leader>u', group = '[U]tils', icon = '' },
     { '<leader>w', group = '[W]orkspace' },
   })
+  end
 end
 
 -- Clear search highlights by pressing <ESC> in normal mode
