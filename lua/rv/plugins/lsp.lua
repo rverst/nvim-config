@@ -135,8 +135,8 @@ return {
 
     local function code_action_listener()
       vim.fn.sign_unplace(signGroup)
-      local context = { diagnostics = vim.lsp.diagnostic.get_line_diagnostics() }
-      local params = vim.lsp.util.make_range_params()
+      local context = { diagnostics = vim.diagnostic.get() }
+      local params = vim.lsp.util.make_range_params(0, 'utf-8')
       params.context = context
       vim.lsp.buf_request(0, 'textDocument/codeAction', params, function(_, result, _, _)
         if result == nil then
