@@ -10,6 +10,25 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  desc = 'Set filetype to gotmpl when detecting `{{` in an html file',
+  group = vim.api.nvim_create_augroup('rv-filetype-gotmpl', { clear = true }),
+  pattern = { '*.html', '*.htm' },
+  callback = function(ev)
+    -- Only proceed if the current filetype is html
+    if vim.bo[ev.buf].filetype ~= 'html' then
+      return
+    end
+    local lines = vim.api.nvim_buf_get_lines(ev.buf, 0, -1, false)
+    for _, line in ipairs(lines) do
+      if line:find('{{') then
+        vim.bo[ev.buf].filetype = 'gotmpl'
+        break
+      end
+    end
+  end,
+})
+
 vim.api.nvim_create_autocmd('LspProgress', {
   ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
   callback = function(ev)

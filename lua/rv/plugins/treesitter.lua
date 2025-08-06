@@ -26,6 +26,7 @@ return {
         'vim',
         'vimdoc',
         'go',
+        'gotmpl',
         'sql',
       },
       -- Autoinstall languages that are not installed

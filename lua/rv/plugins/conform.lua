@@ -21,7 +21,10 @@ return {
     formatters_by_ft = {
       lua = { 'stylua' },
       go = { 'gofumpt' },
-      javascript = { { 'prettierd', 'prettier' } },
+      javascript = { 'prettierd', 'prettier', stop_after_first = true },
+      html = { 'prettierd', 'prettier', stop_after_first = true },
+      json = { 'prettierd', 'prettier', stop_after_first = true },
+      css = { 'prettierd', 'prettier', stop_after_first = true },
       shell = { 'shfmt' },
       sh = { 'shfmt' },
       zsh = { 'shfmt' },

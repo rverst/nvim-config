@@ -7,9 +7,30 @@ return {
   event = 'VeryLazy',
   lazy = true,
   version = false, -- set this if you want to always pull the latest change
+  mode = 'legacy',
   opts = {
     provider = 'claude',
     auto_suggestions_provider = 'claude',
+    providers = {
+      claude = {
+        endpoint = 'https://api.anthropic.com',
+        model = 'claude-sonnet-4-20250514',
+        timeout = 30000, -- Timeout in milliseconds
+        extra_request_body = {
+          temperature = 0.75,
+          max_tokens = 20480,
+        },
+      },
+      openai = {
+        endpoint = 'https://api.openai.com',
+        model = 'gpt-4.1',
+        timeout = 30000, -- Timeout in milliseconds
+        extra_request_body = {
+          temperature = 0.75,
+          max_tokens = 20480,
+        },
+      },
+    },
     file_selector = {
       provider = 'fzf',
     },
