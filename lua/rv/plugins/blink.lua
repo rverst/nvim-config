@@ -9,7 +9,7 @@ return {
     'moyiz/blink-emoji.nvim',
   },
   enabled = true,
-  version = 'v0.*',
+  version = 'v1.*',
   opts = {
 
     keymap = {
@@ -42,8 +42,8 @@ return {
         'buffer',
         'copilot',
         'lazydev',
-        'avante_commands',
-        'avante_mentions',
+        -- 'avante_commands',
+        -- 'avante_mentions',
         -- 'avante_files',
         'emoji',
       },
@@ -67,24 +67,6 @@ return {
           name = 'LazyDev',
           module = 'lazydev.integrations.blink',
           fallbacks = { 'lsp' },
-        },
-        avante_commands = {
-          name = 'avante_commands',
-          module = 'blink.compat.source',
-          score_offset = 90,
-          opts = {},
-        },
-        -- avante_files = {
-        --   name = 'avante_files',
-        --   module = 'blink.compat.source',
-        --   score_offset = 100,
-        --   opts = {},
-        -- },
-        avante_mentions = {
-          name = 'avante_mentions',
-          module = 'blink.compat.source',
-          score_offset = 1000,
-          opts = {},
         },
         emoji = {
           module = 'blink-emoji',
