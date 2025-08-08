@@ -73,21 +73,13 @@ opt.laststatus = 3
 
 -- Diagnostic configuration
 vim.diagnostic.config({
-  virtual_text = {
-    spacing = 10,
-    prefix = '◌',
-  },
+  virtual_text = false, -- using `tiny-inline-diagnostics.nvim` for this
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = '',
       [vim.diagnostic.severity.WARN] = '󰈅',
       [vim.diagnostic.severity.HINT] = '󰩕',
       [vim.diagnostic.severity.INFO] = '',
-    },
-    linehl = {},
-    numhl = {
-      [vim.diagnostic.severity.WARN] = 'WarningMsg',
-      [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
     },
   },
 })

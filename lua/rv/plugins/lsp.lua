@@ -28,6 +28,7 @@ return {
     require('mason').setup()
     require('mason-lspconfig').setup({
       ensure_installed = {},
+      automatic_enable = false,
       automatic_installation = true,
     })
 
@@ -47,14 +48,6 @@ return {
       ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
       ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
     }
-    vim.diagnostic.config({
-      virtual_text = {
-        source = true,
-      },
-      float = {
-        source = 'if_many',
-      },
-    })
 
     local servers = {
       bashls = {},
