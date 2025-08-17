@@ -1,6 +1,6 @@
 return {
   'nvim-lualine/lualine.nvim',
-  enabled = true,
+  enabled = not vim.g.vscode,
   event = { 'VimEnter' },
   dependencies = {
     'nvim-tree/nvim-web-devicons',

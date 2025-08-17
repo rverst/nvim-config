@@ -6,7 +6,7 @@
 
 return {
   'rachartier/tiny-inline-diagnostic.nvim',
-  enabled = true,
+  enabled = not vim.g.vscode,
   event = 'VeryLazy',
   config = function()
     require('tiny-inline-diagnostic').setup({

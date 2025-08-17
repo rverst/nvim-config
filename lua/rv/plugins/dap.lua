@@ -4,7 +4,7 @@
 
 return {
   'mfussenegger/nvim-dap',
-  enabled = true,
+  enabled = not vim.g.vscode,
   event = { 'BufReadPost', 'BufNewFile' },
   dependencies = {
     'rcarriga/nvim-dap-ui',

@@ -3,7 +3,7 @@
 
 local plugin = {
   'dstein64/vim-startuptime',
-  enabled = true,
+  enabled = not vim.g.vscode,
   cmd = 'StartupTime',
   config = function()
     vim.g.startuptime_tries = 10

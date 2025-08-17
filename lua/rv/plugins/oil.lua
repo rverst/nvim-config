@@ -4,7 +4,7 @@
 return {
   {
     'stevearc/oil.nvim',
-    enabled = true,
+    enabled = not vim.g.vscode,
     cmd = 'Oil',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {

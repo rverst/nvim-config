@@ -4,7 +4,7 @@
 
 return {
   'folke/noice.nvim',
-  enabled = false,
+  enabled = not vim.g.vscode and false,
   event = 'VimEnter',
   dependencies = {
     'MunifTanjim/nui.nvim',

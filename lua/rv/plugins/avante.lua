@@ -4,6 +4,7 @@
 
 return {
   'yetone/avante.nvim',
+  enabled = not vim.g.vscode,
   event = 'VeryLazy',
   enabled = false,
   lazy = true,

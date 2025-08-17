@@ -3,8 +3,8 @@
 
 return {
   'goolord/alpha-nvim',
+  enabled = not vim.g.vscode and false,
   event = 'VimEnter',
-  enabled = false,
   config = function()
     local alpha = require('alpha')
 

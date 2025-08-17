@@ -7,7 +7,7 @@
 
 return {
   'norcalli/nvim-colorizer.lua',
-  enabled = true,
+  enabled = not vim.g.vscode,
   cmd = { 'ColorizerToggle', 'ColorizerAttachToBuffer' },
   config = function()
     require('colorizer').setup({

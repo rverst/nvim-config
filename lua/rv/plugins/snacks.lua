@@ -9,7 +9,7 @@ local version = string.format('v%d.%d.%d', v.major, v.minor, v.patch)
 
 return {
   'folke/snacks.nvim',
-  enabled = true,
+  enabled = not vim.g.vscode,
   priority = 9001,
   lazy = false,
   opts = {

@@ -4,7 +4,7 @@
 
 return {
   'stevearc/conform.nvim',
-  enabled = true,
+  enabled = not vim.g.vscode,
   event = { 'BufReadPre', 'BufNewFile' },
   opts = {
     notify_on_error = false,

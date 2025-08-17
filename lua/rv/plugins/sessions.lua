@@ -5,7 +5,7 @@
 
 local plugin = {
   'Shatur/neovim-session-manager',
-  enabled = true,
+  enabled = not vim.g.vscode,
   event = 'VimEnter',
   config = function()
     local path = require('plenary.path')

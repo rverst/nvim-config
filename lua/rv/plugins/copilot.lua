@@ -5,7 +5,7 @@
 return {
   'zbirenbaum/copilot.lua',
   cmd = 'Copilot',
-  enabled = true,
+  enabled = not vim.g.vscode,
   event = { 'InsertEnter' },
   opts = {
     enabled = true,
