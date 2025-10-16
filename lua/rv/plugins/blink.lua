@@ -17,7 +17,8 @@ return {
       ['<C-Space>'] = { 'show', 'show_documentation', 'hide_documentation' },
       ['<Up>'] = { 'select_prev', 'fallback' },
       ['<Down>'] = { 'select_next', 'fallback' },
-      ['<C-a>'] = { 'select_and_accept', 'fallback' },
+      -- ['<C-a>'] = { 'select_and_accept', 'fallback' },
+      ['<C-s>'] = { 'select_and_accept', 'fallback' },
     },
 
     completion = {
@@ -46,6 +47,9 @@ return {
         -- 'avante_mentions',
         -- 'avante_files',
         'emoji',
+      },
+      per_filetype = {
+        codecompanion = { 'codecompanion' },
       },
       providers = {
         copilot = {

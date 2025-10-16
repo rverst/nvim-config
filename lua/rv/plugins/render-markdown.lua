@@ -6,5 +6,5 @@ return {
     file_types = { 'markdown', 'Avante' },
     latex = { enabled = false },
   },
-  ft = { 'markdown', 'Avante' },
+  ft = { 'markdown', 'copdecompanion', 'Avante' },
 }
