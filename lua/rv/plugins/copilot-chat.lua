@@ -4,7 +4,7 @@
 return {
   {
     'CopilotC-Nvim/CopilotChat.nvim',
-    enabled = not vim.g.vscode,
+    enabled = false and not vim.g.vscode,
     dependencies = {
       { 'nvim-lua/plenary.nvim', branch = 'master' },
     },

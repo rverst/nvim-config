@@ -4,9 +4,10 @@
 
 return {
   'mason-org/mason-lspconfig.nvim',
-  enabled = true,
+  enabled = not vim.g.vscode,
   opts = {
     ensure_installed = {
+      'copilot',
       'gopls',
       'templ',
       'golangci_lint_ls',
