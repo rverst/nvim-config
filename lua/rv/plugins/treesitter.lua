@@ -1,48 +1,35 @@
 -- https://github.com/nvim-treesitter/nvim-treesitter
 --
--- The goal of nvim-treesitter is both to provide a simple
--- and easy way to use the interface for tree-sitter in Neovim
--- and to provide some basic functionality such as highlighting based on it
+-- Provides tree-sitter parser installation and queries for Neovim.
+-- NOTE: This uses the rewritten `main` branch (v1.x), required for Neovim 0.12+.
+-- The old `master` branch API (nvim-treesitter.configs.setup) is gone.
+-- Requires: tree-sitter-cli >= 0.26.1 (brew install tree-sitter), tar, curl, a C compiler.
+-- Highlighting is now handled by Neovim itself via vim.treesitter.start().
 
 return {
   'nvim-treesitter/nvim-treesitter',
-  enabled = true,
-  event = { 'BufReadPre', 'BufNewFile' },
-  cmd = { 'TSInstallInfo', 'TSInstall' },
+  branch = 'main',
+  lazy = false,
   build = ':TSUpdate',
   config = function()
-    -- [[ Configure Treesitter  See `:help nvim-treesitter`
+    require('nvim-treesitter').setup()
 
-    ---@diagnostic disable-next-line: missing-fields
-    require('nvim-treesitter.configs').setup({
-      ensure_installed = {
-        'bash',
-        'c',
-        'diff',
-        'regex',
-        'html',
-        'lua',
-        'markdown',
-        'markdown_inline',
-        'vim',
-        'vimdoc',
-        'go',
-        'gotmpl',
-        'sql',
-      },
-      -- Autoinstall languages that are not installed
-      auto_install = true,
-      highlight = { enable = true },
-      indent = {
-        enable = false,
-      },
+    -- Install parsers for languages we care about.
+    -- Highlighting, folding, etc. are Neovim built-ins — no module setup needed.
+    require('nvim-treesitter').install({
+      'bash',
+      'c',
+      'diff',
+      'regex',
+      'html',
+      'lua',
+      'markdown',
+      'markdown_inline',
+      'vim',
+      'vimdoc',
+      'go',
+      'gotmpl',
+      'sql',
     })
-
-    -- There are additional nvim-treesitter modules that you can use to interact
-    -- with nvim-treesitter. You should go explore a few and see what interests you:
-    --
-    --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-    --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-    --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   end,
 }
