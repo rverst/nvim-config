@@ -22,12 +22,29 @@ return {
       lua = { 'stylua' },
       go = { 'gofumpt' },
       javascript = { 'prettierd', 'prettier', stop_after_first = true },
+      javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+      typescript = { 'prettierd', 'prettier', stop_after_first = true },
+      typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
       html = { 'prettierd', 'prettier', stop_after_first = true },
       json = { 'prettierd', 'prettier', stop_after_first = true },
+      jsonc = { 'prettierd', 'prettier', stop_after_first = true },
       css = { 'prettierd', 'prettier', stop_after_first = true },
+      scss = { 'prettierd', 'prettier', stop_after_first = true },
+      yaml = { 'prettierd', 'prettier', stop_after_first = true },
+      markdown = { 'prettierd', 'prettier', stop_after_first = true },
       shell = { 'shfmt' },
       sh = { 'shfmt' },
       zsh = { 'shfmt' },
+      -- Protobuf
+      proto = { 'buf' },
+      -- Typst
+      typst = { 'typstyle' },
+      -- Python
+      python = { 'ruff_format' },
+      -- Rust (rustfmt via LSP fallback is preferred; explicit here for manual fmt)
+      rust = { 'rustfmt' },
+      -- PostgreSQL / SQL
+      sql = { 'pg_format' },
 
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
@@ -56,15 +73,10 @@ return {
       desc = 'Re-enable autoformat-on-save',
     })
 
-    -- vim.keymap.set('n', '<leader>ua', function()
-    --   vim.g.disable_autoformat = not vim.g.disable_autoformat
-    --   vim.notify('Autoformat on save is ' .. (vim.g.disable_autoformat and 'disabled' or 'enabled'))
-    -- end, { desc = 'Toggle Autoformat on save', silent = true })
-
     vim.keymap.set('n', '<leader>cf', function()
       require('conform').format({
         async = true,
-        lsp_fallback = true,
+        lsp_format = true,
       })
     end, { desc = 'Format buffer', silent = true })
   end,

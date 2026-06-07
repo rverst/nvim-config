@@ -5,7 +5,6 @@
 
 return {
   'echasnovski/mini.nvim',
-  enabled = true,
   event = { 'BufReadPre', 'BufNewFile' },
   config = function()
     -- Better Around/Inside textobjects
@@ -23,6 +22,8 @@ return {
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup()
 
-    require('mini.diff').setup()
+    if not vim.g.vscode then
+      require('mini.diff').setup()
+    end
   end,
 }

@@ -1,6 +1,7 @@
 -- https://github.com/zbirenbaum/copilot.lua
 --
--- This plugin is the pure lua replacement for github/copilot.vim.
+-- Pure Lua replacement for github/copilot.vim.
+-- Suggestions and panel are disabled — completions are handled by blink-cmp-copilot.
 
 return {
   'zbirenbaum/copilot.lua',
@@ -8,7 +9,6 @@ return {
   enabled = not vim.g.vscode,
   event = { 'InsertEnter' },
   opts = {
-    enabled = true,
     suggestion = {
       enabled = false,
     },
@@ -19,11 +19,8 @@ return {
       yaml = true,
       markdown = true,
       help = true,
-      gitcommit = false,
-      gitrebase = false,
-      hgcommit = false,
-      svn = false,
-      cvs = false,
+      gitcommit = true,
+      gitrebase = true,
       ['.'] = false,
     },
   },

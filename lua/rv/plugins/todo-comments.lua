@@ -1,12 +1,14 @@
+-- https://github.com/folke/todo-comments.nvim
 --
--- FIX: This is a test for a fix comment
--- TODO: This is a test for a todo comment
--- HACK: This is a test for a hack comment
--- WARN: This is a test for a warn comment
--- PERF: This is a test for a perf comment
--- NOTE: This is a test for a note comment
--- TEST: This is a test for a test comment
+-- Highlight and search TODO/FIXME/HACK/WARN/NOTE/TEST comments using ripgrep.
+-- Jump between comments with ]t / [t.
 --
+-- e.g.:
+-- TODO: this is a todo example
+-- WARN: this is a warning example
+-- PERF: this is a performance issue example
+-- NOTE: this is a note example
+-- TEST: this is a test example
 
 local plugin = {
   'folke/todo-comments.nvim',
@@ -17,7 +19,7 @@ local plugin = {
     local todo = require('todo-comments')
 
     todo.setup({
-      signs = true, -- show icons in the signs column
+      signs = not vim.g.vscode, -- show icons in the signs column
       sign_priority = 8, -- sign priority
       -- keywords recognized as todo comments
       keywords = {
@@ -27,12 +29,12 @@ local plugin = {
           alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' }, -- a set of other keywords that all map to this FIX keywords
           -- signs = false, -- configure signs for some keywords individually
         },
-        TODO = { icon = ' ', color = 'test' },
-        HACK = { icon = ' ', color = 'warning' },
-        WARN = { icon = ' ', color = 'warning', alt = { 'WARNING', 'XXX' } },
+        TODO = { icon = ' ', color = 'warning' },
+        HACK = { icon = ' ', color = 'error' },
+        WARN = { icon = ' ', color = 'error', alt = { 'WARNING', 'XXX' } },
         PERF = { icon = ' ', color = 'info', alt = { 'OPTIM', 'PERFORMANCE', 'OPTIMIZE' } },
         NOTE = { icon = ' ', color = 'hint', alt = { 'INFO' } },
-        TEST = { icon = '⏲ ', color = 'info', alt = { 'TESTING', 'PASSED', 'FAILED' } },
+        TEST = { icon = '⏲ ', color = 'test', alt = { 'TESTING', 'PASSED', 'FAILED' } },
       },
       gui_style = {
         fg = 'NONE', -- The gui style to use for the fg highlight group.
@@ -58,12 +60,12 @@ local plugin = {
       -- list of named colors where we try to extract the guifg from the
       -- list of highlight groups or use the hex color if hl not found as a fallback
       colors = {
-        error = { 'DiagnosticError', 'ErrorMsg', '#DC2626' },
-        warning = { 'DiagnosticWarn', 'WarningMsg', '#FBBF24' },
-        info = { 'DiagnosticInfo', '#2563EB' },
-        hint = { 'DiagnosticHint', '#10B981' },
-        default = { 'Identifier', '#7C3AED' },
-        test = { 'Identifier', '#FF00FF' },
+        error = { 'DiagnosticError', 'ErrorMsg', '#C75646' },
+        warning = { 'DiagnosticWarn', 'WarningMsg', '#D0B03C' },
+        info = { 'DiagnosticInfo', '#4E90A7' },
+        hint = { 'DiagnosticHint', '#8EB33B' },
+        default = { 'Identifier', '#77DFD8' },
+        test = { 'Identifier', '#FBB1F9' },
       },
       search = {
         command = 'rg',

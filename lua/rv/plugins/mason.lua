@@ -1,17 +1,46 @@
--- https://github.com/neovim/nvim-lspconfig
+-- https://github.com/mason-org/mason-lspconfig.nvim
 --
--- Quickstart configs for Nvim LSP
+-- LSP server installation (via Mason) and activation.
+-- Server configs are defined in lsp/ directories (nvim-lspconfig lsp/ or after/lsp/).
+-- Use vim.lsp.config() to override defaults, vim.lsp.enable() to activate.
 
 return {
   'mason-org/mason-lspconfig.nvim',
   enabled = not vim.g.vscode,
   opts = {
     ensure_installed = {
-      'copilot',
+      -- Go
       'gopls',
       'templ',
       'golangci_lint_ls',
+      -- Lua
       'lua_ls',
+      -- TypeScript / JavaScript
+      'vtsls',
+      -- Web
+      'html',
+      'cssls',
+      'jsonls',
+      'eslint',
+      -- Infrastructure
+      'dockerls',
+      'yamlls',
+      'helm_ls',
+      -- OpenAPI / Swagger
+      'vacuum',
+      -- Protobuf
+      'buf_ls',
+      -- Typst
+      'tinymist',
+      -- Python
+      'pyright',
+      'ruff',
+      -- Rust
+      'rust_analyzer',
+      -- GraphQL
+      'graphql',
+      -- PostgreSQL
+      'postgres_lsp',
     },
   },
   dependencies = {
@@ -19,9 +48,177 @@ return {
     { 'neovim/nvim-lspconfig' },
     { 'j-hui/fidget.nvim', opts = {} },
   },
-  init = function()
+  config = function(_, opts)
+    require('mason-lspconfig').setup(opts)
+
+    -- Configure servers that need non-default settings.
+    -- lspconfig ships defaults in lsp/<name>.lua; vim.lsp.config() merges/overrides.
+
+    vim.lsp.config('lua_ls', {
+      settings = {
+        Lua = {
+          runtime = { version = 'LuaJIT' },
+          workspace = { checkThirdParty = false },
+          telemetry = { enable = false },
+        },
+      },
+    })
+
+    vim.lsp.config('vtsls', {
+      settings = {
+        typescript = {
+          inlayHints = {
+            parameterNames = { enabled = 'literals' },
+            parameterTypes = { enabled = true },
+            variableTypes = { enabled = false },
+            propertyDeclarationTypes = { enabled = true },
+            functionLikeReturnTypes = { enabled = true },
+            enumMemberValues = { enabled = true },
+          },
+          updateImportsOnFileMove = { enabled = 'always' },
+          suggest = { completeFunctionCalls = true },
+        },
+        javascript = {
+          inlayHints = {
+            parameterNames = { enabled = 'literals' },
+            parameterTypes = { enabled = true },
+            variableTypes = { enabled = false },
+            propertyDeclarationTypes = { enabled = true },
+            functionLikeReturnTypes = { enabled = true },
+            enumMemberValues = { enabled = true },
+          },
+          updateImportsOnFileMove = { enabled = 'always' },
+          suggest = { completeFunctionCalls = true },
+        },
+        vtsls = {
+          enableMoveToFileCodeAction = true,
+          autoUseWorkspaceTsdk = true,
+          experimental = {
+            completion = { enableServerSideFuzzyMatch = true },
+          },
+        },
+      },
+    })
+
+    vim.lsp.config('yamlls', {
+      settings = {
+        yaml = {
+          keyOrdering = false,
+          format = { enable = true },
+          validate = true,
+          schemaStore = { enable = false, url = '' },
+          schemas = {
+            kubernetes = {
+              '*.k8s.yaml',
+              '*.k8s.yml',
+              'deploy/*.yaml',
+              'deploy/*.yml',
+              'k8s/**/*.yaml',
+              'k8s/**/*.yml',
+              'kubernetes/**/*.yaml',
+              'kubernetes/**/*.yml',
+            },
+            ['https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json'] = {
+              'docker-compose*.yaml',
+              'docker-compose*.yml',
+              'compose*.yaml',
+              'compose*.yml',
+            },
+            ['https://json.schemastore.org/github-workflow.json'] = {
+              '.github/workflows/*.yaml',
+              '.github/workflows/*.yml',
+            },
+            -- OpenAPI 3.0 / 3.1 (file-based; content-detected files get this via setlocal)
+            ['https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json'] = {
+              'openapi.yaml',
+              'openapi.yml',
+              '*-openapi.yaml',
+              '*-openapi.yml',
+              'swagger.yaml',
+              'swagger.yml',
+            },
+          },
+        },
+      },
+    })
+
+    vim.lsp.config('jsonls', {
+      settings = {
+        json = {
+          schemas = {
+            {
+              fileMatch = { 'openapi.json', '*-openapi.json', 'swagger.json' },
+              url = 'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json',
+            },
+          },
+          validate = { enable = true },
+        },
+      },
+    })
+
+    vim.lsp.config('helm_ls', {
+      settings = {
+        ['helm-ls'] = {
+          yamlls = { path = 'yaml-language-server' },
+        },
+      },
+    })
+
+    vim.lsp.config('tinymist', {
+      settings = {
+        exportPdf = 'never',
+        formatterMode = 'typstyle',
+      },
+    })
+
+    vim.lsp.config('pyright', {
+      settings = {
+        python = {
+          analysis = {
+            typeCheckingMode = 'standard',
+            autoImportCompletions = true,
+          },
+        },
+      },
+    })
+
+    -- ruff as LSP handles diagnostics and code actions (isort, fixes);
+    -- pyright handles type-checking and completions. Both run together.
+    vim.lsp.config('ruff', {
+      init_options = {
+        settings = {
+          lineLength = 120,
+        },
+      },
+    })
+
+    -- Enable all configured servers.
+    -- mason-lspconfig installs them; vim.lsp.enable() activates them for matching filetypes.
+    vim.lsp.enable({
+      'gopls',
+      'templ',
+      'golangci_lint_ls',
+      'lua_ls',
+      'vtsls',
+      'html',
+      'cssls',
+      'jsonls',
+      'eslint',
+      'dockerls',
+      'yamlls',
+      'helm_ls',
+      'buf_ls',
+      'tinymist',
+      'pyright',
+      'ruff',
+      'rust_analyzer',
+      'graphql',
+      'postgres_lsp',
+    })
+
+    -- LspAttach: buffer-local keymaps and behaviour on every LSP connection
     vim.api.nvim_create_autocmd('LspAttach', {
-      group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
+      group = vim.api.nvim_create_augroup('rv-lsp-attach', { clear = true }),
       callback = function(args)
         local bufnr = args.buf
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id), 'must have valid client')
@@ -43,39 +240,16 @@ return {
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
         if client and client.server_capabilities.documentHighlightProvider then
+          local hl_group = vim.api.nvim_create_augroup('rv-lsp-highlight-' .. bufnr, { clear = true })
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
             buffer = args.buf,
+            group = hl_group,
             callback = vim.lsp.buf.document_highlight,
           })
-
           vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
             buffer = args.buf,
+            group = hl_group,
             callback = vim.lsp.buf.clear_references,
-          })
-        end
-
-        local signName = 'LspCAS'
-        local signGroup = 'LspCASGrp'
-        vim.fn.sign_define(signName, { text = '󰛩', texthl = 'LspDiagnosticsSignHint' })
-
-        local function code_action_listener()
-          vim.fn.sign_unplace(signGroup)
-          local context = { diagnostics = vim.diagnostic.get() }
-          local range_params = vim.lsp.util.make_range_params(0, 'utf-8')
-          local params = vim.tbl_extend('force', range_params, { context = context })
-          vim.lsp.buf_request(0, 'textDocument/codeAction', params, function(_, result, _, _)
-            if result == nil then
-              return
-            end
-            local line = vim.api.nvim_win_get_cursor(0)[1]
-            vim.fn.sign_place(0, signGroup, signName, '', { lnum = line, priority = 1000 })
-          end)
-        end
-
-        if client and client.server_capabilities.codeActionProvider then
-          vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-            buffer = args.buf,
-            callback = code_action_listener,
           })
         end
       end,

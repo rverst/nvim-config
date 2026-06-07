@@ -1,8 +1,12 @@
--- Fuzzy Finder (files, lsp, etc)
+-- https://github.com/nvim-telescope/telescope.nvim
+--
+-- Highly extendable fuzzy finder. Used for files, grep, LSP symbols/references,
+-- diagnostics, keymaps, highlights, and more. Extensions: fzf-native, ui-select,
+-- symbols.
 
 return {
   'nvim-telescope/telescope.nvim',
-  enabled = true,
+  enabled = not vim.g.vscode,
   event = { 'VeryLazy' },
   cmd = { 'Telescope' },
   dependencies = {
@@ -19,9 +23,24 @@ return {
     { 'nvim-tree/nvim-web-devicons' },
   },
   config = function()
+    local actions = require('telescope.actions')
+    local send_to_qf = actions.send_to_qflist + actions.open_qflist
+
     require('telescope').setup({
-      extensions = {
+      defaults = {
         wrap_results = true,
+        mappings = {
+          i = {
+            ['<C-l>'] = send_to_qf, -- override complete_tag
+            ['<leader>q'] = send_to_qf,
+          },
+          n = {
+            ['<C-l>'] = send_to_qf,
+            ['<leader>q'] = send_to_qf,
+          },
+        },
+      },
+      extensions = {
         fzf = {},
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
@@ -32,13 +51,11 @@ return {
     -- Enable telescope extensions, if they are installed
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
-    pcall(require('telescope').load_extension, 'http')
-
     -- See `:help telescope.builtin`
     local builtin = require('telescope.builtin')
     vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Find Files' })
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Find Help' })
-    vim.keymap.set('n', '<leader>fH', builtin.highlights, { desc = 'Find Help' })
+    vim.keymap.set('n', '<leader>fH', builtin.highlights, { desc = 'Find Highlights' })
     vim.keymap.set('n', '<leader>fi', builtin.symbols, { desc = 'Find Icons' })
     vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Find Keymaps' })
     vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = 'Find Select Telescope' })

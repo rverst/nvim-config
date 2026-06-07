@@ -1,4 +1,9 @@
 -- https://github.com/saghen/blink.cmp
+--
+-- Performant, batteries-included completion plugin for Neovim.
+-- Integrates Copilot, LSP, snippets, path, buffer, and emoji sources.
+-- Configured with blink-cmp-copilot, blink-emoji, and lazydev support.
+-- Accept with <C-s>.
 
 return {
   'saghen/blink.cmp',
@@ -8,7 +13,7 @@ return {
     'giuxtaposition/blink-cmp-copilot',
     'moyiz/blink-emoji.nvim',
   },
-  enabled = true,
+  enabled = not vim.g.vscode,
   version = 'v1.*',
   opts = {
 
@@ -43,14 +48,9 @@ return {
         'buffer',
         'copilot',
         'lazydev',
-        -- 'avante_commands',
-        -- 'avante_mentions',
-        -- 'avante_files',
         'emoji',
       },
-      per_filetype = {
-        codecompanion = { 'codecompanion' },
-      },
+      per_filetype = {},
       providers = {
         copilot = {
           name = 'copilot',
@@ -84,7 +84,7 @@ return {
       use_nvim_cmp_as_default = true,
       nerd_font_variant = 'mono',
       kind_icons = {
-        Copilot = '',
+        Copilot = '',
         Text = '󰉿',
         Method = '󰊕',
         Function = '󰊕',
@@ -118,5 +118,5 @@ return {
       },
     },
   },
-  opts_extend = { 'sources.completion.enabled_providers' },
+  opts_extend = { 'sources.default' },
 }

@@ -149,9 +149,5 @@ return {
       },
       disabled_ft = {}, -- List of filetypes to disable the plugin
     })
-
-    vim.diagnostic.config({
-      virtual_text = false,
-    })
   end,
 }

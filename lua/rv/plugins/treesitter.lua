@@ -8,6 +8,7 @@
 
 return {
   'nvim-treesitter/nvim-treesitter',
+  enabled = not vim.g.vscode,
   branch = 'main',
   lazy = false,
   build = ':TSUpdate',
@@ -22,14 +23,41 @@ return {
       'diff',
       'regex',
       'html',
+      'css',
       'lua',
       'markdown',
       'markdown_inline',
       'vim',
       'vimdoc',
+      -- Go
       'go',
+      'gomod',
+      'gosum',
+      'gowork',
       'gotmpl',
+      -- TypeScript / JavaScript
+      'typescript',
+      'tsx',
+      'javascript',
+      'jsdoc',
+      -- Infrastructure
+      'dockerfile',
+      'yaml',
+      'toml',
+      'make',
+      'json',
+      -- DB
       'sql',
+      -- Protobuf
+      'proto',
+      -- Typst
+      'typst',
+      -- Python
+      'python',
+      -- Rust
+      'rust',
+      -- GraphQL
+      'graphql',
     })
   end,
 }

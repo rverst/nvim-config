@@ -48,7 +48,6 @@ opt.list = true
 opt.listchars = { tab = '› ', trail = '·', nbsp = '␣', precedes = '←', extends = '→' }
 
 -- Preview substitutions live, as you type!
-opt.inccommand = 'split'
 
 -- Show which line your cursor is on
 opt.cursorline = true

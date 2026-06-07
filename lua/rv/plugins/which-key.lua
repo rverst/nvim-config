@@ -4,7 +4,7 @@
 
 return {
   'folke/which-key.nvim',
-  enabled = true,
+  enabled = not vim.g.vscode,
   event = 'VeryLazy',
   opts = {
     preset = 'helix',

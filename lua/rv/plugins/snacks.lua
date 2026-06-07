@@ -2,8 +2,6 @@
 --
 -- A collection of small QoL plugins for Neovim.
 
--- stylua: ignore
-
 local v = vim.version()
 local version = string.format('v%d.%d.%d', v.major, v.minor, v.patch)
 
@@ -60,7 +58,7 @@ return {
     profiler = { enabled = true },
     quickfile = { enabled = true },
     scope = { enabled = true },
-    scroll = { enabled = true },
+    scroll = { enabled = false }, -- Neovim 0.12 has built-in smoothscroll (smoothscroll opt)
     statuscolumn = { enabled = true },
     toggle = { enabled = true },
     words = { enabled = true },
@@ -134,29 +132,6 @@ return {
         Snacks.toggle.indent():map('<leader>ug')
         Snacks.toggle.dim():map('<leader>uD')
 
-        Snacks.toggle
-          .new({
-            id = 'colorizer',
-            name = 'Colorizer',
-            get = function()
-              if pcall(function()
-                require('colorizer').get_buffer_options(0)
-              end) then
-                return true
-              else
-                return false
-              end
-            end,
-            set = function(state)
-              if state then
-                vim.cmd('ColorizerAttachToBuffer')
-              else
-                vim.cmd('ColorizerDetachFromBuffer')
-              end
-            end,
-          })
-          :map('<leader>uc')
-
         -- Copilot initially enabled
         vim.g.copilot_enabled = true
         Snacks.toggle
@@ -177,6 +152,19 @@ return {
             end,
           })
           :map('<leader>up')
+
+        Snacks.toggle
+          .new({
+            id = 'colorizer',
+            name = 'Colorizer',
+            get = function()
+              return require('colorizer').is_buffer_attached(0)
+            end,
+            set = function(_)
+              vim.cmd('ColorizerToggle')
+            end,
+          })
+          :map('<leader>uc')
 
         Snacks.toggle
           .new({

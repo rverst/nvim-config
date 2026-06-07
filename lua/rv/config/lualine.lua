@@ -8,7 +8,7 @@ require('lualine').setup({
     },
     ignore_focus = { 'neo-tree', 'TelescopePrompt' },
     component_separators = { left = '|', right = '|' },
-    section_separators = { left = '', right = '' },
+    section_separators = { left = '', right = '' },
     globalstatus = true,
   },
   sections = {
@@ -16,51 +16,39 @@ require('lualine').setup({
     lualine_b = { 'branch' },
 
     lualine_c = {
-      --Util.lualine.root_dir(),
       {
         'diagnostics',
         symbols = {
-          error = '  ',
+          error = ' ',
           warn = ' ',
-          info = ' ',
-          hint = '  ',
+          info = ' ',
+          hint = '󰩕 ',
         },
       },
       { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } },
       { 'filename', path = 1, separator = ' ' },
       { 'harpoon2' },
-      --{ Util.lualine.pretty_path() },
     },
     lualine_x = {
-            -- stylua: ignore
-            {
-              function() return require("noice").api.status.command.get() end,
-              cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-            --  color = Util.ui.fg("Statement"),
-            },
-            -- stylua: ignore
-            {
-              function() return require("noice").api.status.mode.get() end,
-              cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-              --color = Util.ui.fg("Constant"),
-            },
-            -- stylua: ignore
-            {
-              function() return "  " .. require("dap").status() end,
-              cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
-              --color = Util.ui.fg("Debug"),
-            },
+      -- stylua: ignore
       {
-        require('lazy.status').updates,
-        cond = require('lazy.status').has_updates,
-        --  color = Util.ui.fg('Special'),
+        function() return '  ' .. require('dap').status() end,
+        cond = function() return package.loaded['dap'] and require('dap').status() ~= '' end,
+      },
+      {
+        function()
+          return require('lazy.status').updates()
+        end,
+        cond = function()
+          return require('lazy.status').has_updates()
+        end,
       },
       {
         'diff',
         symbols = {
-          added = ' ',
-          modified = ' ',
-          removed = ' ',
+          added = ' ',
+          modified = '󰣕 ',
+          removed = ' ',
         },
         source = function()
           local gitsigns = vim.b.gitsigns_status_dict
@@ -86,7 +74,7 @@ require('lualine').setup({
         if vim.g.copilot_enabled then
           return '  ' .. os.date('%R')
         end
-        return '  ' .. os.date('%R')
+        return '  ' .. os.date('%R')
       end,
     },
   },

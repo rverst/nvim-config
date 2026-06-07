@@ -1,9 +1,13 @@
 -- https://github.com/ThePrimeagen/harpoon/tree/harpoon2
+--
+-- Fast file bookmarking and navigation. Mark up to 5 files per project
+-- and jump to them instantly via <leader>1-5. Telescope integration for
+-- fuzzy-browsing the mark list.
 
 return {
   'ThePrimeagen/harpoon',
+  enabled = not vim.g.vscode,
   branch = 'harpoon2',
-  enabled = true,
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
     'nvim-telescope/telescope.nvim',
@@ -27,7 +31,7 @@ return {
             results = file_paths,
           }),
           sorter = conf.file_sorter({}),
-          ireviewer = false,
+          previewer = false,
         })
         :find()
     end

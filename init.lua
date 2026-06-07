@@ -7,17 +7,30 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+local v = vim.version()
+
+-- check if the Neovim version is at least 0.12.0, otherwise notify the user and exit
+if vim.version.lt(v, { 0, 12, 0 }) then
+  local major, minor, patch = v.major, v.minor, v.patch
+  local version_str = string.format('%d.%d.%d', major, minor, patch)
+  vim.notify(
+    'Neovim 0.12.0 or higher is required for this configuration, you are running: ' .. version_str,
+    vim.log.levels.ERROR
+  )
+  return
+end
+
 -- expect a nerd font to be installed
 vim.g.have_nerd_font = true
 
--- Disable some buildin plugins
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
+-- Disable netrw (using oil.nvim / neo-tree instead)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- Install `lazy.nvim` plugin manager
 -- See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
   vim.fn.system({ 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath })
 end

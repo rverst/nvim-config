@@ -5,16 +5,15 @@ if not vim.g.vscode then
   local ok, wk = pcall(require, 'which-key')
   if ok then
     wk.add({
-      { '<leader>a', group = '[A]vante', icon = '󱜹' },
       { '<leader>b', group = '[B]uffer', icon = '﬘' },
-      { '<leader>c', group = '[C]ode', icon = '' },
-      { '<leader>d', group = '[D]ocument', icon = '󰧮' },
+      { '<leader>c', group = '[C]ode', icon = '󰅩' },
+      { '<leader>d', group = '[D]ebug', icon = '󰃤' },
       { '<leader>f', group = '[F]ind', icon = '󰍉' },
-      { '<leader>g', group = '[G]it', icon = '' },
+      { '<leader>g', group = '[G]it', icon = '󰊢' },
       { '<leader>h', group = '[H]arpoon', icon = '⇀' },
-      { '<leader>o', group = '[O]pen' },
-      { '<leader>u', group = '[U]tils', icon = '' },
-      { '<leader>w', group = '[W]orkspace' },
+      { '<leader>l', group = '[L]int', icon = '󰦕' },
+      { '<leader>u', group = '[U]tils', icon = '󰙵' },
+      { '<leader>w', group = '[W]orkspace', icon = '󰈺' },
     })
   end
 end
@@ -32,7 +31,7 @@ set('v', '<S-TAB>', '<S-<>gv', { desc = 'Outdent selection' })
 set('n', '<leader>X', '<cmd>.lua<CR>', { desc = 'Execute the current line' })
 set('n', '<leader>x', function()
   vim.cmd('source %')
-  vim.notify(vim.fn.expand('%:t'), 'info', { title = 'Sourced file' })
+  vim.notify(vim.fn.expand('%:t'), vim.log.levels.INFO, { title = 'Sourced file' })
 end, { desc = 'Source the current file', silent = true })
 
 -- Keybinds to make split navigation easier, use CTRL+<hjkl> to switch between windows
@@ -43,13 +42,32 @@ set('n', '<c-j>', '<c-w><c-j>', { desc = 'Move focus to the lower window' })
 set('n', '<c-k>', '<c-w><c-k>', { desc = 'Move focus to the upper window' })
 
 -- Diagnostic keymaps
--- '[d' and ']d' are now a default in neovim ^0.10.0 but i want the notice float
-set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+-- vim.diagnostic.goto_prev/next deprecated in 0.12; use vim.diagnostic.jump()
+set('n', '[d', function()
+  vim.diagnostic.jump({ count = -1 })
+end, { desc = 'Go to previous [D]iagnostic message' })
+set('n', ']d', function()
+  vim.diagnostic.jump({ count = 1 })
+end, { desc = 'Go to next [D]iagnostic message' })
 -- <F2> is the jetbrains default for this
-set('n', '<F2>', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+set('n', '<F2>', function()
+  vim.diagnostic.jump({ count = 1 })
+end, { desc = 'Go to next [D]iagnostic message' })
 set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+-- Quickfix list
+set('n', '<leader>q', function()
+  local wins = vim.fn.getwininfo()
+  for _, win in ipairs(wins) do
+    if win.quickfix == 1 then
+      vim.cmd('cclose')
+      return
+    end
+  end
+  vim.cmd('copen')
+end, { desc = 'Toggle [Q]uickfix list' })
+set('n', ']q', '<cmd>cnext<CR>zz', { desc = 'Next quickfix item' })
+set('n', '[q', '<cmd>cprev<CR>zz', { desc = 'Prev quickfix item' })
 
 -- Resize splits
 -- the options key on macOS results in different keycodes
@@ -99,5 +117,5 @@ end, { desc = 'Open help for the word under the cursor', silent = true })
 set('n', '<F4>', ':Neotree toggle reveal<CR>', { desc = 'Toggle Neo-Tree', silent = true })
 
 set('n', '<leader>uf', function()
-  vim.notify(vim.bo.filetype, 'info', { title = ' Filetype' })
+  vim.notify(vim.bo.filetype, vim.log.levels.INFO, { title = ' Filetype' })
 end, { desc = 'Show current filetype' })
