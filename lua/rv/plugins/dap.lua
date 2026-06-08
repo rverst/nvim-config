@@ -4,7 +4,7 @@
 
 return {
   'mfussenegger/nvim-dap',
-  enabled = not vim.g.vscode,
+  enabled = require('rv.utils').plugin_enabled({ vscode = false, minimal = false }),
   -- Signs must be defined immediately (before lazy-load) so breakpoints placed
   -- before the first debug session show the correct icon in the gutter.
   init = function()

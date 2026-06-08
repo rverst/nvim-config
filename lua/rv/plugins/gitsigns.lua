@@ -4,7 +4,7 @@
 
 return {
   'lewis6991/gitsigns.nvim',
-  enabled = not vim.g.vscode,
+  enabled = require('rv.utils').plugin_enabled({ vscode = false }),
   event = { 'BufReadPre', 'BufNewFile' },
   opts = {
     signs = {

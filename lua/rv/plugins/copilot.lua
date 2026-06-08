@@ -7,7 +7,7 @@
 return {
   'zbirenbaum/copilot.lua',
   cmd = 'Copilot',
-  enabled = not vim.g.vscode,
+  enabled = require('rv.utils').plugin_enabled({ vscode = false, minimal = false }),
   build = function()
     require('rv.utils').ensure_installed('node')
   end,

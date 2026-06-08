@@ -6,7 +6,7 @@
 
 return {
   'nvim-neo-tree/neo-tree.nvim',
-  enabled = not vim.g.vscode,
+  enabled = require('rv.utils').plugin_enabled({ vscode = false }),
   branch = 'v3.x',
   cmd = 'Neotree',
   dependencies = {

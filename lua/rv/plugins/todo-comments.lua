@@ -13,7 +13,7 @@
 
 local plugin = {
   'folke/todo-comments.nvim',
-  enabled = true,
+  enabled = require('rv.utils').plugin_enabled(),
   build = function()
     require('rv.utils').ensure_installed('ripgrep')
   end,

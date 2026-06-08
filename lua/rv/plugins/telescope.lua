@@ -7,7 +7,7 @@
 
 return {
   'nvim-telescope/telescope.nvim',
-  enabled = not vim.g.vscode,
+  enabled = require('rv.utils').plugin_enabled({ vscode = false }),
   build = function()
     require('rv.utils').ensure_installed('fzf')
   end,

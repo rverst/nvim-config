@@ -4,7 +4,7 @@
 
 return {
   'stevearc/conform.nvim',
-  enabled = not vim.g.vscode,
+  enabled = require('rv.utils').plugin_enabled({ vscode = false, minimal = false }),
   event = { 'BufReadPre', 'BufNewFile' },
   opts = {
     notify_on_error = false,

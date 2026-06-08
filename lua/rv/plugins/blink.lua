@@ -13,7 +13,7 @@ return {
     'giuxtaposition/blink-cmp-copilot',
     'moyiz/blink-emoji.nvim',
   },
-  enabled = not vim.g.vscode,
+  enabled = require('rv.utils').plugin_enabled({ vscode = false, minimal = false }),
   version = 'v1.*',
   opts = {
 

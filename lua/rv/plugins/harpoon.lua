@@ -6,7 +6,7 @@
 
 return {
   'ThePrimeagen/harpoon',
-  enabled = not vim.g.vscode,
+  enabled = require('rv.utils').plugin_enabled({ vscode = false }),
   branch = 'harpoon2',
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {

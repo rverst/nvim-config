@@ -23,6 +23,10 @@ end
 -- expect a nerd font to be installed
 vim.g.have_nerd_font = true
 
+-- Minimal mode: set NVIM_MINIMAL=1 to disable LSP, DAP, Copilot, formatters, etc.
+-- Useful on servers where only basic editing is needed.
+vim.g.minimal = vim.env.NVIM_MINIMAL == '1'
+
 -- Disable netrw (using oil.nvim / neo-tree instead)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1

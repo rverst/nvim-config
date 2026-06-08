@@ -8,7 +8,7 @@ local version = string.format('v%d.%d.%d', v.major, v.minor, v.patch)
 
 return {
   'folke/snacks.nvim',
-  enabled = not vim.g.vscode,
+  enabled = require('rv.utils').plugin_enabled({ vscode = false }),
   priority = 9001,
   lazy = false,
   build = function()
@@ -51,22 +51,22 @@ return {
     },
     debug = { enabled = true },
     git = { enabled = true },
-    gitbrowse = { enabled = true },
+    gitbrowse = { enabled = require('rv.utils').plugin_enabled({ vscode = false, minimal = false }) },
     indent = { enabled = true },
     input = { enabled = true },
     notifier = {
       margin = { top = 1, right = 1, bottom = 0 },
     },
     notify = { enabled = true },
-    lazygit = { enabled = true },
-    profiler = { enabled = true },
+    lazygit = { enabled = require('rv.utils').plugin_enabled({ vscode = false }) },
+    profiler = { enabled = require('rv.utils').plugin_enabled({ vscode = false, minimal = false }) },
     quickfile = { enabled = true },
     scope = { enabled = true },
     scroll = { enabled = false }, -- Neovim 0.12 has built-in smoothscroll (smoothscroll opt)
     statuscolumn = { enabled = true },
     toggle = { enabled = true },
     words = { enabled = true },
-    zen = { enabled = true },
+    zen = { enabled = require('rv.utils').plugin_enabled({ vscode = false, minimal = false }) },
   },
   -- stylua: ignore
   keys = {

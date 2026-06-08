@@ -5,7 +5,7 @@
 
 return {
   'tpope/vim-sleuth',
-  enabled = not vim.g.vscode,
+  enabled = require('rv.utils').plugin_enabled({ vscode = false }),
   event = 'BufRead',
   config = function()
     vim.g.sleuth_automatic = 1

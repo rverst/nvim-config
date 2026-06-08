@@ -5,7 +5,7 @@
 
 return {
   'folke/lazydev.nvim',
-  enabled = not vim.g.vscode,
+  enabled = require('rv.utils').plugin_enabled({ vscode = false, minimal = false }),
   ft = 'lua',
   opts = {
     library = {

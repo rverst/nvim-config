@@ -4,6 +4,28 @@ M.is_mac = function()
   return vim.uv.os_uname().sysname == 'Darwin'
 end
 
+--- Returns whether a plugin should be enabled in the current environment.
+--- Each flag represents an environment; false means "disabled in that environment".
+--- Omitted flags default to true (enabled everywhere).
+---
+--- @param opts? { vscode?: boolean, minimal?: boolean }
+--- @return boolean
+---
+--- Examples:
+---   plugin_enabled()                                   -- always enabled
+---   plugin_enabled({ vscode = false })                 -- disabled in VSCode
+---   plugin_enabled({ vscode = false, minimal = false }) -- disabled in VSCode + minimal mode
+M.plugin_enabled = function(opts)
+  opts = opts or {}
+  if opts.vscode == false and vim.g.vscode then
+    return false
+  end
+  if opts.minimal == false and vim.g.minimal then
+    return false
+  end
+  return true
+end
+
 --- Install one or more system packages via the OS package manager.
 --- Runs asynchronously — does not block Neovim startup.
 --- Intended to be called from a lazy.nvim build hook (runs only on plugin install/update).

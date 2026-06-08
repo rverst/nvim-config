@@ -5,7 +5,7 @@
 
 return {
   'Shatur/neovim-session-manager',
-  enabled = not vim.g.vscode,
+  enabled = require('rv.utils').plugin_enabled({ vscode = false, minimal = false }),
   event = 'VimEnter',
   dependencies = { 'nvim-lua/plenary.nvim' },
   config = function()

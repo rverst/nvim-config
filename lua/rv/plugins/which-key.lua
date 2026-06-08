@@ -4,7 +4,7 @@
 
 return {
   'folke/which-key.nvim',
-  enabled = not vim.g.vscode,
+  enabled = require('rv.utils').plugin_enabled({ vscode = false }),
   event = 'VeryLazy',
   opts = {
     preset = 'helix',

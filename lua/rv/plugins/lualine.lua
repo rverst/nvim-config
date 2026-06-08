@@ -5,7 +5,7 @@
 
 return {
   'nvim-lualine/lualine.nvim',
-  enabled = not vim.g.vscode,
+  enabled = require('rv.utils').plugin_enabled({ vscode = false }),
   event = { 'VimEnter' },
   dependencies = {
     'nvim-tree/nvim-web-devicons',

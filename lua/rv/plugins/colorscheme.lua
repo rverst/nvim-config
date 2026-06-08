@@ -7,7 +7,7 @@
 return {
   'catppuccin/nvim',
   name = 'catppuccin',
-  enabled = not vim.g.vscode,
+  enabled = require('rv.utils').plugin_enabled({ vscode = false }),
   priority = 1000,
   config = function()
     vim.cmd.colorscheme('catppuccin-mocha')

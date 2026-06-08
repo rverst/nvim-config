@@ -4,7 +4,7 @@
 return {
   {
     'stevearc/oil.nvim',
-    enabled = not vim.g.vscode,
+    enabled = require('rv.utils').plugin_enabled({ vscode = false }),
     cmd = 'Oil',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {

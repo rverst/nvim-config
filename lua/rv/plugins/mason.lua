@@ -6,7 +6,7 @@
 
 return {
   'mason-org/mason-lspconfig.nvim',
-  enabled = not vim.g.vscode,
+  enabled = require('rv.utils').plugin_enabled({ vscode = false, minimal = false }),
   opts = {
     ensure_installed = {
       -- Go

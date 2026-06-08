@@ -5,7 +5,7 @@
 
 return {
   'MeanderingProgrammer/render-markdown.nvim',
-  enabled = not vim.g.vscode,
+  enabled = require('rv.utils').plugin_enabled({ vscode = false }),
   ft = { 'markdown' },
   opts = {
     file_types = { 'markdown' },
