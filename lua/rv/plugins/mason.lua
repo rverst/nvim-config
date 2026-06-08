@@ -129,7 +129,7 @@ return {
               '.github/workflows/*.yml',
             },
             -- OpenAPI 3.0 / 3.1 (file-based; content-detected files get this via setlocal)
-            ['https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json'] = {
+            ['https://www.schemastore.org/openapi-3.X.json'] = {
               'openapi.yaml',
               'openapi.yml',
               '*-openapi.yaml',
@@ -148,7 +148,7 @@ return {
           schemas = {
             {
               fileMatch = { 'openapi.json', '*-openapi.json', 'swagger.json' },
-              url = 'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json',
+              url = 'https://www.schemastore.org/openapi-3.X.json',
             },
           },
           validate = { enable = true },
