@@ -12,7 +12,7 @@ return {
   branch = 'main',
   lazy = false,
   build = function()
-    require('rv.utils').ensure_installed('tree-sitter')
+    require('rv.utils').ensure_installed('tree-sitter-cli')
     vim.cmd('TSUpdate')
   end,
   config = function()
