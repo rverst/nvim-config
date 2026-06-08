@@ -3,7 +3,7 @@
 -- Provides tree-sitter parser installation and queries for Neovim.
 -- NOTE: This uses the rewritten `main` branch (v1.x), required for Neovim 0.12+.
 -- The old `master` branch API (nvim-treesitter.configs.setup) is gone.
--- Requires: tree-sitter-cli >= 0.26.1 (brew install tree-sitter), tar, curl, a C compiler.
+-- Requires: tree-sitter-cli >= 0.26.1 (auto-installed via brew on macOS), tar, curl, a C compiler.
 -- Highlighting is now handled by Neovim itself via vim.treesitter.start().
 
 return {
@@ -11,7 +11,10 @@ return {
   enabled = not vim.g.vscode,
   branch = 'main',
   lazy = false,
-  build = ':TSUpdate',
+  build = function()
+    require('rv.utils').ensure_installed('tree-sitter')
+    vim.cmd('TSUpdate')
+  end,
   config = function()
     require('nvim-treesitter').setup()
 

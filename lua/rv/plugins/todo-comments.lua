@@ -2,6 +2,7 @@
 --
 -- Highlight and search TODO/FIXME/HACK/WARN/NOTE/TEST comments using ripgrep.
 -- Jump between comments with ]t / [t.
+-- Requires: ripgrep / rg (auto-installed via brew on macOS)
 --
 -- e.g.:
 -- TODO: this is a todo example
@@ -13,6 +14,9 @@
 local plugin = {
   'folke/todo-comments.nvim',
   enabled = true,
+  build = function()
+    require('rv.utils').ensure_installed('ripgrep')
+  end,
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = { 'nvim-lua/plenary.nvim' },
   config = function()

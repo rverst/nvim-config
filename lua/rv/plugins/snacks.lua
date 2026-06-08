@@ -1,6 +1,7 @@
 -- https://github.com/folke/snacks.nvim
 --
 -- A collection of small QoL plugins for Neovim.
+-- Requires: lazygit (auto-installed via brew on macOS)
 
 local v = vim.version()
 local version = string.format('v%d.%d.%d', v.major, v.minor, v.patch)
@@ -10,6 +11,9 @@ return {
   enabled = not vim.g.vscode,
   priority = 9001,
   lazy = false,
+  build = function()
+    require('rv.utils').ensure_installed('lazygit')
+  end,
   opts = {
     animate = { enabled = true },
     bigfile = { enabled = true },

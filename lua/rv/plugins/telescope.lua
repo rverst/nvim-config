@@ -3,10 +3,14 @@
 -- Highly extendable fuzzy finder. Used for files, grep, LSP symbols/references,
 -- diagnostics, keymaps, highlights, and more. Extensions: fzf-native, ui-select,
 -- symbols.
+-- Requires: fzf (auto-installed via brew on macOS)
 
 return {
   'nvim-telescope/telescope.nvim',
   enabled = not vim.g.vscode,
+  build = function()
+    require('rv.utils').ensure_installed('fzf')
+  end,
   event = { 'VeryLazy' },
   cmd = { 'Telescope' },
   dependencies = {
