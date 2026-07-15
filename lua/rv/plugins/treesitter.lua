@@ -16,8 +16,6 @@ return {
     vim.cmd('TSUpdate')
   end,
   config = function()
-    require('nvim-treesitter').setup()
-
     -- Install parsers for languages we care about.
     -- Highlighting, folding, etc. are Neovim built-ins — no module setup needed.
     require('nvim-treesitter').install({
@@ -38,6 +36,11 @@ return {
       'gosum',
       'gowork',
       'gotmpl',
+      -- elixir / poenix
+      'elixir',
+      'eex',
+      'heex',
+      'surface',
       -- TypeScript / JavaScript
       'typescript',
       'tsx',
