@@ -41,6 +41,8 @@ return {
       'graphql',
       -- PostgreSQL
       'postgres_lsp',
+      -- Rechtschreibung (alle Filetypes) — Config: ~/.config/codebook/codebook.toml
+      'codebook',
     },
   },
   dependencies = {
@@ -214,6 +216,7 @@ return {
       'rust_analyzer',
       'graphql',
       'postgres_lsp',
+      'codebook',
     })
 
     -- LspAttach: buffer-local keymaps and behaviour on every LSP connection
