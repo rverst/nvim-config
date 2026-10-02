@@ -12,7 +12,7 @@ return {
     workspaces = {
       {
         name = 'work',
-        path = '~/Documents/notes/',
+        path = '~/Dev/notes/',
       },
     },
     -- Suppress the conceallevel warning; it's handled per-buffer via enter_note callback.
