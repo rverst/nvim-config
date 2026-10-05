@@ -43,6 +43,13 @@ return {
       'postgres_lsp',
       -- Rechtschreibung (alle Filetypes) — Config: ~/.config/codebook/codebook.toml
       'codebook',
+      -- GitHub Copilot (completions via blink-copilot)
+      'copilot',
+    },
+    -- mason-lspconfig v2 enables every installed server automatically (automatic_enable).
+    -- vacuum is installed only as a binary for nvim-lint, not as an LSP.
+    automatic_enable = {
+      exclude = { 'vacuum' },
     },
   },
   dependencies = {
@@ -194,31 +201,6 @@ return {
       },
     })
 
-    -- Enable all configured servers.
-    -- mason-lspconfig installs them; vim.lsp.enable() activates them for matching filetypes.
-    vim.lsp.enable({
-      'gopls',
-      'templ',
-      'golangci_lint_ls',
-      'lua_ls',
-      'vtsls',
-      'html',
-      'cssls',
-      'jsonls',
-      'eslint',
-      'dockerls',
-      'yamlls',
-      'helm_ls',
-      'buf_ls',
-      'tinymist',
-      'pyright',
-      'ruff',
-      'rust_analyzer',
-      'graphql',
-      'postgres_lsp',
-      'codebook',
-    })
-
     -- LspAttach: buffer-local keymaps and behaviour on every LSP connection
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('rv-lsp-attach', { clear = true }),
@@ -230,17 +212,10 @@ return {
           vim.keymap.set('n', keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
         end
 
-        vim.opt_local.omnifunc = 'v:lua.vim.lsp.omnifunc'
         map('gd', require('telescope.builtin').lsp_definitions, 'Goto Definition')
         map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
-        map('gr', require('telescope.builtin').lsp_references, 'Goto References')
-        map('gI', require('telescope.builtin').lsp_implementations, 'Goto Implementation')
-        map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type Definition')
         map('<leader>ds', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
         map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace Symbols')
-        map('<leader>cr', vim.lsp.buf.rename, 'Rename')
-        map('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
-        map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
         if client and client.server_capabilities.documentHighlightProvider then
           local hl_group = vim.api.nvim_create_augroup('rv-lsp-highlight-' .. bufnr, { clear = true })

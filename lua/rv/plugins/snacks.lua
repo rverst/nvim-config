@@ -57,7 +57,6 @@ return {
     notifier = {
       margin = { top = 1, right = 1, bottom = 0 },
     },
-    notify = { enabled = true },
     lazygit = { enabled = require('rv.utils').plugin_enabled({ vscode = false }) },
     profiler = { enabled = require('rv.utils').plugin_enabled({ vscode = false, minimal = false }) },
     quickfile = { enabled = true },
@@ -143,16 +142,11 @@ return {
             id = 'copilot',
             name = 'Copilot',
             get = function()
-              local clients = vim.lsp.get_clients({ name = 'copilot' })
-              return #clients > 0
+              return vim.lsp.is_enabled('copilot')
             end,
             set = function(state)
               vim.g.copilot_enabled = state
-              if state then
-                vim.cmd('Copilot enable')
-              else
-                vim.cmd('Copilot disable')
-              end
+              vim.lsp.enable('copilot', state)
             end,
           })
           :map('<leader>up')

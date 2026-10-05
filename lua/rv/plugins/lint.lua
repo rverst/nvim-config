@@ -2,7 +2,8 @@
 --
 -- Asynchronous linter plugin for Neovim, complementing LSP-based diagnostics.
 -- Runs linters on file save and after reading. Install linters via Mason:
---   golangci-lint, eslint_d, hadolint, yamllint
+--   golangci-lint, hadolint, yamllint, buf, squawk, vacuum
+-- eslint and ruff run as LSP servers (see mason.lua), so they are not listed here.
 
 return {
   'mfussenegger/nvim-lint',
@@ -17,12 +18,6 @@ return {
       -- on-save linting for cases where the LSP is slow or misses something.
       go = { 'golangcilint' },
 
-      -- TypeScript / JavaScript: eslint_d (daemon, much faster than eslint)
-      typescript = { 'eslint_d' },
-      typescriptreact = { 'eslint_d' },
-      javascript = { 'eslint_d' },
-      javascriptreact = { 'eslint_d' },
-
       -- Dockerfile: hadolint
       dockerfile = { 'hadolint' },
 
@@ -31,12 +26,6 @@ return {
 
       -- Protobuf: buf lint
       proto = { 'buf_lint' },
-
-      -- OpenAPI: vacuum (detected files get this via the openapi filetype alias)
-      openapi = { 'vacuum' },
-
-      -- Python: ruff (fast, replaces flake8/pylint for most cases)
-      python = { 'ruff' },
 
       -- PostgreSQL: squawk for anti-pattern and migration safety checks
       sql = { 'squawk' },

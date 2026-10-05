@@ -40,7 +40,6 @@ return {
       map('<leader>gs', gs.stage_hunk, 'Stage Hunk')
       map('<leader>gr', gs.reset_hunk, 'Reset Hunk')
       map('<leader>gS', gs.stage_buffer, 'Stage Buffer')
-      map('<leader>gu', gs.undo_stage_hunk, 'Undo Stage Hunk')
       map('<leader>gp', gs.preview_hunk, 'Preview Hunk')
     end,
   },

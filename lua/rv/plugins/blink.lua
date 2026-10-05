@@ -2,15 +2,13 @@
 --
 -- Performant, batteries-included completion plugin for Neovim.
 -- Integrates Copilot, LSP, snippets, path, buffer, and emoji sources.
--- Configured with blink-cmp-copilot, blink-emoji, and lazydev support.
+-- Configured with blink-copilot (native copilot LSP, see mason.lua), blink-emoji, and lazydev support.
 -- Accept with <C-s>.
 
 return {
   'saghen/blink.cmp',
   dependencies = {
-    { 'saghen/blink.compat', version = '*', lazy = true, opts = {} },
-    'zbirenbaum/copilot.lua',
-    'giuxtaposition/blink-cmp-copilot',
+    'fang2hou/blink-copilot',
     'moyiz/blink-emoji.nvim',
   },
   enabled = require('rv.utils').plugin_enabled({ vscode = false, minimal = false }),
@@ -27,6 +25,10 @@ return {
     },
 
     completion = {
+      list = {
+        -- Only <C-s> inserts an item; navigating the list or pressing <Esc> leaves the text untouched.
+        selection = { auto_insert = false },
+      },
       documentation = {
         auto_show = true,
       },
@@ -54,18 +56,9 @@ return {
       providers = {
         copilot = {
           name = 'copilot',
-          module = 'blink-cmp-copilot',
+          module = 'blink-copilot',
           score_offset = 80,
           async = true,
-          transform_items = function(_, items)
-            local CompletionItemKind = require('blink.cmp.types').CompletionItemKind
-            local kind_idx = #CompletionItemKind + 1
-            CompletionItemKind[kind_idx] = 'Copilot'
-            for _, item in ipairs(items) do
-              item.kind = kind_idx
-            end
-            return items
-          end,
         },
         lazydev = {
           name = 'LazyDev',
@@ -81,7 +74,6 @@ return {
     },
 
     appearance = {
-      use_nvim_cmp_as_default = true,
       nerd_font_variant = 'mono',
       kind_icons = {
         Copilot = '',

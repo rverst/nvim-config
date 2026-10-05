@@ -1,10 +1,10 @@
--- https://github.com/echasnovski/mini.nvim
+-- https://github.com/nvim-mini/mini.nvim
 --
 -- Library of 40+ independent Lua modules improving overall Neovim
 -- (version 0.8 and higher) experience with minimal effort.
 
 return {
-  'echasnovski/mini.nvim',
+  'nvim-mini/mini.nvim',
   event = { 'BufReadPre', 'BufNewFile' },
   config = function()
     -- Better Around/Inside textobjects

@@ -32,7 +32,6 @@ return {
       scss = { 'prettierd', 'prettier', stop_after_first = true },
       yaml = { 'prettierd', 'prettier', stop_after_first = true },
       markdown = { 'prettierd', 'prettier', stop_after_first = true },
-      shell = { 'shfmt' },
       sh = { 'shfmt' },
       zsh = { 'shfmt' },
       -- Protobuf
@@ -76,7 +75,7 @@ return {
     vim.keymap.set('n', '<leader>cf', function()
       require('conform').format({
         async = true,
-        lsp_format = true,
+        lsp_format = 'fallback',
       })
     end, { desc = 'Format buffer', silent = true })
   end,

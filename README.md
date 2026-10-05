@@ -33,7 +33,7 @@ queries/              # Custom Tree-sitter queries
 | Plugin | Description |
 |--------|-------------|
 | [blink.cmp](https://github.com/saghen/blink.cmp) | Performant completion engine (v1.x). Sources: LSP, path, snippets, buffer, Copilot, emoji. Accept with `<C-s>`. |
-| [copilot.lua](https://github.com/zbirenbaum/copilot.lua) | Pure-Lua GitHub Copilot client. Inline suggestions disabled — completions flow through blink.cmp via blink-cmp-copilot. Toggle with `<leader>up`. |
+| [blink-copilot](https://github.com/fang2hou/blink-copilot) | GitHub Copilot via the native `copilot` LSP (installed by Mason). Completions flow through blink.cmp. Sign in with `:LspCopilotSignIn`, toggle with `<leader>up`. |
 
 ### LSP & Diagnostics
 
@@ -56,7 +56,7 @@ queries/              # Custom Tree-sitter queries
 
 | Plugin | Description |
 |--------|-------------|
-| [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | Highly extensible fuzzy finder. Extensions: fzf-native, ui-select, symbols. Key mappings under `<leader>f`. LSP go-to (gd, gr, gI) routed through Telescope. |
+| [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | Highly extensible fuzzy finder. Extensions: fzf-native, ui-select, symbols. Key mappings under `<leader>f`. `gd` and symbol pickers routed through Telescope; other LSP maps use Neovim defaults (`grr`, `gri`, `grn`, `gra`, `grt`, `K`). |
 | [harpoon](https://github.com/ThePrimeagen/harpoon/tree/harpoon2) | Fast per-project file bookmarks. Mark with `<leader>hm`, jump to marks 1–5 with `<leader>1`–`<leader>5`, browse with `<leader>hh` (Telescope). |
 
 ### File Management
@@ -121,7 +121,7 @@ Leader key: `<Space>`
 | `<leader>u` | UI toggles (spelling, wrap, diagnostics, Copilot, autoformat, …) |
 | `<leader>b/B` | DAP breakpoints |
 | `<F6>`–`<F10>` | DAP debug controls |
-| `gd/gr/gI/K` | LSP navigation and hover |
+| `gd`, `grr/gri/grt/grn/gra`, `K` | LSP navigation, rename, code action, hover (Neovim defaults) |
 | `-` | Open Oil (parent directory) |
 | `<C-/>` | Toggle terminal (Snacks) |
 | `<leader>z/Z` | Zen / zoom mode |
