@@ -4,6 +4,18 @@ M.is_mac = function()
   return vim.uv.os_uname().sysname == 'Darwin'
 end
 
+--- Returns the dotfiles flavour from ~/.dotconfig (core.flavour), or nil if unset.
+--- @return string|nil
+M.flavour = function()
+  if M._flavour == nil then
+    local res = vim
+      .system({ 'git', 'config', '-f', vim.fn.expand('~/.dotconfig'), 'core.flavour' }, { text = true })
+      :wait()
+    M._flavour = res.code == 0 and vim.trim(res.stdout) or false
+  end
+  return M._flavour or nil
+end
+
 --- Returns whether a plugin should be enabled in the current environment.
 --- Each flag represents an environment; false means "disabled in that environment".
 --- Omitted flags default to true (enabled everywhere).
