@@ -52,6 +52,7 @@ return {
     debug = { enabled = true },
     git = { enabled = true },
     gitbrowse = { enabled = require('rv.utils').plugin_enabled({ vscode = false, minimal = false }) },
+    image = { enabled = require('rv.utils').plugin_enabled({ vscode = false, minimal = false }) },
     indent = { enabled = true },
     input = { enabled = true },
     notifier = {
